@@ -1,0 +1,69 @@
+package sensor_package
+public
+	with std;
+	with Base_Types;
+	with binary_switch_primitive_pkg;
+	with relational_primitive_pkg;
+	with constant_primitive_pkg;
+	
+system sensor
+features
+	current_height : in data port Base_Types::Float;
+	sensor_height  : in data port Base_Types::Float;
+	
+	sensor_value : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		-- Assumptions
+		assume "Initially the sensor height is greater than the current height" :
+			std.Initial(sensor_height > current_height);
+			
+		assume "the liquid height is non-negative":
+			current_height >= 0.0;
+			
+		assume "the sensor height is non-negative":
+			sensor_height >= 0.0;
+		
+		-- Guarantees
+		guarantee "If the tank height is greater than or equal to the sensor height then Sensor_Value is true" :
+			(false -> (current_height >= sensor_height)) => (sensor_value = 1.0);
+			
+		guarantee "If the tank height is less than the sensor height then Sensor_Value is false" :
+			(true -> (current_height < sensor_height)) => (sensor_value = 0.0);
+			
+		guarantee "The sensor should be false initially":
+			std.Initial(sensor_value = 0.0);
+			
+		guarantee "the sensor value shall only be 1.0 (true) or 0.0 (false)" :
+			sensor_value = 1.0 or sensor_value = 0.0;
+			
+	**};
+
+end sensor;
+
+system implementation sensor.prim
+subcomponents
+	constant_0 : system constant_primitive_pkg::constant_0.impl;
+	constant_1 : system constant_primitive_pkg::constant_1.impl;
+	greater : system relational_primitive_pkg::relational_g.impl;
+	switch : system binary_switch_primitive_pkg::binary_switch.impl;
+	
+connections
+	-- Inputs to relational operator
+	sh_to_ro1 : port sensor_height -> greater.input1 {Communication_Properties::Timing => immediate;};
+	ch_to_ro2 : port current_height -> greater.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- connect switch
+	constant_0_to_switch : port constant_0.output -> switch.true_case {Communication_Properties::Timing => immediate;};
+	ro_to_switch : port greater.output -> switch.control {Communication_Properties::Timing => immediate;};
+	constant_1_to_switch : port constant_1.output -> switch.false_case {Communication_Properties::Timing => immediate;};
+	
+	-- output value
+	switch_to_output : port switch.output -> sensor_value {Communication_Properties::Timing => immediate;};
+
+end sensor.prim;
+
+
+
+end sensor_package;

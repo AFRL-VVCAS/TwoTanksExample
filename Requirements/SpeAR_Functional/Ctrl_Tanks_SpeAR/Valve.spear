@@ -1,0 +1,34 @@
+Relation Ctrl_Tanks.Valve;
+
+Uses Ctrl_Tanks.definitions.*;
+
+Inputs:
+	available_inflow : bool;		// basically the tank will provide true if the water behind the tank is of acceptable level for the valve to be open
+	valve_open_state : bool;
+	max_flowrate : real;
+	
+Outputs:
+	outflow : real;
+	
+State:	
+
+Macros:
+//	differential : real = max_flowrate - available_inflow;
+	
+Requirements:
+//	a00 = global :: always differential == 0.0;
+	
+	// Make an assumption here about the available inflow, if the low sensor in the tank is on then assume the necessary liquid is available
+	// -> this gets around doing an mathematical calculation and acts more like our system
+	// -> also gets around the physics of the flow
+	a_inflow_1 = while not available_inflow :: always outflow == 0.0;
+	a_inflow_2 = while not available_inflow :: always not valve_open_state;
+
+	r01 = while valve_open_state :: always outflow > 0.0  and outflow <= max_flowrate;
+	r02 = while not valve_open_state :: always outflow == 0.0 ;
+	
+Properties:
+	p_valve_01 = global :: always outflow >= 0.0;
+	p_valve_02 = while valve_open_state :: always available_inflow;
+	
+//	canary = global :: always false;

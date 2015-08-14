@@ -1,0 +1,103 @@
+Relation Ctrl_Tanks.Environment;
+
+Uses Ctrl_Tanks.definitions.*;
+Uses Ctrl_Tanks.definitions.environment_output_type.*;
+Uses Ctrl_Tanks.definitions.tank1_output_type.*;
+Uses Ctrl_Tanks.definitions.tank2_output_type.*;
+
+Inputs:
+	t1_pump_state : bool;
+	t1_valve_state : bool;
+	t2_prod_valve_state : bool;
+	t2_emrg_valve_state : bool;
+
+Outputs:
+	env_output : environment_output_type;
+
+State:
+	tank1_output : tank1_output_type;
+	tank2_output : tank2_output_type;
+	
+	// get the outflows through the actuators in the system
+	available_pump_inflow : real;
+	pump_outflow : real;
+	t1_valve_outflow : real;
+	t2_p_valve_outflow : real;
+	t2_e_valve_outflow : real;
+	
+Macros:
+	tank1_output_water_lvl : real  = tank1_output{tank1_output_type.water_lvl};
+	tank1_overflow : bool = tank1_output{tank1_output_type.overflow};
+	tank1_underflow : bool = tank1_output{tank1_output_type.underflow};
+	tank1_sensor_high : bool  = Ctrl_Tanks.Sensor(tank1_output_water_lvl, TANK1_SENSOR_HIGH);
+	tank1_sensor_low : bool = Ctrl_Tanks.Sensor(tank1_output_water_lvl, TANK1_SENSOR_LOW);
+	
+	tank2_output_water_lvl : real = tank2_output{tank2_output_type.water_lvl};
+	tank2_overflow : bool = tank2_output{tank2_output_type.overflow};
+	tank2_underflow : bool = tank2_output{tank2_output_type.underflow};
+	tank2_sensor_high : bool = Ctrl_Tanks.Sensor(tank2_output_water_lvl, TANK2_SENSOR_HIGH);
+	tank2_sensor_mid : bool = Ctrl_Tanks.Sensor(tank2_output_water_lvl, TANK2_SENSOR_MID);
+	tank2_sensor_low : bool = Ctrl_Tanks.Sensor(tank2_output_water_lvl, TANK2_SENSOR_LOW);
+	
+	// Making a simplification on the outflow that of each tank that it shouldn't drain unless it has enough liquid behind to drain
+	tank1_available_valve_inflow : bool = tank1_sensor_low;
+	tank2_available_valve_inflow : bool = tank2_sensor_low;
+	
+//	t2_p_valve_outflow : real = Ctrl_Tanks.Valve(tank2_available_valve_inflow, t2_prod_valve_state, MAX_TANK2_P_VALVE_FLOWRATE);
+
+Requirements:
+	a_avail_pump_inflow = global :: always available_pump_inflow >= MAX_PUMP_FLOWRATE;
+	a_p_flow = initial :: t2_p_valve_outflow == 0.0;
+	a_e_flow = initial :: t2_e_valve_outflow == 0.0;
+	
+	r_t1_pump = global :: always pump_outflow == Ctrl_Tanks.Pump(available_pump_inflow, t1_pump_state);
+	r_t1_valve = global :: always t1_valve_outflow == Ctrl_Tanks.Valve(tank1_available_valve_inflow, t1_valve_state, MAX_TANK1_VALVE_FLOWRATE);
+	
+	r_t2_p_valve = global :: always t2_p_valve_outflow == Ctrl_Tanks.Valve(tank2_available_valve_inflow, t2_prod_valve_state, MAX_TANK2_P_VALVE_FLOWRATE);
+	r_t2_e_valve = global :: always t2_e_valve_outflow == Ctrl_Tanks.Valve(tank2_available_valve_inflow, t2_emrg_valve_state, MAX_TANK2_E_VALVE_FLOWRATE);
+	
+	r_t1 = global :: always tank1_output == Ctrl_Tanks.Tank1(pump_outflow,t1_valve_outflow);
+	r_t2 = global :: always tank2_output == Ctrl_Tanks.Tank2(t1_valve_outflow,t2_p_valve_outflow,t2_e_valve_outflow);
+	
+	r_output = global :: always env_output == new environment_output_type{t1_sensor_high = tank1_sensor_high, 
+																		  t1_sensor_low = tank1_sensor_low, 
+																		  t2_sensor_high = tank2_sensor_high, 
+																		  t2_sensor_mid = tank2_sensor_mid, 
+																		  t2_sensor_low = tank2_sensor_low,
+																		  tank1_water_lvl = tank1_output_water_lvl,
+																		  tank1_overflow = tank1_overflow,
+																		  tank1_underflow = tank1_underflow,
+																		  tank2_water_lvl = tank2_output_water_lvl,
+																		  tank2_overflow = tank2_overflow,
+																		  tank2_underflow = tank2_underflow,
+																		  production_flow = t2_p_valve_outflow, 
+																		  emergency_flow = t2_e_valve_outflow };
+
+Properties:
+	// Tank 1 sensor properties
+	p_env_01 = while tank1_sensor_high :: always tank1_sensor_low;
+	p_env_02 = while not tank1_sensor_low :: always not tank1_sensor_high;
+	
+	// Tank 2 sensor properties
+	p_env_03 = while tank2_sensor_high :: always (tank2_sensor_mid and tank2_sensor_low);
+	p_env_04 = while tank2_sensor_mid :: always tank2_sensor_low;
+	p_env_05 = while not tank2_sensor_low :: always not tank2_sensor_mid and not tank2_sensor_high;
+	p_env_06 = while not tank2_sensor_mid :: always not tank2_sensor_high;
+	
+	// Check the possible liquid levels in the tanks
+	p_env_07 = global :: always tank1_output_water_lvl >= 0.0; 
+	p_env_08 = global :: always tank1_output_water_lvl <= MAX_TANK1_HEIGHT;
+	p_env_09 = global :: always tank2_output_water_lvl >= 0.0;
+	p_env_10 = global :: always tank2_output_water_lvl <= MAX_TANK2_HEIGHT;
+	
+	// Counter-examples (designed to prove correct behavior of the system)
+	// Verify that the tanks can reach an overflow state (should be prevented by the controllers)
+//	p_env_CE01 = global :: always not tank1_overflow;
+//	p_env_CE02 = global :: always not tank2_overflow;
+//	
+//	// Verify that the tanks can reach an underflow state (should be prevented by the controllers)
+//	p_env_CE03 = global :: always not tank1_underflow;
+//	p_env_CE04 = global :: always not tank2_underflow;
+//    
+//	canary = global :: always false;
+	

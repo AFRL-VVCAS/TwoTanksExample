@@ -1,0 +1,38 @@
+%implements "chartSource" "C"
+%function ChartConfig(block, system) void
+  %createrecord chartConfiguration { ...
+          executeAtInitialization  0 ...
+  }
+  %return chartConfiguration
+%endfunction
+%function ChartDataMap(block, system) void
+  %createrecord ChartDataElements {\
+    NumChartData   4 \
+    ChartDataDefaults {\
+      RecordType   "ChartData"\
+      Dimensions   []\
+      IsTestPoint  0\
+    }\
+    ChartData {\
+      Name         "pre_max_vol_m3"\
+      SFName       ""\
+      Path         ""\
+    }\
+    ChartData {\
+      Name         "pre_max_vol_m3_not_empty"\
+      SFName       ""\
+      Path         ""\
+    }\
+    ChartData {\
+      Name         "pre_tank_cross_section_area_m2"\
+      SFName       ""\
+      Path         ""\
+    }\
+    ChartData {\
+      Name         "pre_tank_cross_section_area_m2_not_empty"\
+      SFName       ""\
+      Path         ""\
+    }\
+  }
+  %return ChartDataElements
+%endfunction

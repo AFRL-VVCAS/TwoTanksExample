@@ -1,0 +1,206 @@
+package controller_package
+public 
+   with Base_Types;
+   with std;
+   with valve_package;
+   with pump_package;
+   with sensor_package;
+   
+system Controller_Tank1
+	features
+		SH_Input: in data port Base_Types::Boolean;
+		SL_Input: in data port Base_Types::Boolean;
+		Pump_State: out data port Base_Types::Boolean;  -- commanded pump state and valve state	
+		Valve_State: out data port Base_Types::Boolean;
+	
+	annex agree {**
+
+		-- assumption: goal is to keep the fluid between the sensors
+
+		-- Initial state: assume pump and valve are off
+--		assume "The pump is initially off":
+		guarantee "The pump is initially off":
+			std.Init(not Pump_State);			
+			
+		guarantee "The valve is initially closed" :
+			std.Init(not Valve_State);
+
+		-- Liquid below Below Low sensor - just flow in
+		guarantee "When SL_Input is False, the Pump shall be on and Valve shall be Closed" : 
+			true -> ((not SL_Input) => ((not Valve_State) and Pump_State));
+			
+		-- Liquid above high sensor - just flow out
+		guarantee "When the SH_Input is true, the Pump shall be off and Valve shall be open" : 
+			true -> (SH_Input => (Valve_State and (not Pump_State)));
+
+		-- Liquid between sensors - hold pump and valve states
+		guarantee "When the SL_Input is True and the SH_Input is False, the Pump and Valve shall mainatin the state they were in the previous timestep" : 
+			true -> ((not SH_Input and SL_Input) => (Valve_State = pre(Valve_State) and Pump_State = pre(Pump_State)));
+				
+		
+		-- System description
+		assume "If the high sensor is true, then the low sensor is True" : 
+			(SH_Input => SL_Input);	
+
+			
+	**};
+end Controller_Tank1;
+
+system implementation Controller_Tank1.Impl
+
+	annex agree {**
+		
+		-- when to turn pump on - as long as liquid isn't at high sensor
+		eq pump_command : bool = false -> 
+		(
+			if (not SH_Input and not SL_Input) then true 
+		 	else if (SH_Input and SL_Input) then false
+		 	else (pump_command = pre(pump_command)) 
+		);		
+		assert(Pump_State = pump_command);
+
+		-- when to open valve - as long as liquid is above low sensor
+		eq valve_command : bool = false ->
+		(
+			if (not SH_Input and not SL_Input) then false 
+		 	else if (SH_Input and SL_Input) then true
+		 	else (valve_command = pre(valve_command)) 
+		);		
+		assert(Valve_State = valve_command);	
+		
+	**};
+
+end Controller_Tank1.Impl;
+
+system Controller_Tank2
+	features
+		SH_Input: in data port Base_Types::Boolean;
+		SM_Input: in data port Base_Types::Boolean;
+		SL_Input: in data port Base_Types::Boolean;		
+		Valve_Input_State: in data port Base_Types::Boolean;
+		Valve_Output_P_State: out data port Base_Types::Boolean;
+		Valve_Output_E_State: out data port Base_Types::Boolean;
+	
+	annex agree {**
+
+		-- assumption: goal is to keep the fluid between the sensors
+
+		-- Initial state: assume the valves are off (closed)
+		guarantee "The output production valve is initially closed" :
+			std.Init(not Valve_Output_P_State);
+			
+		guarantee "The output emergency valve is initially closed" :
+			std.Init(not Valve_Output_E_State);
+
+		-- Liquid below Below Low sensor - just flow in
+		guarantee "When SL_Input is False, the valves shall be Closed" : 
+			true -> ((not SL_Input) => ((not Valve_Output_P_State) and (not Valve_Output_E_State)));
+			
+		-- Liquid below Below Mid sensor above low sensor
+		guarantee "When SM_Input is False and the SL_Input is true, the production valve shall be open and the emergency valve shall be closed" : 
+			true -> ((not SM_Input and SL_Input) => (Valve_Output_P_State and (not Valve_Output_E_State)));
+			
+		-- Liquid above high sensor
+		guarantee "When the SH_Input is true, both valves will be open" : 
+			true -> (SH_Input => (Valve_Output_P_State and Valve_Output_E_State));
+
+		-- Liquid between mid and high sensors, previously emergency valve open
+		guarantee "When the SM_Input is True and the SH_Input is False and the emergency valve was previously open, the valves shall be Open" : 
+			true -> ((not SH_Input and SM_Input and pre(Valve_Output_E_State) and Valve_Input_State) => (Valve_Output_P_State and Valve_Output_E_State));
+				
+		-- Liquid between mid and high sensors, previously emergency valve closed
+		guarantee "When the SM_Input is True and the SH_Input is False and the emergency valve was previously closed, the production valve shall be open and the emergency valve shall be closed" : 
+			true -> ((not SH_Input and SM_Input and pre(not Valve_Output_E_State)) => (Valve_Output_P_State and not Valve_Output_E_State));
+			
+		-- System description
+		assume "If the high sensor is true, then the mid sensor is True" : 
+			(SH_Input => SM_Input);
+		
+		-- System description	
+		assume "If the mid sensor is true, then the low sensor is True" : 
+			(SM_Input => SL_Input);
+			
+	**};
+end Controller_Tank2;
+
+system implementation Controller_Tank2.Impl
+
+	annex agree {**
+		
+		eq production_valve_cmd : bool = false -> 
+		(
+			if (SL_Input) then true 
+		 	else false 
+		);		
+		assert(Valve_Output_P_State = production_valve_cmd);
+
+		eq emergency_valve_cmd : bool = false ->
+		(
+			if (SH_Input or (SM_Input and Valve_Input_State and pre(emergency_valve_cmd))) then true		 	
+		 	else false
+		);		
+		assert(Valve_Output_E_State = emergency_valve_cmd);	
+		
+	**};
+
+end Controller_Tank2.Impl;
+      
+system Controller_Generic
+	features
+		SH_Input: in data port Base_Types::Boolean;
+		SL_Input: in data port Base_Types::Boolean;
+		Pump_State: out data port Base_Types::Boolean;  -- commanded pump state and valve state	
+		Valve_State: out data port Base_Types::Boolean;
+	
+	annex agree {**
+
+		-- assumption: goal is to keep the fluid between the sensors
+
+		-- Initial state: assume pump and valve are off
+--		guarantee "Pump is initially Off and Valve is initially Closed" : 
+--			std.Initially(not Pump_State and not Valve State);
+			
+		guarantee "The pump is initially off":
+			std.Init(not Pump_State);
+			
+			
+		guarantee "The valve is initially closed" :
+			std.Init(not Valve_State);
+
+		-- Liquid below Below Low sensor - just flow in
+		guarantee "When SL_Input is False, the Pump shall be on and Valve shall be Closed" : 
+			true -> ((not SL_Input) => ((not Valve_State) and Pump_State));
+
+		-- Liquid between sensors - decide flow to be in and out
+		guarantee "When the SL_Input is True and the SH_Input is False, the Pump shall be On and Valve shall be Open" : 
+			true -> ((not SH_Input and SL_Input) => (Valve_State and Pump_State));
+
+		-- Liquid above high sensor - just flow out
+		guarantee "When the SH_Input is true, the Pump shall be off and Valve shall be open" : 
+			true -> (SH_Input => (Valve_State and (not Pump_State)));		
+		
+		-- System description
+		assume "If the high sensor is true, then the low sensor is True" : 
+			(SH_Input => SL_Input);	
+
+			
+	**};
+end Controller_Generic; 
+  
+system implementation Controller_Generic.Impl
+
+	annex agree {**
+		
+		-- when to turn pump on - as long as liquid isn't at high sensor
+		eq pump_command : bool = false -> (if (SH_Input) then false else true);		
+		assert(Pump_State = pump_command);
+
+		-- when to open valve - as long as liquid is above low sensor
+		eq valve_command : bool = false -> (if (SL_Input) then true else false);		
+		assert(Valve_State = valve_command);	
+		
+	**};
+
+end Controller_Generic.Impl;
+
+end controller_package;

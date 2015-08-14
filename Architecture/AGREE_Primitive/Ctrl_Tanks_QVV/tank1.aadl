@@ -1,0 +1,132 @@
+package tank1_package
+public
+	with std;
+	with Base_Types;
+	with two_input_sum_primitive_pkg;
+	with two_input_diff_primitive_pkg;
+	with two_input_division_primitive_pkg;
+	with limiter_primitive_pkg;
+	with constant_primitive_pkg;
+	with config;
+	
+annex agree{**
+	const tank1_initial_vol_m3 : real = 0.0;
+	const max_tank1_vol_m3 : real = config.max_tank1_vol_m3;
+	const tank1_cca : real = config.tank1_cross_section_area_m2;
+	
+**};
+	
+system tank1
+features
+	previous_height : in data port Base_Types::Float;
+	pump_flow_rate : in data port Base_Types::Float;
+	cross_section_area : in data port Base_Types::Float;
+	valve_flow_rate : in data port Base_Types::Float;
+	max_tank_vol : in data port Base_Types::Float;
+	
+	liquid_height : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		-- Equations
+		eq max_tank_height : real = max_tank_vol / cross_section_area;
+		
+		-- Assumptions
+		assume "pump_flow_rate is zero or the max_pump_flow_rate" :
+			(pump_flow_rate = 0.0 or pump_flow_rate = config.t1_pump_max_flow_rate_m3s);
+			
+		assume "the pump flow rate is initially zero" :
+			 std.Initial(pump_flow_rate = 0.0);
+		
+		assume "cross section area equals the specified value and doesn't change" :
+			std.Historically(cross_section_area = tank1_package.tank1_cca);
+		
+		assume "valve flow rate is zero or the max flow rate" :
+			(valve_flow_rate = 0.0 or valve_flow_rate = config.t1_valve_max_flow_rate_m3s);
+			
+		assume "the valve flow rate is initiall zero" :
+			 std.Initial(valve_flow_rate = 0.0);
+			
+		assume "the tank volume equals the specified value and does not change" :
+			std.Historically(max_tank_vol = tank1_package.max_tank1_vol_m3);
+			
+		assume "the previous height is the height at the previous time step" :
+			previous_height = prev(liquid_height,0.0);
+			
+		assume "initial height is 0.0":
+			std.Initial(liquid_height = 0.0);
+		
+		-- Guarantees
+		guarantee "The initial volume of tank 1 should be equivalent to the specified initial tank 1 volume" :
+			std.Initial((liquid_height * cross_section_area) = tank1_package.tank1_initial_vol_m3);		
+			
+		guarantee "If the current tank 1 volume plus the tank 1 net flow is greater than the tank 1 maximum volume then tank 1 is full":
+			(prev(liquid_height, tank1_package.tank1_initial_vol_m3) + ((pump_flow_rate - valve_flow_rate) / cross_section_area) > max_tank_height) => (liquid_height = max_tank_height);
+			
+		guarantee "If the current tank 1 volume plus the tank 1 net flow is less than the tank 1 minimum volume then tank 1 is empty" :
+			(prev(liquid_height, tank1_package.tank1_initial_vol_m3) + ((pump_flow_rate - valve_flow_rate) / cross_section_area) < 0.0) => (liquid_height = 0.0);
+		
+		guarantee "If the current tank 1 volume plus the tank 1 net flow is greater than empty and less than the tank 1 maximum volume then the tank 1 volume changes by the tank 1 net flow":
+			(prev(liquid_height, tank1_package.tank1_initial_vol_m3) + ((pump_flow_rate - valve_flow_rate) / cross_section_area) <= max_tank_height) and (prev(liquid_height, tank1_package.tank1_initial_vol_m3) + ((pump_flow_rate - valve_flow_rate) / cross_section_area) >= 0.0) 
+				=> (liquid_height = prev(liquid_height, tank1_package.tank1_initial_vol_m3) + ((pump_flow_rate - valve_flow_rate) / cross_section_area));
+
+		guarantee "Current height of tank 1 is equal or less than the max tank 1 height" : 
+			liquid_height <= max_tank_height;
+			
+		guarantee "Current height of tank 1 is non negative" :
+			liquid_height >= 0.0;
+		
+		-- Sanity Checking (guarantees designed to fail/produce counterexamples)
+--		guarantee "The tank 1 current height is equal to the tank 1 current ht" :
+--			liquid_height = current_ht;
+--			
+--		guarantee "the initial height is 0":
+--			std.Initially(current_ht = 0.0);
+			
+--		guarantee "CANARY":
+--			false;
+			
+		
+	**};
+
+end tank1;
+
+system implementation tank1.impl
+subcomponents
+	diff : system two_input_diff_primitive_pkg::two_input_diff.impl;
+	sum : system two_input_sum_primitive_pkg::two_input_sum.impl;
+	div : system two_input_division_primitive_pkg::two_input_division.impl;
+	div2 : system two_input_division_primitive_pkg::two_input_division.impl;
+	limiter : system limiter_primitive_pkg::limiter.impl;
+	cons_0 : system constant_primitive_pkg::constant_0.impl;
+	
+connections
+	-- Inputs to difference
+	pfr_to_diff : port pump_flow_rate -> diff.minuend {Communication_Properties::Timing => immediate;};
+	vfr_to_diff : port valve_flow_rate -> diff.subtrahend {Communication_Properties::Timing => immediate;};
+	
+	-- Connect to divisor
+	diff_to_div : port diff.output -> div.dividend {Communication_Properties::Timing => immediate;};
+	csa_to_div : port cross_section_area -> div.divisor {Communication_Properties::Timing => immediate;};
+	
+	-- Connect to Summer
+	ph_to_sum : port previous_height -> sum.input1 {Communication_Properties::Timing => immediate;};
+	div_to_sum : port div.output -> sum.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Connect to divisor2
+	max_vol_to_div2 : port max_tank_vol -> div2.dividend {Communication_Properties::Timing => immediate;};
+	csa_to_div2 : port cross_section_area -> div2.divisor {Communication_Properties::Timing => immediate;};
+	
+	-- Connect to limiter
+	div2_to_limiter : port div2.output -> limiter.up {Communication_Properties::Timing => immediate;};
+	sum_to_limiter : port sum.output -> limiter.input {Communication_Properties::Timing => immediate;};
+	constant_0_to_limiter : port cons_0.output -> limiter.lo {Communication_Properties::Timing => immediate;};
+	
+	-- Output
+	limiter_to_lh : port limiter.output -> liquid_height {Communication_Properties::Timing => immediate;};
+	
+
+end tank1.impl;
+
+
+end tank1_package;

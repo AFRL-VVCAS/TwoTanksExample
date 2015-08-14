@@ -1,0 +1,184 @@
+package Updater_pkg
+public
+	with Base_Types;
+	with std;
+	with config;
+	with two_input_sum_primitive_pkg;
+	with constant_primitive_pkg;
+	with delay_primitive_pkg;
+	with Initial_Conditions_pkg;
+	with initializer_primitive_pkg;
+
+system Updater
+features
+	tank1_liquid_height_m : in data port Base_Types::Float;
+	tank2_liquid_height_m : in data port Base_Types::Float;
+	pump_state : in data port Base_Types::Float;
+	valve_state : in data port Base_Types::Float;
+	production_valve_state : in data port Base_Types::Float;
+	emergency_valve_state : in data port Base_Types::Float;
+	
+	tank1_previous_height_m : out data port Base_Types::Float;
+	tank2_previous_height_m : out data port Base_Types::Float;
+	pre_pump_state : out data port Base_Types::Float;
+	pre_valve_state : out data port Base_Types::Float;
+	pre_production_valve_state : out data port Base_Types::Float;
+	pre_emergency_valve_state : out data port Base_Types::Float;
+	
+annex agree {**
+	
+	-- Assumptions ---------------------------------
+	assume "pump_state is a correct value":
+		(pump_state = 0.0) or (pump_state = 1.0);
+		
+	assume "valve_state is a correct value":
+		(valve_state = 0.0) or (valve_state = 1.0);
+		
+	assume "production_valve_state is a correct value":
+		(production_valve_state = 0.0) or (production_valve_state = 1.0);
+		
+	assume "emergency_valve_state is a correct value":
+		(emergency_valve_state = 0.0) or (emergency_valve_state = 1.0);
+		
+	-- Guarantees-----------------------------------
+	
+	--Initial Values
+	guarantee "tank1_previous_height_m is initially the value specified in the config file":
+		std.Initial(tank1_previous_height_m = config.tank1_initial_vol_m3);
+	
+	guarantee "tank2_previous_height_m is initially the value specified in the config file":
+		std.Initial(tank2_previous_height_m = config.tank2_initial_vol_m3);
+	
+	guarantee "pre_pump_state is initially the value specified in the config file":
+		std.Initial(pre_pump_state = config.tank1_pump_initial_state);
+	
+	guarantee "pre_valve_state is initially the value specified in the config file":
+		std.Initial(pre_valve_state = config.tank1_valve_initial_state);
+	
+	guarantee "pre_production_valve_state is initially the value specified in the config file":
+		std.Initial(pre_production_valve_state = config.tank2_p_valve_initial_state);
+	
+	guarantee "pre_emergency_valve_state is initially the value specified in the config file":
+		std.Initial(pre_emergency_valve_state = config.tank2_e_valve_initial_state);
+		
+	-- After the Initial Step
+	guarantee "tank1_previous_height_m is the same as the input tank1_liquid_height_m after the first time step":
+		std.After1(tank1_previous_height_m = prev(tank1_liquid_height_m,0.0));
+	
+	guarantee "tank2_previous_height_m is the same as the input tank2_liquid_height_m after the first time step":
+		std.After1(tank2_previous_height_m = prev(tank2_liquid_height_m,0.0));
+	
+	guarantee "pre_pump_state is the same as the input pump_state after the first time step":
+		std.After1(pre_pump_state = prev(pump_state,0.0));
+	
+	guarantee "pre_valve_state is the same as the input valve_state after the first time step":
+		std.After1(pre_valve_state = prev(valve_state,0.0));
+	
+	guarantee "pre_production_valve_state is the same as the input production_valve_state after the first time step":
+		std.After1(pre_production_valve_state = prev(production_valve_state,0.0));
+		
+	guarantee "pre_emergency_valve_state is the same as the input emergency_valve_state after the first time step":
+		std.After1(pre_emergency_valve_state = prev(emergency_valve_state,0.0));
+		
+	-- Valid Outputs
+	guarantee "pre_pump_state has a valid value":
+		(pre_pump_state = 0.0) or (pre_pump_state = 1.0);
+		
+	guarantee "pre_valve_state has a valid value":
+		(pre_valve_state = 0.0) or (pre_valve_state = 1.0);
+		
+	guarantee "pre_production_valve_state has a valid value":
+		(pre_production_valve_state = 0.0) or (pre_production_valve_state = 1.0);
+		
+	guarantee "pre_emergency_valve_state has a valid value":
+		(pre_emergency_valve_state = 0.0) or (pre_emergency_valve_state = 1.0);
+	
+	
+**};
+
+end Updater;
+
+system implementation Updater.impl
+subcomponents
+	IC : system Initial_Conditions_pkg::Initial_Conditions.impl;
+	
+	t1_lh_init : system initializer_primitive_pkg::initializer.impl;
+	t2_lh_init : system initializer_primitive_pkg::initializer.impl;
+	ps_init : system initializer_primitive_pkg::initializer.impl;
+	vs_init : system initializer_primitive_pkg::initializer.impl;
+	pvs_init : system initializer_primitive_pkg::initializer.impl;
+	evs_init : system initializer_primitive_pkg::initializer.impl;
+	
+	t1_lh_sum : system two_input_sum_primitive_pkg::two_input_sum.impl;
+	t2_lh_sum : system two_input_sum_primitive_pkg::two_input_sum.impl;
+	ps_sum : system two_input_sum_primitive_pkg::two_input_sum.impl;
+	vs_sum : system two_input_sum_primitive_pkg::two_input_sum.impl;
+	pvs_sum : system two_input_sum_primitive_pkg::two_input_sum.impl;
+	evs_sum : system two_input_sum_primitive_pkg::two_input_sum.impl;
+	
+	t1_lh_delay : system delay_primitive_pkg::delay_with_initial.impl;
+	t2_lh_delay : system delay_primitive_pkg::delay_with_initial.impl;
+	ps_delay : system delay_primitive_pkg::delay_with_initial.impl;
+	vs_delay : system delay_primitive_pkg::delay_with_initial.impl;
+	pvs_delay : system delay_primitive_pkg::delay_with_initial.impl;
+	evs_delay : system delay_primitive_pkg::delay_with_initial.impl;
+	
+	zero : system constant_primitive_pkg::constant_0.impl;
+	
+connections
+	-- Initial_Conditions to Initializers
+	IC_to_t1_init : port IC.tank1_initial_height_m -> t1_lh_init.initial_value_in {Communication_Properties::Timing => immediate;};
+	IC_to_t2_init : port IC.tank2_initial_height_m -> t2_lh_init.initial_value_in {Communication_Properties::Timing => immediate;};
+	IC_to_ps_init : port IC.tank1_pump_initial_state -> ps_init.initial_value_in {Communication_Properties::Timing => immediate;};
+	IC_to_vs_init : port IC.tank1_valve_initial_state -> vs_init.initial_value_in {Communication_Properties::Timing => immediate;};
+	IC_to_pvs_init : port IC.tank2_p_valve_initial_state -> pvs_init.initial_value_in {Communication_Properties::Timing => immediate;};
+	IC_to_evs_init : port IC.tank2_e_valve_initial_state -> evs_init.initial_value_in {Communication_Properties::Timing => immediate;};
+	
+	-- Initializers to Summers
+	t1_init_to_t1_sum : port t1_lh_init.initial_value_out -> t1_lh_sum.input1 {Communication_Properties::Timing => immediate;};
+	t2_init_to_t2_sum : port t2_lh_init.initial_value_out -> t2_lh_sum.input1 {Communication_Properties::Timing => immediate;};
+	ps_init_to_ps_sum : port ps_init.initial_value_out -> ps_sum.input1 {Communication_Properties::Timing => immediate;};
+	vs_init_to_vs_sum : port vs_init.initial_value_out -> vs_sum.input1 {Communication_Properties::Timing => immediate;};
+	pvs_init_to_pvs_sum : port pvs_init.initial_value_out -> pvs_sum.input1 {Communication_Properties::Timing => immediate;};
+	evs_init_to_pvs_sum : port evs_init.initial_value_out -> evs_sum.input1 {Communication_Properties::Timing => immediate;};
+
+	-- Initialize the Delays
+	zero_to_t1_delay : port zero.output -> t1_lh_delay.initial_value {Communication_Properties::Timing => immediate;};
+	zero_to_t2_delay : port zero.output -> t2_lh_delay.initial_value {Communication_Properties::Timing => immediate;};
+	zero_to_ps_delay : port zero.output -> ps_delay.initial_value {Communication_Properties::Timing => immediate;};
+	zero_to_vs_delay : port zero.output -> vs_delay.initial_value {Communication_Properties::Timing => immediate;};
+	zero_to_pvs_delay : port zero.output -> pvs_delay.initial_value {Communication_Properties::Timing => immediate;};
+	zero_to_evs_delay : port zero.output -> evs_delay.initial_value {Communication_Properties::Timing => immediate;};
+	
+	-- Inputs to Delays
+	t1_lh_to_t1_delay : port tank1_liquid_height_m -> t1_lh_delay.input {Communication_Properties::Timing => immediate;};
+	t2_lh_to_t2_delay : port tank2_liquid_height_m -> t2_lh_delay.input {Communication_Properties::Timing => immediate;};
+	ps_to_ps_delay : port pump_state -> ps_delay.input {Communication_Properties::Timing => immediate;};
+	vs_to_vs_delay : port valve_state -> vs_delay.input {Communication_Properties::Timing => immediate;};
+	pvs_to_pvs_delay : port production_valve_state -> pvs_delay.input {Communication_Properties::Timing => immediate;};
+	evs_to_evs_delay : port emergency_valve_state -> evs_delay.input {Communication_Properties::Timing => immediate;};
+	
+	-- Delays to Summers
+	t1_delay_to_t1_sum : port t1_lh_delay.output -> t1_lh_sum.input2 {Communication_Properties::Timing => immediate;};
+	t2_delay_to_t2_sum : port t2_lh_delay.output -> t2_lh_sum.input2 {Communication_Properties::Timing => immediate;};
+	ps_delay_to_ps_sum : port ps_delay.output -> ps_sum.input2 {Communication_Properties::Timing => immediate;};
+	vs_delay_to_vs_sum : port vs_delay.output -> vs_sum.input2 {Communication_Properties::Timing => immediate;};
+	pvs_delay_to_pvs_sum : port pvs_delay.output -> pvs_sum.input2 {Communication_Properties::Timing => immediate;};
+	evs_delay_to_pvs_sum : port evs_delay.output -> evs_sum.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Summers to Outputs
+	t1_sum_to_t1_lh : port t1_lh_sum.output -> tank1_previous_height_m {Communication_Properties::Timing => immediate;};
+	t2_sum_to_t2_lh : port t2_lh_sum.output -> tank2_previous_height_m {Communication_Properties::Timing => immediate;};
+	ps_sum_to_ps : port ps_sum.output -> pre_pump_state {Communication_Properties::Timing => immediate;};
+	vs_sum_to_vs : port vs_sum.output -> pre_valve_state {Communication_Properties::Timing => immediate;};
+	pvs_sum_to_pvs : port pvs_sum.output -> pre_production_valve_state {Communication_Properties::Timing => immediate;};
+	evs_sum_to_evs : port evs_sum.output -> pre_emergency_valve_state {Communication_Properties::Timing => immediate;};
+
+	
+
+
+
+end Updater.impl;
+
+end Updater_pkg;
+

@@ -1,0 +1,200 @@
+package relational_primitive_pkg
+public
+	with Base_Types;
+
+system relational_ge
+features
+	input1 : in data port Base_Types::Float;
+	input2 : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		guarantee "The output shall true if input1 is greater or equal to input2":
+			output = (input1 >= input2);
+		
+	**};
+
+end relational_ge;
+
+system implementation relational_ge.impl
+
+	annex agree{**
+		eq greater_e : bool = (input1 >= input2);
+		
+		assert(output = greater_e);
+	**};
+
+end relational_ge.impl;
+
+
+
+system relational_g
+features
+	input1 : in data port Base_Types::Float;
+	input2 : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		guarantee "The output shall true if input1 is greater than input2":
+			output = (input1 > input2);
+		
+	**};
+
+end relational_g;
+
+system implementation relational_g.impl
+
+	annex agree{**
+		eq greater : bool = (input1 > input2);
+		
+		assert(output = greater);
+	**};
+
+end relational_g.impl;
+
+
+
+system relational_le
+features
+	input1 : in data port Base_Types::Float;
+	input2 : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		guarantee "The output shall true if input1 is less than or equal to input2":
+			output = (input1 <= input2);
+		
+	**};
+
+end relational_le;
+
+system implementation relational_le.impl
+
+	annex agree{**
+		eq less_e : bool = (input1 <= input2);
+		
+		assert(output = less_e);
+	**};
+
+end relational_le.impl;
+
+
+
+system relational_l
+features
+	input1 : in data port Base_Types::Float;
+	input2 : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		guarantee "The output shall true if input1 is less than input2":
+			output = (input1 < input2);
+		
+	**};
+
+end relational_l;
+
+system implementation relational_l.impl
+
+	annex agree{**
+		eq less : bool = (input1 < input2);
+		
+		assert(output = less);
+	**};
+
+end relational_l.impl;
+
+
+
+system relational_e
+features
+	input1 : in data port Base_Types::Float;
+	input2 : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		guarantee "The output shall true if input1 is equal to input2":
+			output = (input1 = input2);
+		
+	**};
+
+end relational_e;
+
+system implementation relational_e.impl
+
+	annex agree{**
+		eq e : bool = (input1 = input2);
+		
+		assert(output = e);
+	**};
+
+end relational_e.impl;
+
+
+
+system relational_ne
+features
+	input1 : in data port Base_Types::Float;
+	input2 : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		guarantee "The output shall true if input1 is not equal to input2":
+			output = (input1 <> input2);
+		
+	**};
+
+end relational_ne;
+
+system implementation relational_ne.impl
+
+	annex agree{**
+		eq ne : bool = (input1 <> input2);
+		
+		assert(output = ne);
+	**};
+
+end relational_ne.impl;
+
+
+
+system compare_1
+features
+	input : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		const val : real = 1.0;
+		
+		guarantee "The output shall true if input1 is equal to input2":
+			output = (input = val);
+		
+	**};
+
+end compare_1;
+
+system implementation compare_1.impl
+
+	annex agree{**
+		eq e : bool = (input = val);
+		
+		assert(output = e);
+	**};
+
+end compare_1.impl;
+
+end relational_primitive_pkg;

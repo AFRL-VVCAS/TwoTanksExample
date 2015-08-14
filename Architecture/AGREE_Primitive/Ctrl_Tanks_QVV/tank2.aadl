@@ -1,0 +1,133 @@
+package tank2_package
+public
+	with std;
+	with Base_Types;
+	with two_input_sum_primitive_pkg;
+	with two_input_diff_primitive_pkg;
+	with two_input_division_primitive_pkg;
+	with limiter_primitive_pkg;
+	with constant_primitive_pkg;
+	with config;
+	
+annex agree{**
+	const tank2_initial_vol_m3 : real = 0.0;
+	const max_tank2_vol_m3 : real = config.max_tank2_vol_m3;
+	const tank2_cca : real = config.tank2_cs_area_m2;
+	
+**};
+	
+system tank2
+features
+	previous_height : in data port Base_Types::Float;
+	valve_flow_rate : in data port Base_Types::Float;
+	cross_section_area : in data port Base_Types::Float;
+	p_valve_flow_rate : in data port Base_Types::Float;
+	e_valve_flow_rate : in data port Base_Types::Float;
+	max_tank_vol : in data port Base_Types::Float;
+	
+	liquid_height : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		-- Equations
+		eq current_vol : real;
+		eq max_tank_height : real = max_tank_vol / cross_section_area;
+		
+		-- Assumptions
+		assume "valve_flow_rate is positive" :
+			(valve_flow_rate >= 0.0) and std.Initial(valve_flow_rate = 0.0);
+		
+		assume "cross section area is positive and doesn't change" :
+			std.Historically(cross_section_area = tank2_package.tank2_cca);
+		
+		assume "P valve flow rate is positive" :
+			(p_valve_flow_rate >= 0.0) and std.Initial(p_valve_flow_rate = 0.0);
+			
+		assume "E valve flow rate is positive" :
+			(e_valve_flow_rate >= 0.0) and std.Initial(e_valve_flow_rate = 0.0);
+			
+		assume "the tank volume is positive and does not change" :
+			std.Historically(max_tank_vol = tank2_package.max_tank2_vol_m3);
+			
+		assume "the previous height is the height at the previous time step" :
+			previous_height = prev(liquid_height,0.0);
+		
+		-- Guarantees
+		guarantee "The initial volume of tank 2 should be equivalent to the specified initial tank 2 volume" :
+			std.Initial((liquid_height / cross_section_area) = tank2_package.tank2_initial_vol_m3);		
+			
+		guarantee "If the current tank 2 volume plus the tank 2 net flow is greater than the tank 2 maximum volume then tank 2 is full":
+			(prev(liquid_height, tank2_package.tank2_initial_vol_m3) + ((valve_flow_rate - p_valve_flow_rate - e_valve_flow_rate) / cross_section_area) > max_tank_height) => (liquid_height = max_tank_height);
+			
+		guarantee "If the current tank 2 volume plus the tank 2 net flow is less than the tank 2 minimum volume then tank 2 is empty" :
+			(prev(liquid_height, tank2_package.tank2_initial_vol_m3) + ((valve_flow_rate - p_valve_flow_rate - e_valve_flow_rate) / cross_section_area) < 0.0) => (liquid_height = 0.0);
+		
+		guarantee "If the current tank 2 volume plus the tank 2 net flow is greater than empty and less than the tank 2 maximum volume then the tank 2 volume changes by the tank 2 net flow":
+			(prev(liquid_height, tank2_package.tank2_initial_vol_m3) + ((valve_flow_rate - p_valve_flow_rate - e_valve_flow_rate) / cross_section_area) <= max_tank_height) and (prev(liquid_height, tank2_package.tank2_initial_vol_m3) + ((valve_flow_rate - p_valve_flow_rate - e_valve_flow_rate) / cross_section_area) >= 0.0) 
+				=> (liquid_height = prev(liquid_height, tank2_package.tank2_initial_vol_m3) + ((valve_flow_rate - p_valve_flow_rate - e_valve_flow_rate) / cross_section_area));
+
+		guarantee "Current height of tank 2 is equal or less than the max tank 2 height" : 
+			liquid_height <= max_tank_height;
+			
+		guarantee "Current height of tank 2 is non negative" :
+			liquid_height >= 0.0;
+			
+		guarantee "The tank 2 current height is equal to the tank 2 current volume divided by the tank 2 cross sectional area" :
+			liquid_height = current_vol / cross_section_area;
+			
+		guarantee "The current tank 2 height is the current tank 2 volume divided by the tank 2 cross sectional area":
+			liquid_height = (current_vol / cross_section_area);
+			
+		
+	**};
+
+end tank2;
+
+system implementation tank2.impl
+subcomponents
+	diff : system two_input_diff_primitive_pkg::two_input_diff.impl;
+	diff2 : system two_input_diff_primitive_pkg::two_input_diff.impl;
+	sum : system two_input_sum_primitive_pkg::two_input_sum.impl;
+	div : system two_input_division_primitive_pkg::two_input_division.impl;
+	div2 : system two_input_division_primitive_pkg::two_input_division.impl;
+	limiter : system limiter_primitive_pkg::limiter.impl;
+	cons_0 : system constant_primitive_pkg::constant_0.impl;
+	
+connections
+	-- Inputs to difference
+	vfr_to_diff : port valve_flow_rate -> diff.minuend {Communication_Properties::Timing => immediate;};
+	pvfr_to_diff : port p_valve_flow_rate -> diff.subtrahend {Communication_Properties::Timing => immediate;};
+
+	-- Inputs to difference #2
+	diff_to_diff2 : port diff.output -> diff2.minuend {Communication_Properties::Timing => immediate;};
+	evfr_to_diff2 : port e_valve_flow_rate -> diff2.subtrahend {Communication_Properties::Timing => immediate;};
+	
+	-- Connect to divisor
+	diff_to_div : port diff2.output -> div.dividend {Communication_Properties::Timing => immediate;};
+	csa_to_div : port cross_section_area -> div.divisor {Communication_Properties::Timing => immediate;};
+	
+	-- Connect to Summer
+	ph_to_sum : port previous_height -> sum.input1 {Communication_Properties::Timing => immediate;};
+	div_to_sum : port div.output -> sum.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Connect to divisor2
+	max_vol_to_div2 : port max_tank_vol -> div2.dividend {Communication_Properties::Timing => immediate;};
+	csa_to_div2 : port cross_section_area -> div2.divisor {Communication_Properties::Timing => immediate;};
+	
+	-- Connect to limiter
+	div2_to_limiter : port div2.output -> limiter.up {Communication_Properties::Timing => immediate;};
+	sum_to_limiter : port sum.output -> limiter.input {Communication_Properties::Timing => immediate;};
+	constant_0_to_limiter : port cons_0.output -> limiter.lo {Communication_Properties::Timing => immediate;};
+	
+	-- Output
+	limiter_to_lh : port limiter.output -> liquid_height {Communication_Properties::Timing => immediate;};
+	
+	annex agree{**
+		assert(current_vol = limiter.output * cross_section_area);
+		
+	**};
+
+end tank2.impl;
+
+
+end tank2_package;

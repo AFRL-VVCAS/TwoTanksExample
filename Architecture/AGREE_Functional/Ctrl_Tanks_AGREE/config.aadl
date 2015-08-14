@@ -1,0 +1,76 @@
+package config
+public
+
+annex agree {**
+	-- time rates
+	const system_rate_s : int = 1;
+	const init_period_s : int = system_rate_s * 20;
+	const high_safety_margin_s : int = system_rate_s * 3;
+	const low_safety_margin_s : int = system_rate_s * 3;
+
+-- Tank 1 specifications ----------------------------		
+	-- volume for Tank 1				
+	const max_tank1_vol_m3 : real = 7.0;
+	const tank1_empty_m3 : real = 0.0;
+	const tank1_initial_vol_m3 : real = 0.0; 	
+		
+	-- parameters for Tank 1
+	const max_tank1_height_m : real = 7.0;
+	const tank1_empty_m : real = 0.0;
+	const tank1_lo_height_m : real = 2.0;
+	const tank1_hi_height_m : real = 5.0;
+	const tank1_cross_section_area_m2 : real = 1.0;
+	
+	-- safety parameters for Tank 1
+	const tank1_safety_hi_ht_m : real = 5.0;
+	const tank1_safety_lo_ht_m : real = 2.0;
+	
+	-- sensor heights
+	const t1_sensor_lo_height_m : real = 2.0;
+	const t1_sensor_hi_height_m : real = 5.0;
+	
+	-- valve const
+	const t1_valve_max_flow_rate_m3s : real = 0.1;
+	const t1_valve_zero_flow_rate_m3s : real = 0.0;
+	
+	-- pump const
+	const t1_pump_max_flow_rate_m3s : real = 0.2;
+	const t1_pump_zero_flow_rate_m3s : real = 0.0;
+-----------------------------------------------------	
+
+-- Tank 2 specifications ----------------------------	
+	-- volume for Tank 2				
+	const max_tank2_vol_m3 : real = 8.0;
+	const tank2_empty_m3 : real = 0.0;
+	const tank2_initial_vol_m3 : real = 0.0; 	
+		
+	-- parameters for Tank 2
+	const max_tank2_height_m : real = 4.0;
+	const tank2_empty_m : real = 0.0;
+	const tank2_lo_height_m : real = 1.0;
+	const tank2_md_height_m : real = 2.0;
+	const tank2_hi_height_m : real = 3.0;
+	const tank2_cs_area_m2 : real = 2.0;
+	
+	-- safety parameters for Tank 2
+	const tank2_safety_hi_ht_m : real = 3.0;
+	const tank2_safety_md_ht_m : real = 2.0;
+	const tank2_safety_lo_ht_m : real = 1.0;
+	
+	-- sensor heights
+	const t2_sensor_hi_height_m : real = 3.0;
+	const t2_sensor_md_height_m : real = 2.0;
+	const t2_sensor_lo_height_m : real = 1.0;
+	
+	-- valve const
+	const t2_e_valve_max_flow_rate_m3s : real = 0.2;
+	const t2_p_valve_max_flow_rate_m3s : real = 0.05;
+	const t2_valve_zero_flow_rate_m3s : real = 0.0;	
+-----------------------------------------------------	
+	
+	
+	
+	
+**};
+
+end config;

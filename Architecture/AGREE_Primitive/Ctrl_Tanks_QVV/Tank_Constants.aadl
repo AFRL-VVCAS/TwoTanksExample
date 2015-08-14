@@ -1,0 +1,117 @@
+package Tank_Constants_pkg
+public
+	with Base_Types;
+	with config;
+	with constant_primitive_pkg;
+
+system Tank_Constants
+features
+	time_increment : out data port Base_Types::Float;
+
+	tank1_sensor_hi_height_m : out data port Base_Types::Float;
+	tank1_sensor_lo_height_m : out data port Base_Types::Float;
+	tank1_pump_flow_rate_m3s : out data port Base_Types::Float;
+	tank1_valve_flow_rate_m3s : out data port Base_Types::Float;
+	tank1_cross_section_area_m2 : out data port Base_Types::Float;
+	tank1_max_vol_m3 : out data port Base_Types::Float;
+	
+	tank2_sensor_hi_height_m : out data port Base_Types::Float;
+	tank2_sensor_md_height_m : out data port Base_Types::Float;
+	tank2_sensor_lo_height_m : out data port Base_Types::Float;
+	tank2_p_valve_flow_rate_m3s : out data port Base_Types::Float;
+	tank2_e_valve_flow_rate_m3s : out data port Base_Types::Float;
+	tank2_cross_section_area_m2 : out data port Base_Types::Float;
+	tank2_max_vol_m3 : out data port Base_Types::Float;
+	
+annex agree{**
+	
+	-- Guarantees
+	guarantee "time_increment is the specified value in the config file":
+		time_increment = config.system_rate_s;
+	
+	-- Tank 1
+	guarantee "tank1_sensor_hi_height_m is the specified value in the config file":
+		tank1_sensor_hi_height_m = config.t1_sensor_hi_height_m;
+	
+	guarantee "tank1_sensor_lo_height_m is the specified value in the config file":
+		tank1_sensor_lo_height_m = config.t1_sensor_lo_height_m;
+		
+	guarantee "tank1_pump_flow_rate_m3s is the specified value in the config file":
+		tank1_pump_flow_rate_m3s = config.t1_pump_max_flow_rate_m3s;
+		
+	guarantee "tank1_valve_flow_rate_m3s is the specified value in the config file":
+		tank1_valve_flow_rate_m3s = config.t1_valve_max_flow_rate_m3s;
+		
+	guarantee "tank1_cross_section_area_m2 is the specified value in the config file":
+		tank1_cross_section_area_m2 = config.tank1_cross_section_area_m2;
+		
+	guarantee "tank1_max_vol_m3 is the specified value in the config file":
+		tank1_max_vol_m3 = config.max_tank1_vol_m3;
+		
+		
+	-- Tank 2	
+	guarantee "tank2_sensor_hi_height_m is the specified value in the config file":
+		tank2_sensor_hi_height_m = config.t2_sensor_hi_height_m;
+	
+	guarantee "tank2_sensor_md_height_m is the specified value in the config file":
+		tank2_sensor_md_height_m = config.t2_sensor_md_height_m;
+		
+	guarantee "tank2_sensor_lo_height_m is the specified value in the config file":
+		tank2_sensor_lo_height_m = config.t2_sensor_lo_height_m;
+		
+	guarantee "tank2_p_valve_flow_rate_m3s is the specified value in the config file":
+		tank2_p_valve_flow_rate_m3s = config.t2_p_valve_max_flow_rate_m3s;
+		
+	guarantee "tank2_e_valve_flow_rate_m3s is the specified value in the config file":
+		tank2_e_valve_flow_rate_m3s = config.t2_e_valve_max_flow_rate_m3s;
+		
+	guarantee "tank2_cross_section_area_m2 is the specified value in the config file":
+		tank2_cross_section_area_m2 = config.tank2_cs_area_m2;
+		
+	guarantee "tank2_max_vol_m3 is the specified value in the config file":
+		tank2_max_vol_m3 = config.max_tank2_vol_m3;
+	
+**};
+	
+end Tank_Constants;
+
+system implementation Tank_Constants.impl
+subcomponents
+	ti : system constant_primitive_pkg::constant_1.impl;
+
+	t1_sh : system constant_primitive_pkg::constant_5.impl;
+	t1_sl : system constant_primitive_pkg::constant_2.impl;
+	t1_pfr : system constant_primitive_pkg::constant_0_2.impl;
+	t1_vfr : system constant_primitive_pkg::constant_0_1.impl;
+	t1_csa : system constant_primitive_pkg::constant_1.impl;
+	t1_mv : system constant_primitive_pkg::constant_7.impl;
+	
+	t2_sh : system constant_primitive_pkg::constant_3.impl;
+	t2_sm : system constant_primitive_pkg::constant_2.impl;
+	t2_sl : system constant_primitive_pkg::constant_1.impl;
+	t2_pfr : system constant_primitive_pkg::constant_0_05.impl;
+	t2_efr : system constant_primitive_pkg::constant_0_2.impl;
+	t2_csa : system constant_primitive_pkg::constant_2.impl;
+	t2_mv : system constant_primitive_pkg::constant_8.impl;
+	
+connections
+	t1_sh_to_out : port t1_sh.output -> tank1_sensor_hi_height_m {Communication_Properties::Timing => immediate;};
+	t1_sl_to_out : port t1_sl.output -> tank1_sensor_lo_height_m {Communication_Properties::Timing => immediate;};
+	t1_pfr_to_out : port t1_pfr.output -> tank1_pump_flow_rate_m3s {Communication_Properties::Timing => immediate;};
+	t1_vfr_to_out : port t1_vfr.output -> tank1_valve_flow_rate_m3s {Communication_Properties::Timing => immediate;};
+	t1_csa_to_out : port t1_csa.output -> tank1_cross_section_area_m2 {Communication_Properties::Timing => immediate;};
+	t1_mv_to_out : port t1_mv.output -> tank1_max_vol_m3 {Communication_Properties::Timing => immediate;};
+	
+	t2_sh_to_out : port t2_sh.output -> tank2_sensor_hi_height_m {Communication_Properties::Timing => immediate;};
+	t2_sm_to_out : port t2_sm.output -> tank2_sensor_md_height_m {Communication_Properties::Timing => immediate;};
+	t2_sl_to_out : port t2_sl.output -> tank2_sensor_lo_height_m {Communication_Properties::Timing => immediate;};
+	t2_pfr_to_out : port t2_pfr.output -> tank2_p_valve_flow_rate_m3s {Communication_Properties::Timing => immediate;};
+	t2_vfr_to_out : port t2_efr.output -> tank2_e_valve_flow_rate_m3s {Communication_Properties::Timing => immediate;};
+	t2_csa_to_out : port t2_csa.output -> tank2_cross_section_area_m2 {Communication_Properties::Timing => immediate;};
+	t2_mv_to_out : port t2_mv.output -> tank2_max_vol_m3 {Communication_Properties::Timing => immediate;};
+	
+	ti_to_out : port ti.output -> time_increment {Communication_Properties::Timing => immediate;};
+	
+end Tank_Constants.impl;
+
+end Tank_Constants_pkg;

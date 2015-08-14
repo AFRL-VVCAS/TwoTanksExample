@@ -1,0 +1,39 @@
+package two_input_and_primitive_pkg
+public
+	with Base_Types;
+
+system two_input_and
+features
+	input1 : in data port Base_Types::Boolean;
+	input2 : in data port Base_Types::Boolean;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		guarantee "The output shall be false if input1 is false":
+			(input1 = false) => (output = false);
+			
+		guarantee "The output shall be false if input2 is false":
+			(input2 = false) => (output = false);
+			
+		guarantee "The output shall be true if input1 and input2 are both true":
+			(input1 and input2) => (output = true);
+		
+	**};
+
+end two_input_and;
+
+system implementation two_input_and.impl
+
+	annex agree{**
+		eq and_var : bool = input1 and input2;
+		
+		assert(output = and_var);
+	**};
+
+end two_input_and.impl;
+
+
+
+end two_input_and_primitive_pkg;

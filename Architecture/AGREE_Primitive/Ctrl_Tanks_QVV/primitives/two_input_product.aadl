@@ -1,0 +1,33 @@
+package two_input_product_primitive_pkg
+public
+	with Base_Types;
+
+system two_input_product
+features
+	input1 : in data port Base_Types::Float;
+	input2 : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		guarantee "The output shall be the product of the two inputs":
+			output = input1 * input2; 
+		
+	**};
+
+end two_input_product;
+
+system implementation two_input_product.impl
+
+	annex agree{**
+		eq product : real = input1 * input2;
+		
+		assert(output = product);
+	**};
+
+end two_input_product.impl;
+
+
+
+end two_input_product_primitive_pkg;

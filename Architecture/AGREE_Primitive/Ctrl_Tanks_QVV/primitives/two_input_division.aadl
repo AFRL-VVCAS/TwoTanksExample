@@ -1,0 +1,33 @@
+package two_input_division_primitive_pkg
+public
+	with Base_Types;
+
+system two_input_division
+features
+	dividend : in data port Base_Types::Float;		-- u1
+	divisor : in data port Base_Types::Float;		-- u2
+	
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		guarantee "The output shall be the division of the two inputs":
+			output = dividend / divisor;
+		
+	**};
+
+end two_input_division;
+
+system implementation two_input_division.impl
+
+	annex agree{**
+		eq quotient : real = dividend / divisor;
+		
+		assert(output = quotient);
+	**};
+
+end two_input_division.impl;
+
+
+
+end two_input_division_primitive_pkg;

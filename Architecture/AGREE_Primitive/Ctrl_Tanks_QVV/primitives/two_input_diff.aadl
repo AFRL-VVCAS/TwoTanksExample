@@ -1,0 +1,33 @@
+package two_input_diff_primitive_pkg
+public
+	with Base_Types;
+
+system two_input_diff
+features
+	minuend : in data port Base_Types::Float;			-- u1
+	subtrahend : in data port Base_Types::Float;		-- u2
+	
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		guarantee "The output shall be the difference between the minuend and subtrahend":
+			output = minuend - subtrahend;
+		
+	**};
+
+end two_input_diff;
+
+system implementation two_input_diff.impl
+
+	annex agree{**
+		eq diff : real = minuend - subtrahend;
+		
+		assert(output = diff);
+	**};
+
+end two_input_diff.impl;
+
+
+
+end two_input_diff_primitive_pkg;

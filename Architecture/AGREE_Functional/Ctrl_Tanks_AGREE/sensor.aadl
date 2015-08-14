@@ -1,0 +1,233 @@
+package sensor_package
+public
+	with Base_Types;
+	with std;
+	with config;
+
+annex agree {**
+-- Tank 1 specifications ----------------------------	
+	const t1_sensor_lo_height_m : real = config.t1_sensor_lo_height_m;
+	const t1_sensor_hi_height_m : real = config.t1_sensor_hi_height_m;
+-----------------------------------------------------
+-- Tank 2 specifications ----------------------------
+	const t2_sensor_hi_height_m : real = config.t2_sensor_hi_height_m;
+	const t2_sensor_md_height_m : real = config.t2_sensor_md_height_m;
+	const t2_sensor_lo_height_m : real = config.t2_sensor_lo_height_m;
+-----------------------------------------------------	
+**};
+
+-- Tank 2 -------------------------------------------
+system T2_Sensor_High
+	features
+		Tank_Height : in data port Base_Types::Float;
+		Sensor_Value: out data port Base_Types::Boolean;
+		Sensor_Height : out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		eq sensor_height : real;
+		
+		guarantee "If the tank height is greater than or equal to the sensor height then Sensor_Value is true" :
+			(false -> (Tank_Height >= sensor_height)) => Sensor_Value;
+			
+		guarantee "If the tank height is less than the sensor height then Sensor_Value is false" :
+			(true -> (Tank_Height < sensor_height)) => not Sensor_Value;
+			
+		guarantee "The sensor should be false Init":
+			std.Init(Sensor_Value = false);
+			
+		guarantee "The Sensor_Height is the same as the specified sensor height":
+			Sensor_Height = sensor_package.t2_sensor_hi_height_m;
+			
+		guarantee "The sensor_height is the same as the specified sensor height":
+			sensor_height = sensor_package.t2_sensor_hi_height_m;
+		
+	**};		
+end T2_Sensor_High;
+
+system implementation T2_Sensor_High.H_Impl
+
+	annex agree {**
+		eq sensor_hi_on : bool = false -> (Tank_Height >= sensor_package.t2_sensor_hi_height_m);
+		
+		assert(sensor_height = sensor_package.t2_sensor_hi_height_m);
+		
+		assert(Sensor_Value = sensor_hi_on);
+		assert(Sensor_Height = sensor_height);
+		
+	**};
+
+end T2_Sensor_High.H_Impl;
+
+system T2_Sensor_Mid
+	features
+		Tank_Height : in data port Base_Types::Float;
+		Sensor_Value: out data port Base_Types::Boolean;
+		Sensor_Height : out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		eq sensor_height : real;
+		
+		guarantee "If the tank height is greater than or equal to the sensor height then Sensor_Value is true" :
+			(false -> (Tank_Height >= sensor_height)) => Sensor_Value;
+			
+		guarantee "If the tank height is less than the sensor height then Sensor_Value is false" :
+			(true -> (Tank_Height < sensor_height)) => not Sensor_Value;
+			
+		guarantee "The sensor should be false Init":
+			std.Init(Sensor_Value = false);
+			
+		guarantee "The Sensor_Height is the same as the specified sensor height":
+			Sensor_Height = sensor_package.t2_sensor_md_height_m;
+			
+		guarantee "The sensor_height is the same as the specified sensor height":
+			sensor_height = sensor_package.t2_sensor_md_height_m;
+		
+	**};		
+end T2_Sensor_Mid;
+
+system implementation T2_Sensor_Mid.M_Impl
+
+	annex agree {**
+		eq sensor_md_on : bool = false -> (Tank_Height >= sensor_package.t2_sensor_md_height_m);
+		
+		assert(sensor_height = sensor_package.t2_sensor_md_height_m);
+		
+		assert(Sensor_Value = sensor_md_on);
+		assert(Sensor_Height = sensor_height);
+		
+	**};
+
+end T2_Sensor_Mid.M_Impl;
+
+system T2_Sensor_Low
+	features
+		Tank_Height : in data port Base_Types::Float;
+		Sensor_Value: out data port Base_Types::Boolean;
+		Sensor_Height : out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		eq sensor_height : real;
+		
+		guarantee "If the tank height is greater than or equal to the sensor height then Sensor_Value is true" :
+			(false -> (Tank_Height >= sensor_height)) => Sensor_Value;
+			
+		guarantee "If the tank height is less than the sensor height then Sensor_Value is false" :
+			(true -> (Tank_Height < sensor_height)) => not Sensor_Value;
+			
+		guarantee "The sensor should be false Init":
+			std.Init(Sensor_Value = false);
+			
+		guarantee "The Sensor_Height is the same as the specified sensor height":
+			Sensor_Height = sensor_package.t2_sensor_lo_height_m;
+			
+		guarantee "The sensor_height is the same as the specified sensor height":
+			sensor_height = sensor_package.t2_sensor_lo_height_m;
+		
+	**};		
+end T2_Sensor_Low; 
+
+system implementation T2_Sensor_Low.L_Impl
+
+	annex agree {**
+		eq sensor_low_on : bool = false -> (Tank_Height >= sensor_package.t2_sensor_lo_height_m);
+		
+		assert(sensor_height = sensor_package.t2_sensor_lo_height_m);
+		
+		assert(Sensor_Value = sensor_low_on);
+		assert(Sensor_Height = sensor_height);
+		
+	**};
+
+end T2_Sensor_Low.L_Impl;
+-----------------------------------------------------
+
+-- Tank 1 -------------------------------------------
+system T1_Sensor_High
+	features
+		Tank_Height : in data port Base_Types::Float;
+		Sensor_Value: out data port Base_Types::Boolean;
+		Sensor_Height : out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		eq sensor_height : real;
+		
+		guarantee "If the tank height is greater than or equal to the sensor height then Sensor_Value is true" :
+			(false -> (Tank_Height >= sensor_height)) => Sensor_Value;
+			
+		guarantee "If the tank height is less than the sensor height then Sensor_Value is false" :
+			(true -> (Tank_Height < sensor_height)) => not Sensor_Value;
+			
+		guarantee "The sensor should be false Init":
+			std.Init(Sensor_Value = false);
+			
+		guarantee "The Sensor_Height is the same as the specified sensor height":
+			Sensor_Height = sensor_package.t1_sensor_hi_height_m;
+			
+		guarantee "The sensor_height is the same as the specified sensor height":
+			sensor_height = sensor_package.t1_sensor_hi_height_m;
+		
+	**};		
+end T1_Sensor_High;
+
+system implementation T1_Sensor_High.H_Impl
+
+	annex agree {**
+		eq sensor_hi_on : bool = false -> (Tank_Height >= sensor_package.t1_sensor_hi_height_m);
+		
+		assert(sensor_height = sensor_package.t1_sensor_hi_height_m);
+		
+		assert(Sensor_Value = sensor_hi_on);
+		assert(Sensor_Height = sensor_height);
+		
+	**};
+
+end T1_Sensor_High.H_Impl;
+
+system T1_Sensor_Low
+	features
+		Tank_Height : in data port Base_Types::Float;
+		Sensor_Value: out data port Base_Types::Boolean;
+		Sensor_Height : out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		eq sensor_height : real;
+		
+		guarantee "If the tank height is greater than or equal to the sensor height then Sensor_Value is true" :
+			(false -> (Tank_Height >= sensor_height)) => Sensor_Value;
+			
+		guarantee "If the tank height is less than the sensor height then Sensor_Value is false" :
+			(true -> (Tank_Height < sensor_height)) => not Sensor_Value;
+			
+		guarantee "The sensor should be false Init":
+			std.Init(Sensor_Value = false);
+			
+		guarantee "The Sensor_Height is the same as the specified sensor height":
+			Sensor_Height = sensor_package.t1_sensor_lo_height_m;
+			
+		guarantee "The sensor_height is the same as the specified sensor height":
+			sensor_height = sensor_package.t1_sensor_lo_height_m;
+		
+	**};		
+end T1_Sensor_Low; 
+
+system implementation T1_Sensor_Low.L_Impl
+
+	annex agree {**
+		eq sensor_low_on : bool = false -> (Tank_Height >= sensor_package.t1_sensor_lo_height_m);
+		
+		assert(sensor_height = sensor_package.t1_sensor_lo_height_m);
+		
+		assert(Sensor_Value = sensor_low_on);
+		assert(Sensor_Height = sensor_height);
+		
+	**};
+
+end T1_Sensor_Low.L_Impl;
+-----------------------------------------------------
+
+end sensor_package;

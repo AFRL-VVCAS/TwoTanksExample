@@ -1,0 +1,150 @@
+package tank_package
+public
+	with Base_Types;
+	with config;
+	
+annex agree {**
+-- Tank 1 specifications ----------------------------	
+	const tank1_initial_vol_m3 : real = config.tank1_initial_vol_m3;	
+	const max_tank1_vol_m3 : real = config.max_tank1_vol_m3;
+	const tank1_cross_section_area_m2 : real = config.tank1_cross_section_area_m2;
+-----------------------------------------------------	
+-- Tank 2 specifications ----------------------------
+	const tank2_initial_vol_m3 : real = config.tank2_initial_vol_m3;	
+	const max_tank2_vol_m3 : real = config.max_tank2_vol_m3;
+	const tank2_cross_section_area_m2 : real = config.tank2_cs_area_m2;
+-----------------------------------------------------
+**};
+	
+system Tank_1
+	features
+		Flow_In: in data port Base_Types::Float;
+		Flow_Out: in data port Base_Types::Float;
+		Liq_Height_m: out data port Base_Types::Float;
+		
+	annex agree {**	
+		
+		eq current_vol : real;		
+		eq max_tank_height : real;
+		eq current_height : real;		
+		
+		guarantee "The initial volume of tank 1 should be equivalent to the specified initial tank 1 volume" :
+			std.Init(current_vol = tank_package.tank1_initial_vol_m3);		
+			
+		guarantee "If the current tank 1 volume plus the tank 1 net flow is greater than the tank 1 maximum volume then tank 1 is full":
+			(prev(current_vol, tank_package.tank1_initial_vol_m3) + prev(Flow_In - Flow_Out,0.0) > tank_package.max_tank1_vol_m3) => (current_vol = tank_package.max_tank1_vol_m3);
+			
+		guarantee "If the current tank 1 volume plus the tank 1 net flow is less than the tank 1 minimum volume then tank 1 is empty" :
+			(prev(current_vol, tank_package.tank1_initial_vol_m3) + prev(Flow_In - Flow_Out,0.0) < 0.0) => (current_vol = 0.0);
+		
+		guarantee "If the current tank 1 volume plus the tank 1 net flow is greater than empty and less than the tank 1 maximum volume then the tank 1 volume changes by the tank 1 net flow":
+			(prev(current_vol, tank_package.tank1_initial_vol_m3) + prev(Flow_In - Flow_Out,0.0) <= tank_package.max_tank1_vol_m3) and (prev(current_vol, tank_package.tank1_initial_vol_m3) + prev(Flow_In - Flow_Out,0.0) >= 0.0) 
+				=> (current_vol = prev(current_vol, tank_package.tank1_initial_vol_m3) + prev(Flow_In - Flow_Out,0.0));
+
+		guarantee "Current height of tank 1 is equal or less than the max tank 1 height" : 
+			Liq_Height_m <= max_tank_height;
+			
+		guarantee "Current height of tank 1 is non negative" :
+			Liq_Height_m >= 0.0;
+			
+		guarantee "The tank 1 current height is equal to the tank 1 current volume divided by the tank 1 cross sectional area" :
+			Liq_Height_m = current_vol / tank_package.tank1_cross_section_area_m2;
+			
+		guarantee "The max tank 1 height is equal to the max tank 1 volume divided by tank 1 cross sectional area":
+			max_tank_height = tank_package.max_tank1_vol_m3 / tank_package.tank1_cross_section_area_m2;
+			
+		guarantee "The current tank 1 height is the current tank 1 volume divided by the tank 1 cross sectional area":
+			current_height = (current_vol / tank_package.tank1_cross_section_area_m2);
+			
+		guarantee "The output height of tank 1 should equal the calculated height of tank 1":
+			Liq_Height_m = current_height;
+		
+	**};
+end Tank_1;
+
+system implementation Tank_1.UniformTankImpl
+	annex agree{**
+		
+		eq delta_vol : real = prev(Flow_In - Flow_Out,0.0);
+		eq tank_vol_calc : real = ((tank_package.tank1_initial_vol_m3 -> pre(current_vol)) + delta_vol);
+		
+		eq tank_vol_overflow_underflow : real = if (tank_vol_calc > tank_package.max_tank1_vol_m3) then tank_package.max_tank1_vol_m3 else if (tank_vol_calc < 0.0) then 0.0 else tank_vol_calc;
+		
+		assert(current_vol = tank_vol_overflow_underflow);
+		
+		assert(max_tank_height = (tank_package.max_tank1_vol_m3 / tank_package.tank1_cross_section_area_m2));
+		assert(current_height = (current_vol / tank_package.tank1_cross_section_area_m2));		
+		
+		-- Output
+		assert(Liq_Height_m = current_height);
+	**};
+end Tank_1.UniformTankImpl;
+
+system Tank_2
+	features
+		Flow_In: in data port Base_Types::Float;
+		Flow_Production_Out: in data port Base_Types::Float;
+		Flow_Emergency_Out: in data port Base_Types::Float;
+		Liq_Height_m: out data port Base_Types::Float;
+		
+	annex agree {**	
+		
+		eq current_vol : real;		
+		eq max_tank_height : real;
+		eq current_height : real;
+		
+		eq netFlow : real = (Flow_In - Flow_Production_Out - Flow_Emergency_Out);	
+		
+		guarantee "The initial volume of tank 2 should be equivalent to the specified initial tank 2 volume" :
+			std.Init(current_vol = tank_package.tank2_initial_vol_m3);		
+			
+		guarantee "If the current tank 2 volume plus the tank 2 net flow is greater than the tank 2 maximum volume then tank 2 is full":
+			(prev(current_vol, tank_package.tank2_initial_vol_m3) + prev(netFlow,0.0) > tank_package.max_tank2_vol_m3) => (current_vol = tank_package.max_tank2_vol_m3);
+			
+		guarantee "If the current tank 2 volume plus the tank 2 net flow is less than the tank 2 minimum volume then tank 2 is empty" :
+			(prev(current_vol, tank_package.tank2_initial_vol_m3) + prev(netFlow,0.0) < 0.0) => (current_vol = 0.0);
+		
+		guarantee "If the current tank 2 volume plus the tank 2 net flow is greater than empty and less than the tank 2 maximum volume then the tank 2 volume changes by the tank 2 net flow":
+			(prev(current_vol, tank_package.tank2_initial_vol_m3) + prev(netFlow,0.0) <= tank_package.max_tank2_vol_m3) and (prev(current_vol, tank_package.tank2_initial_vol_m3) + prev(netFlow,0.0) >= 0.0) 
+				=> (current_vol = prev(current_vol, tank_package.tank2_initial_vol_m3) + prev(netFlow,0.0));
+
+		guarantee "Current height of tank 2 is equal or less than the max tank 2 height" : 
+			Liq_Height_m <= max_tank_height;
+			
+		guarantee "Current height of tank 2 is non negative" :
+			Liq_Height_m >= 0.0;
+			
+		guarantee "The tank 2 current height is equal to the tank 2 current volume divided by the tank 2 cross sectional area" :
+			Liq_Height_m = current_vol / tank_package.tank2_cross_section_area_m2;
+			
+		guarantee "The max tank 2 height is equal to the max tank 2 volume divided by tank 2 cross sectional area":
+			max_tank_height = tank_package.max_tank2_vol_m3 / tank_package.tank2_cross_section_area_m2;
+			
+		guarantee "The current tank 2 height is the current tank 2 volume divided by the tank 2 cross sectional area":
+			current_height = (current_vol / tank_package.tank2_cross_section_area_m2);
+			
+		guarantee "The output height of tank 2 should equal the calculated height of tank 2":
+			Liq_Height_m = current_height;
+		
+	**};
+end Tank_2;
+
+system implementation Tank_2.UniformTankImpl
+	annex agree{**
+		
+		eq delta_vol : real = prev(netFlow,0.0);
+		eq tank_vol_calc : real = ((tank_package.tank2_initial_vol_m3 -> pre(current_vol)) + delta_vol);
+		
+		eq tank_vol_overflow_underflow : real = if (tank_vol_calc > tank_package.max_tank2_vol_m3) then tank_package.max_tank2_vol_m3 else if (tank_vol_calc < 0.0) then 0.0 else tank_vol_calc;
+		
+		assert(current_vol = tank_vol_overflow_underflow);
+		
+		assert(max_tank_height = (tank_package.max_tank2_vol_m3 / tank_package.tank2_cross_section_area_m2));
+		assert(current_height = (current_vol / tank_package.tank2_cross_section_area_m2));		
+		
+		-- Output
+		assert(Liq_Height_m = current_height);
+	**};
+end Tank_2.UniformTankImpl;
+	
+end tank_package;

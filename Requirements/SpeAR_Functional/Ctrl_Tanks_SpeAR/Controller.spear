@@ -1,0 +1,50 @@
+Relation Ctrl_Tanks.Controller;
+
+Uses Ctrl_Tanks.definitions.*;
+Uses Ctrl_Tanks.definitions.tank1_ctrl_output_type.*;
+Uses Ctrl_Tanks.definitions.tank2_ctrl_output_type.*;
+Uses Ctrl_Tanks.definitions.controller_output_type.*;
+
+Inputs:
+	t1_sensor_high : bool;
+	t1_sensor_low : bool;
+
+	t2_sensor_high : bool;
+	t2_sensor_mid : bool;
+	t2_sensor_low : bool;
+
+Outputs:
+	ctrl_output : controller_output_type;
+	
+State:
+	t1_ctrl : tank1_ctrl_output_type;
+	t2_ctrl : tank2_ctrl_output_type;
+
+Macros:
+	tank1_ctrl_pump_state : bool = t1_ctrl{pump_state_cmd};
+	tank1_ctrl_valve_state : bool = t1_ctrl{valve_state_cmd};
+
+	tank2_ctrl_p_valve_state : bool = t2_ctrl{valve_p_state_cmd};
+	tank2_ctrl_e_valve_state : bool = t2_ctrl{valve_e_state_cmd};
+
+Requirements:
+	r_t1_ctrl = global :: always t1_ctrl == Ctrl_Tanks.Tank1_Ctrl(t1_sensor_high, t1_sensor_low);
+	r_t2_ctrl = global :: always t2_ctrl == Ctrl_Tanks.Tank2_Ctrl(t2_sensor_high, t2_sensor_mid, t2_sensor_low, tank1_ctrl_valve_state);
+	
+	r_output = global :: always ctrl_output == new controller_output_type{pump_state = tank1_ctrl_pump_state, 
+																		  t1_valve_state = tank1_ctrl_valve_state, 
+																		  t2_p_valve_state = tank2_ctrl_p_valve_state, 
+																		  t2_e_valve_state = tank2_ctrl_e_valve_state};
+
+Properties:
+	// tank 1 logic verification
+	p_ctrl_01 = while not t1_sensor_low :: always not tank1_ctrl_valve_state;
+	p_ctrl_02 = while t1_sensor_high :: always not tank1_ctrl_pump_state;
+	
+	// tank 2 logic verification
+	p_ctrl_03 = while t2_sensor_low :: always tank2_ctrl_p_valve_state;
+	p_ctrl_04 = while t2_sensor_high :: always tank2_ctrl_p_valve_state and tank2_ctrl_e_valve_state;
+	
+	
+	canary = global :: always false;
+	

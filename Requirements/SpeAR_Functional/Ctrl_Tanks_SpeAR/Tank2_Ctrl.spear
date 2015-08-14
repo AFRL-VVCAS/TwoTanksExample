@@ -1,0 +1,38 @@
+Relation Ctrl_Tanks.Tank2_Ctrl;
+
+Uses Ctrl_Tanks.definitions.*;
+Uses Ctrl_Tanks.definitions.tank2_ctrl_output_type.*;
+
+Inputs:
+	sensor_high : bool;
+	sensor_mid : bool;
+	sensor_low : bool;
+	input_valve_state : bool;
+
+State:
+	e_valve : bool;
+	p_valve : bool;
+
+Outputs:
+	output : tank2_ctrl_output_type;
+	
+Requirements:
+	a01 = global :: always sensor_high implies (sensor_mid and sensor_low);
+	a02 = global :: always sensor_mid implies sensor_low;
+	
+	a03 = global :: always not sensor_low implies not (sensor_mid or sensor_high);
+	a04 = global :: always not sensor_mid implies not sensor_high;
+
+	r00 = initial :: not (p_valve and e_valve);
+	r01 = while not sensor_low :: always not (e_valve or p_valve);
+	r02 = while sensor_low and not sensor_mid :: always not e_valve and p_valve;
+	r03 = while sensor_mid and not sensor_high :: always (e_valve == input_valve_state) and p_valve;
+	r04 = while sensor_high :: always e_valve and p_valve;
+	
+	r_output = global :: always output == new tank2_ctrl_output_type{valve_p_state_cmd = p_valve, valve_e_state_cmd = e_valve};
+
+Properties:
+	p_t2ctrl_01 = after sensor_high until (not sensor_mid or not input_valve_state) :: always e_valve;
+	p_t2ctrl_02 = after sensor_low until not sensor_low :: always p_valve;
+//	canary = global :: always false;
+	

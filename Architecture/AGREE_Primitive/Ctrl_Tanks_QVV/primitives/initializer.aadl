@@ -1,0 +1,55 @@
+package initializer_primitive_pkg
+public
+	with Base_Types;
+	with std;
+	with delay_primitive_pkg;
+	with binary_switch_primitive_pkg;
+	with constant_primitive_pkg;
+	with relational_primitive_pkg;
+
+system initializer
+features
+	initial_value_in : in data port Base_Types::Float;
+	
+	initial_value_out : out data port Base_Types::Float;
+	
+	annex agree {**
+		
+		guarantee "Initially, the output is equal to the input":
+			std.Initial(initial_value_out = initial_value_in);
+			
+		guarantee "after the first time step, the output is equal to zero":
+			std.After1(initial_value_out = 0.0);
+		
+	**};
+	
+end initializer;
+
+system implementation initializer.impl
+subcomponents
+	switch : system binary_switch_primitive_pkg::binary_switch.impl;
+	one : system constant_primitive_pkg::constant_1.impl;
+	zero : system constant_primitive_pkg::constant_0.impl;
+	compare_to_one : system relational_primitive_pkg::compare_1.impl;
+	delay : system delay_primitive_pkg::delay_with_initial.impl;
+	
+connections
+	-- Setup Delay
+	zero_to_delay_input : port zero.output -> delay.input {Communication_Properties::Timing => immediate;};
+	one_to_delay_initial : port one.output -> delay.initial_value {Communication_Properties::Timing => immediate;};
+
+	-- Setup Compare
+	delay_to_compare : port delay.output -> compare_to_one.input {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Switch
+	input_to_switch : port initial_value_in -> switch.true_case {Communication_Properties::Timing => immediate;};
+	zero_to_switch : port zero.output -> switch.false_case {Communication_Properties::Timing => immediate;};
+	compare_to_switch : port compare_to_one.output -> switch.control {Communication_Properties::Timing => immediate;};
+	
+	-- Output
+	switch_to_output : port switch.output -> initial_value_out {Communication_Properties::Timing => immediate;};
+	
+end initializer.impl;
+
+end initializer_primitive_pkg;
+

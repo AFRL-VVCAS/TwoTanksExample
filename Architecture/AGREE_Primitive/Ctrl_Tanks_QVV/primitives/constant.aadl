@@ -1,0 +1,302 @@
+package constant_primitive_pkg
+public
+	with Base_Types;
+
+system constant_1
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 1.0;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_1;
+
+system implementation constant_1.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_1.impl;
+
+
+
+system boolean_true
+features
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		const value : bool = true;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end boolean_true;
+
+system implementation boolean_true.impl
+	annex agree{**
+		eq constant_value : bool = value;
+		assert(output = constant_value); 
+	**};
+end boolean_true.impl;
+
+
+
+system constant_0
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 0.0;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_0;
+
+system implementation constant_0.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_0.impl;
+
+
+
+system boolean_false
+features
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		const value : bool = false;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end boolean_false;
+
+system implementation boolean_false.impl
+	annex agree{**
+		eq constant_value : bool = value;
+		assert(output = constant_value); 
+	**};
+end boolean_false.impl;
+
+
+
+system constant_5
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 5.0;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_5;
+
+system implementation constant_5.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_5.impl;
+
+
+
+system constant_7
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 7.0;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_7;
+
+system implementation constant_7.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_7.impl;
+
+
+
+system constant_8
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 8.0;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_8;
+
+system implementation constant_8.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_8.impl;
+
+
+
+system constant_2
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 2.0;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_2;
+
+system implementation constant_2.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_2.impl;
+
+
+
+system constant_3
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 3.0;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_3;
+
+system implementation constant_3.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_3.impl;
+
+
+
+system constant_0_2
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 0.2;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_0_2;
+
+system implementation constant_0_2.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_0_2.impl;
+
+
+
+system constant_0_1
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 0.1;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_0_1;
+
+system implementation constant_0_1.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_0_1.impl;
+
+
+
+system constant_0_05
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = 0.05;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_0_05;
+
+system implementation constant_0_05.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_0_05.impl;
+
+
+
+system constant_neg1
+features
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		const value : real = -1.0;
+		
+		guarantee "The output shall be the constant value":
+			output = value; 	
+		guarantee "the output shall never change":
+			true -> (output = pre(output));
+	**};
+end constant_neg1;
+
+system implementation constant_neg1.impl
+	annex agree{**
+		eq constant_value : real = value;
+		assert(output = constant_value); 
+	**};
+end constant_neg1.impl;
+
+end constant_primitive_pkg; 

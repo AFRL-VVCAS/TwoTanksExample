@@ -1,0 +1,62 @@
+package delay_primitive_pkg
+public
+	with Base_Types;
+
+system delay
+features
+	input : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		guarantee "The current output shall be the previous input":
+			output = prev(input,0.0); 
+			
+		guarantee "the output is initially 0":
+			std.Initial(output = 0.0);
+		
+	**};
+
+end delay;
+
+system implementation delay.impl
+
+	annex agree{**
+		eq delayed_input : real = prev(input,0.0);
+		
+		assert(output = delayed_input); 
+	**};
+
+end delay.impl;
+
+system delay_with_initial
+features
+	input : in data port Base_Types::Float;
+	initial_value : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		guarantee "The current output shall be the previous input":
+			output = prev(input,initial_value); 
+			
+		guarantee "the output is initially the initial_value":
+			std.Initial(output = initial_value);
+		
+	**};
+
+end delay_with_initial;
+
+system implementation delay_with_initial.impl
+
+	annex agree{**
+		eq delayed_input : real = prev(input,initial_value);
+		
+		assert(output = delayed_input); 
+	**};
+
+end delay_with_initial.impl;
+
+end delay_primitive_pkg; 

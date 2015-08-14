@@ -1,0 +1,71 @@
+package actuator_pkg
+public
+	with std;
+	with Base_Types;
+	with binary_switch_primitive_pkg;
+	with relational_primitive_pkg;
+	with constant_primitive_pkg;
+	with two_input_product_primitive_pkg;
+
+system actuator
+features
+	actuator_state : in data port Base_Types::Float;
+	actuator_flow_rate_m3s : in data port Base_types::Float;
+	time_increment : in data port Base_Types::Float;
+	
+	flow_rate_m3dt : out data port Base_Types::Float;
+	
+	annex agree {**
+		assume "actuator state is either 0 or 1" :
+			actuator_state = 0.0 or actuator_state = 1.0;
+			
+		assume "time_increment is positive" :
+			time_increment > 0.0;
+			
+		assume "actuator flow rate is positive" :
+			actuator_flow_rate_m3s > 0.0;
+		
+		guarantee "If the actuator is receiving the On/Open signal then there is flow through the actuator is the max flow rate" :
+			(actuator_state = 1.0) => (flow_rate_m3dt = (actuator_flow_rate_m3s * time_increment));
+			
+		guarantee "If the actuator is receiving the Off/Close signal then the flow rate through the actuator is 0.0" :
+			(actuator_state = 0.0) => (flow_rate_m3dt = 0.0);
+			
+		guarantee "If there is flow through the actuator, then the actuator is receiving an ON signal" :
+			(flow_rate_m3dt = (actuator_flow_rate_m3s * time_increment)) => (actuator_state = 1.0);
+			
+		guarantee "If the flow is 0.0, then the actuator is receiving on OFF signal" :
+			(flow_rate_m3dt = 0.0 ) => (actuator_state = 0.0);
+		
+	**};
+
+end actuator;
+
+system implementation actuator.impl
+subcomponents
+	constant_0 : system constant_primitive_pkg::constant_0.impl;
+	constant_1 : system constant_primitive_pkg::constant_1.impl;
+	equal : system relational_primitive_pkg::relational_e.impl;
+	switch : system binary_switch_primitive_pkg::binary_switch.impl;
+	prod : system two_input_product_primitive_pkg::two_input_product.impl;
+	
+connections
+	-- Inputs to relational operator
+	as_to_ro1 : port actuator_state -> equal.input1 {Communication_Properties::Timing => immediate;};
+	cons1_to_ro2 : port constant_1.output -> equal.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Inputs to product
+	afr_to_prod : port actuator_flow_rate_m3s -> prod.input1 {Communication_Properties::Timing => immediate;};
+	ti_to_prod : port time_increment -> prod.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- connect switch
+	prod_to_switch : port prod.output -> switch.true_case {Communication_Properties::Timing => immediate;};
+	ro_to_switch : port equal.output -> switch.control {Communication_Properties::Timing => immediate;};
+	constant_0_to_switch : port constant_0.output -> switch.false_case {Communication_Properties::Timing => immediate;};
+	
+	-- output value
+	switch_to_output : port switch.output -> flow_rate_m3dt {Communication_Properties::Timing => immediate;};
+
+end actuator.impl;
+
+end actuator_pkg;

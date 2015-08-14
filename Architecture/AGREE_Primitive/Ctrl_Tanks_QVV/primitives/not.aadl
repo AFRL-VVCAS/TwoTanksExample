@@ -1,0 +1,63 @@
+package not_primitive_pkg
+public
+	with Base_Types;
+
+system not
+features
+	input : in data port Base_Types::Boolean;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		guarantee "The output shall be false if the input is true":
+			(input = true) => (output = false); 
+		
+		guarantee "The output shall be true if the input is false":
+			(input = false) => (output = true); 
+		
+	**};
+
+end not;
+
+system implementation not.impl
+
+	annex agree{**
+		eq not_var : bool = not input;
+		
+		assert(output = not_var);
+	**};
+
+end not.impl;
+
+system not_r
+features
+	input : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		guarantee "The output shall be false if the input is true":
+			(input = 1.0) => (output = 0.0); 
+		
+		guarantee "The output shall be true if the input is false":
+			(input = 0.0) => (output = 1.0); 
+		
+	**};
+
+end not_r;
+
+system implementation not_r.impl
+
+	annex agree{**
+		eq not_var : real = if input = 1.0 then 0.0 else 1.0;
+		
+		assert(output = not_var);
+	**};
+
+end not_r.impl;
+
+
+
+end not_primitive_pkg;

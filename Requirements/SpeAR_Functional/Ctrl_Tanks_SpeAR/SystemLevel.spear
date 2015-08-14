@@ -1,0 +1,76 @@
+Relation Ctrl_Tanks.SystemLevel;
+
+Uses Ctrl_Tanks.definitions.*;
+Uses Ctrl_Tanks.definitions.system_output_type.*;
+Uses Ctrl_Tanks.definitions.controller_output_type.*;
+Uses Ctrl_Tanks.definitions.environment_output_type.*;
+Uses Ctrl_Tanks.definitions.system_output_type.*;
+
+Inputs:
+	available_inflow : real;
+		
+Outputs:
+	system_outflow : system_output_type;
+	
+State:
+	env_output : environment_output_type;
+	ctrl_output : controller_output_type;
+
+	
+Macros:
+	// Commands for the environment from the controller
+	t1_pump_state : bool = ctrl_output{controller_output_type.pump_state};
+	t1_valve_state : bool = ctrl_output{controller_output_type.t1_valve_state};
+	t2_prod_valve_state : bool = ctrl_output{controller_output_type.t2_p_valve_state};
+	t2_emrg_valve_state : bool = ctrl_output{controller_output_type.t2_e_valve_state};
+	
+	// Signals for the controller from the environment
+	t1_sensor_high : bool = env_output{environment_output_type.t1_sensor_high};
+	t1_sensor_low : bool = env_output{environment_output_type.t1_sensor_low};
+	t2_sensor_high : bool = env_output{environment_output_type.t2_sensor_high};
+	t2_sensor_mid : bool = env_output{environment_output_type.t2_sensor_mid};
+	t2_sensor_low : bool = env_output{environment_output_type.t2_sensor_low};
+	
+	// Tank information from the environment
+	tank1_water_lvl : real = env_output{environment_output_type.tank1_water_lvl};
+	tank1_overflow : bool = env_output{environment_output_type.tank1_overflow};
+	tank1_underflow : bool = env_output{environment_output_type.tank1_underflow};
+	tank2_water_lvl : real = env_output{environment_output_type.tank2_water_lvl};
+	tank2_overflow : bool = env_output{environment_output_type.tank2_overflow};
+    tank2_underflow : bool = env_output{environment_output_type.tank2_underflow};
+	
+	// Output flows from the system 
+	system_production_flow : real = env_output{environment_output_type.production_flow};
+	system_emergency_flow : real = env_output{environment_output_type.emergency_flow};
+	
+Requirements:
+	a00 = global :: always available_inflow >= MAX_PUMP_FLOWRATE;
+	a01 = initial :: system_outflow{system_output_type.production_flow} == 0.0;
+	a02 = initial :: system_outflow{system_output_type.emergency_flow} == 0.0;
+	
+	
+	r00 = global :: always env_output == Ctrl_Tanks.Environment(t1_pump_state, t1_valve_state, t2_prod_valve_state, t2_emrg_valve_state);
+	r01 = global :: always ctrl_output == Ctrl_Tanks.Controller(t1_sensor_high, t1_sensor_low, t2_sensor_high, t2_sensor_mid, t2_sensor_low);
+	
+	r_output = global :: always system_outflow == new system_output_type{system_output_type.production_flow = system_production_flow,
+	                                                                     system_output_type.emergency_flow = system_emergency_flow};
+	
+
+Properties:
+    // Check the possible liquid levels in the tanks
+    p_sys_01 = global :: always tank1_water_lvl >= 0.0; 
+	p_sys_02 = global :: always tank1_water_lvl <= MAX_TANK1_HEIGHT;
+	p_sys_03 = global :: always tank2_water_lvl >= 0.0;
+	p_sys_04 = global :: always tank2_water_lvl <= MAX_TANK2_HEIGHT;
+	
+	// Verify that the controllers protect the tanks from overflow or underflow
+	p_sys_05 = global :: always not tank1_overflow;
+	p_sys_06 = global :: always not tank1_underflow;
+	p_sys_07 = global :: always not tank2_overflow;
+    p_sys_08 = global :: always not tank2_underflow;
+	
+	// System flow should never be negative (backflow)
+	p_sys_09 = global :: always system_production_flow >= 0.0;
+	p_sys_10 = global :: always system_emergency_flow >= 0.0;
+	
+	canary = global :: always false;

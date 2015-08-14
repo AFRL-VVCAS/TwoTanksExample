@@ -1,0 +1,36 @@
+CC     = "C:\Program Files (x86)\MATLAB\R2012b\sys\lcc\bin\lcc.exe"
+LD     = "C:\Program Files (x86)\MATLAB\R2012b\sys\lcc\bin\lcclnk.exe"
+LIBCMD = "C:\Program Files (x86)\MATLAB\R2012b\sys\lcc\bin\lcclib.exe"
+CFLAGS = -c -Zp8 -DMATLAB_MEX_FILE -noregistrylookup
+LDFLAGS = -s -dll -L"C:\Program Files (x86)\MATLAB\R2012b\sys\lcc\lib"
+LIBFLAGS = 
+
+OBJECTS = \
+	"Properties_Tank2_Primitives_sfun.obj"\
+	"Properties_Tank2_Primitives_sfun_registry.obj"\
+	"c8_Properties_Tank2_Primitives.obj"\
+	"lccstub.obj"\
+	"C:\Program Files (x86)\MATLAB\R2012b\sys\lcc\mex\lccdef.def"\
+	"C:\Program Files (x86)\MATLAB\R2012b\stateflow\c\debugger\lib\win32\sfc_debuglcc.lib"\
+	"C:\Program Files (x86)\MATLAB\R2012b\stateflow\c\mex\lib\win32\sfc_mexlcc.lib"\
+	"C:\Program Files (x86)\MATLAB\R2012b\extern\lib\win32\lcc\libmex.lib"\
+	"C:\Program Files (x86)\MATLAB\R2012b\extern\lib\win32\lcc\libmx.lib"\
+	"C:\Program Files (x86)\MATLAB\R2012b\extern\lib\win32\lcc\libfixedpoint.lib"\
+	"C:\Program Files (x86)\MATLAB\R2012b\extern\lib\win32\lcc\libut.lib"\
+	"C:\Program Files (x86)\MATLAB\R2012b\extern\lib\win32\lcc\libmwmathutil.lib"\
+	"C:\Program Files (x86)\MATLAB\R2012b\extern\lib\win32\lcc\libemlrt.lib"\
+	"C:\Program Files (x86)\MATLAB\R2012b\extern\lib\win32\lcc\libmwblascompat32.lib"\
+
+INCLUDE_PATH= -I"C:\Program Files (x86)\MATLAB\R2012b\sys\lcc\include"  -I"C:\Program Files (x86)\MATLAB\R2012b\extern\include"  -I"C:\Program Files (x86)\MATLAB\R2012b\simulink\include"  -I"C:\Program Files (x86)\MATLAB\R2012b\stateflow\c\mex\include"  -I"C:\Program Files (x86)\MATLAB\R2012b\stateflow\c\debugger\include" 
+ 
+
+Properties_Tank2_Primitives_sfun.mexw32 : $(MAKEFILE) $(OBJECTS)
+	$(LD) $(LDFLAGS) -o Properties_Tank2_Primitives_sfun.mexw32 @Properties_Tank2_Primitives_sfun.lmko
+Properties_Tank2_Primitives_sfun.obj :	"Properties_Tank2_Primitives_sfun.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "Properties_Tank2_Primitives_sfun.c"
+Properties_Tank2_Primitives_sfun_registry.obj :	"Properties_Tank2_Primitives_sfun_registry.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "Properties_Tank2_Primitives_sfun_registry.c"
+c8_Properties_Tank2_Primitives.obj :	"c8_Properties_Tank2_Primitives.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c8_Properties_Tank2_Primitives.c"
+lccstub.obj :	"C:\Program Files (x86)\MATLAB\R2012b\sys\lcc\mex\lccstub.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "C:\Program Files (x86)\MATLAB\R2012b\sys\lcc\mex\lccstub.c"

@@ -1,0 +1,22 @@
+Relation Ctrl_Tanks.Pump;
+
+Uses Ctrl_Tanks.definitions.*;
+
+Inputs:
+	inflow : real;
+	pump_on_state : bool;
+	
+Outputs:
+	outflow : real;
+	
+State:
+	
+Requirements:
+	a01 = global :: always inflow >= MAX_PUMP_FLOWRATE;
+
+	r01 = while pump_on_state :: always outflow == MAX_PUMP_FLOWRATE;
+	r02 = while not pump_on_state :: always outflow == 0.0 ;
+	
+Properties:
+	p_pump_01 = global :: always outflow >= 0.0;
+//	canary = global :: always false;

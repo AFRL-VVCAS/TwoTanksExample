@@ -1,0 +1,30 @@
+Relation Ctrl_Tanks.Tank1_Ctrl;
+
+Uses Ctrl_Tanks.definitions.*;
+Uses Ctrl_Tanks.definitions.tank1_ctrl_output_type.*;
+
+Inputs:
+	sensor_high : bool;
+	sensor_low : bool;
+	
+Outputs:
+	output : tank1_ctrl_output_type;
+	
+State:
+	pump_state : bool;
+	valve_state : bool;
+	
+Requirements:
+	a01 = global :: always sensor_high implies sensor_low;
+	a02 = global :: always not sensor_low implies not sensor_high;
+
+	init = initial :: pump_state and not valve_state;
+	r00 = while sensor_high :: always not pump_state and valve_state;
+	r01 = while not sensor_low :: always pump_state and not valve_state;
+	r02 = while not sensor_high and sensor_low :: always (pump_state == pre pump_state) and (valve_state == pre valve_state);
+	
+	r_output = global :: always output == new tank1_ctrl_output_type{pump_state_cmd = pump_state, valve_state_cmd = valve_state};
+	
+Properties:
+	p01 = global :: always not (pump_state and valve_state);
+//	canary = global :: always false;

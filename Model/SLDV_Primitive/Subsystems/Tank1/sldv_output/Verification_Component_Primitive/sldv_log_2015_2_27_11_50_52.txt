@@ -1,0 +1,26 @@
+
+27-Feb-2015 11:50:35
+Preprocessing model... done
+Starting property proving for model 'Verification_Component_Primitive'
+Compiling model... done
+Translating model... done
+'Verification_Component_Primitive_replacement' is compatible with Simulink Design Verifier.
+
+Proving properties...
+
+PROVEN VALID
+Tank2_g8"The max tank 2 height is equal to the max tank 2 volume divided by tank 2 cross sectional area"
+Objective: T
+
+
+27-Feb-2015 11:50:52
+Completed normally.
+
+Generating output files:
+
+    Data file:
+    C:\Users\Kerianne\Documents\MATLAB\Coupled_Tanks(20140205)\Primitive\Subsystems\Tank1\sldv_output\Verification_Component_Primitive\Verification_Component_Primitive_sldvdata.mat
+
+27-Feb-2015 11:50:52
+Results generation completed.
+

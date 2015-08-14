@@ -1,0 +1,57 @@
+Definition Ctrl_Tanks.definitions;
+
+Units:
+	m;					// meter
+	s;					// second
+	m3 : m * m * m;		// meters cubed
+	m3_p_s : m3 / s;	// cubic meters per second
+	
+Constants:
+	// Tank 1 Constants ---------------------
+	TANK1_SENSOR_HIGH : real = 5.0;
+	TANK1_SENSOR_LOW : real  = 3.0;	 
+	
+	MAX_PUMP_FLOWRATE : real  = 0.2;
+	MAX_TANK1_VALVE_FLOWRATE : real  = 0.1 ;
+	
+	MAX_TANK1_HEIGHT : real = 7.0;
+	TANK1_CROSS_SECTIONAL_AREA : real = 1.0;
+	
+	TANK1_INIT_LIQUID_HEIGHT : real = 0.0;
+	// --------------------------------------
+	
+	// Tank 2 Constants ---------------------
+	TANK2_SENSOR_HIGH : real  = 3.0;
+	TANK2_SENSOR_MID : real  = 2.0;
+	TANK2_SENSOR_LOW : real  = 1.0;
+	
+	// Tank2's max inflow is Tank1's max outflow	
+	
+	MAX_TANK2_E_VALVE_FLOWRATE : real  = 0.2;
+	MAX_TANK2_P_VALVE_FLOWRATE : real  = 0.05;	
+	
+	MAX_TANK2_HEIGHT : real = 4.0;	
+	TANK2_CROSS_SECTIONAL_AREA : real = 2.0;
+	
+	TANK2_INIT_LIQUID_HEIGHT :real = 0.0;
+	// --------------------------------------
+
+Types:
+	system_output_type : {production_flow : real , emergency_flow : real};
+	
+	environment_output_type : {t1_sensor_high : bool, t1_sensor_low : bool, 
+							   t2_sensor_high : bool, t2_sensor_mid : bool, t2_sensor_low : bool, 
+							   tank1_water_lvl : real, tank1_overflow : bool, tank1_underflow : bool,
+							   tank2_water_lvl : real, tank2_overflow : bool, tank2_underflow : bool,
+							   production_flow : real , emergency_flow : real};
+	controller_output_type : {pump_state : bool, t1_valve_state : bool, t2_p_valve_state : bool, t2_e_valve_state : bool}; 
+
+	// Tank output types
+//	tank1_output_type : {sensor_high : bool, sensor_low : bool, water_lvl : real};
+	tank1_output_type : {water_lvl : real, overflow : bool, underflow : bool};
+//	tank2_output_type : {sensor_high : bool, sensor_mid : bool, sensor_low : bool, water_lvl : real};
+	tank2_output_type : {water_lvl : real, overflow : bool, underflow : bool};
+	
+	// Tank controllers output types
+	tank1_ctrl_output_type : {pump_state_cmd : bool, valve_state_cmd : bool};
+	tank2_ctrl_output_type : {valve_p_state_cmd : bool, valve_e_state_cmd : bool};

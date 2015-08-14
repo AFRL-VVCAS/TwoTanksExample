@@ -1,0 +1,67 @@
+package binary_switch_primitive_pkg
+public
+	with Base_Types;
+
+system binary_switch
+features
+	true_case : in data port Base_Types::Float;			-- u1
+	false_case : in data port Base_Types::Float;		-- u2
+	control : in data port Base_Types::Boolean;
+	
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		
+		guarantee "The output shall be equal to the true_case when the control is true":
+			(control = true) => (output = true_case);
+			
+		guarantee "The output shall be equal to the false_case when the control is false":
+			(control = false) => (output = false_case);
+		
+	**};
+
+end binary_switch;
+
+system implementation binary_switch.impl
+
+	annex agree{**
+		eq out : real = if (control = true) then true_case else false_case;
+		
+		assert(output = out);
+	**};
+
+end binary_switch.impl;
+
+system boolean_binary_switch
+features
+	true_case : in data port Base_Types::Boolean;			-- u1
+	false_case : in data port Base_Types::Boolean;		-- u2
+	control : in data port Base_Types::Boolean;
+	
+	output : out data port Base_Types::Boolean;
+	
+	annex agree{**
+		
+		guarantee "The output shall be equal to the true_case when the control is true":
+			(control = true) => (output = true_case);
+			
+		guarantee "The output shall be equal to the false_case when the control is false":
+			(control = false) => (output = false_case);
+		
+	**};
+
+end boolean_binary_switch;
+
+system implementation boolean_binary_switch.impl
+
+	annex agree{**
+		eq out : bool = if (control = true) then true_case else false_case;
+		
+		assert(output = out);
+	**};
+
+end boolean_binary_switch.impl;
+
+
+
+end binary_switch_primitive_pkg;

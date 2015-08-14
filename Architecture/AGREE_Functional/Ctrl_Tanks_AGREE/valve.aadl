@@ -1,0 +1,120 @@
+package valve_package
+public
+	with Base_Types;
+	with config;
+
+annex agree {**	
+-- Tank 1 specifications ----------------------------	
+	const t1_max_flow_rate_m3s : real = config.t1_valve_max_flow_rate_m3s;
+	const t1_zero_flow_rate_m3s : real = config.t1_valve_zero_flow_rate_m3s;
+-----------------------------------------------------
+-- Tank 2 specifications ----------------------------	
+	const t2_p_max_flow_rate_m3s : real = config.t2_p_valve_max_flow_rate_m3s;
+	const t2_p_zero_flow_rate_m3s : real = config.t2_valve_zero_flow_rate_m3s;
+	const t2_e_max_flow_rate_m3s : real = config.t2_e_valve_max_flow_rate_m3s;
+	const t2_e_zero_flow_rate_m3s : real = config.t2_valve_zero_flow_rate_m3s;
+-----------------------------------------------------
+	
+**};
+
+system T2_Production_Valve
+	features
+		Valve_State: in data port Base_Types::Boolean;
+		Flow_Out: out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		guarantee "If the production valve is open then the flow through the valve is the max production valve flow rate" :
+			Valve_State => (Flow_Out = valve_package.t2_p_max_flow_rate_m3s);
+			
+		guarantee "If the production valve is closed then the flow rate through the production valve is 0.0" :
+			(not Valve_State) => (Flow_Out = valve_package.t2_p_zero_flow_rate_m3s);
+		
+		guarantee "If the Flow is the max production valve rate, then the valve is receiving an OPEN signal" :
+			(Flow_Out = valve_package.t2_p_max_flow_rate_m3s) => Valve_State;
+			
+		guarantee "If the Flow is 0.0, then the production valve is receiving a CLOSED signal" :
+			(Flow_Out = valve_package.t2_p_zero_flow_rate_m3s) => not Valve_State;
+		
+	**};
+			
+end T2_Production_Valve;
+
+system implementation T2_Production_Valve.Impl
+	annex agree {**
+		
+		eq flow_rate : real = if (Valve_State) then valve_package.t2_p_max_flow_rate_m3s else valve_package.t2_p_zero_flow_rate_m3s;
+		
+		-- This is to assert that the output acts as it should
+		assert(Flow_Out = flow_rate);
+	**};
+end T2_Production_Valve.Impl;
+
+system T2_Emergency_Valve
+	features
+		Valve_State: in data port Base_Types::Boolean;
+		Flow_Out: out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		guarantee "If the emergency valve is open then the flow through the valve is the max emergency valve flow rate" :
+			Valve_State => (Flow_Out = valve_package.t2_e_max_flow_rate_m3s);
+			
+		guarantee "If the emergency valve is closed then the flow rate through the emergency valve is 0.0" :
+			(not Valve_State) => (Flow_Out = valve_package.t2_e_zero_flow_rate_m3s);
+		
+		guarantee "If the Flow is the max emergency valve rate, then the emergency valve is receiving an OPEN signal" :
+			(Flow_Out = valve_package.t2_e_max_flow_rate_m3s) => Valve_State;
+			
+		guarantee "If the Flow is 0.0, then the emergency valve is receiving a CLOSED signal" :
+			(Flow_Out = valve_package.t2_e_zero_flow_rate_m3s) => not Valve_State;
+		
+	**};
+			
+end T2_Emergency_Valve;
+
+system implementation T2_Emergency_Valve.Impl
+	annex agree {**
+		
+		eq flow_rate : real = if (Valve_State) then valve_package.t2_e_max_flow_rate_m3s else valve_package.t2_e_zero_flow_rate_m3s;
+		
+		-- This is to assert that the output acts as it should
+		assert(Flow_Out = flow_rate);
+	**};
+end T2_Emergency_Valve.Impl;
+
+system T1_Valve
+	features
+		Valve_State: in data port Base_Types::Boolean;
+		Flow_Out: out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		guarantee "If the valve is open then the flow through the valve is the max valve flow rate" :
+			Valve_State => (Flow_Out = valve_package.t1_max_flow_rate_m3s);
+			
+		guarantee "If the valve is closed then the flow rate through the valve is 0.0" :
+			(not Valve_State) => (Flow_Out = valve_package.t1_zero_flow_rate_m3s);
+		
+		guarantee "If the Flow is the max valve rate, then the valve is receiving an OPEN signal" :
+			(Flow_Out = valve_package.t1_max_flow_rate_m3s) => Valve_State;
+			
+		guarantee "If the Flow is 0.0, then the valve is receiving a CLOSED signal" :
+			(Flow_Out = valve_package.t1_zero_flow_rate_m3s) => not Valve_State;
+		
+	**};
+			
+end T1_Valve;
+
+system implementation T1_Valve.Impl
+	annex agree {**
+		
+		eq flow_rate : real = if (Valve_State) then valve_package.t1_max_flow_rate_m3s else valve_package.t1_zero_flow_rate_m3s;
+		
+		-- This is to assert that the output acts as it should
+		assert(Flow_Out = flow_rate);
+	**};
+end T1_Valve.Impl;
+
+
+end valve_package;

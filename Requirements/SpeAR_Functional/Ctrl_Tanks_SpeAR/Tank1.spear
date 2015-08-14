@@ -1,0 +1,64 @@
+Relation Ctrl_Tanks.Tank1;
+// This is the requirements on first tank (tank1) subcomponent
+//	->	This is designed to act only as a liquid container, any logic to prevent overflow and underflow
+//		is not the responsibility of this component.
+//	->	In the event that an overflow or underflow occurs the component must inform the rest of the system.
+//	->	This is an OPEN tank, therefore in the event the tank overflows then extra liquid will exceed the capacity
+
+Uses Ctrl_Tanks.definitions.*;
+Uses Ctrl_Tanks.definitions.tank1_output_type.*;
+
+Inputs:
+	inflow : real;	// dependent on the current pump flow rate
+	outflow : real; // dependent on the current valve flow rate 
+	
+Outputs:
+	output : tank1_output_type;		// only output information that the tank can provide
+	
+State:
+	level : real;
+	overflow_state : bool;
+	underflow_state : bool;
+	
+Macros:
+	calculated_height : real = (pre level + ((inflow - outflow) / TANK1_CROSS_SECTIONAL_AREA)); 
+	tank_liquid_height : real = if (calculated_height < 0.0) then 0.0 else
+									if (calculated_height > MAX_TANK1_HEIGHT) then MAX_TANK1_HEIGHT else
+									calculated_height;
+	
+Requirements:
+	a01 = initial :: level == TANK1_INIT_LIQUID_HEIGHT;
+
+	a_inflow_1 = global :: always inflow >= 0.0;
+	a_inflow_2 = global :: always inflow <= MAX_PUMP_FLOWRATE;
+	a_outflow_1 = global :: always outflow >= 0.0;
+	a_outflow_2 = global :: always outflow <= MAX_TANK1_VALVE_FLOWRATE;	
+	
+	r_liq_ht = global :: always level == tank_liquid_height;
+	
+	// Not currently working - Lucas is looking into
+//	r_overflow_00 = before level >= MAX_TANK1_HEIGHT :: always not overflow_state;	
+//	r_overflow_01 = after level >= MAX_TANK1_HEIGHT :: always overflow_state;
+
+	// This works in the trace because we are using the gross height calculation to determine underflow and overflow
+	// -> The trace is only showing the level which is protected to the proper height restrictions
+	r_overflow_00 = while calculated_height <= MAX_TANK1_HEIGHT :: always not overflow_state;	
+	r_overflow_01 = while calculated_height > MAX_TANK1_HEIGHT :: always overflow_state;
+	
+	r_underflow_00 = while calculated_height >= 0.0 :: always not underflow_state;	
+	r_underflow_01 = while calculated_height < 0.0 :: always underflow_state;
+	
+	r_output = global :: always output == new tank1_output_type{tank1_output_type.water_lvl = level, 
+																tank1_output_type.overflow = overflow_state,
+																tank1_output_type.underflow = underflow_state};
+	
+	
+Properties:
+	// Verify liquid height remains in correct range
+	p_t1_01 = global :: always level >= 0.0;
+	p_t1_02 = global :: always level <= MAX_TANK1_HEIGHT; 	// the tank can't hold more than the max height
+	
+	// Counter-examples (designed to prove correct behavior of the system)
+//	p_t1_CE01 = global :: always not overflow_state;
+//	p_t1_CE02 = global :: always not underflow_state;
+//	canary = global :: always false;

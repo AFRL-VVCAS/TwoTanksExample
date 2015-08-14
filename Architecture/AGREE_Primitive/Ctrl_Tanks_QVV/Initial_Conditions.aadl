@@ -1,0 +1,61 @@
+package Initial_Conditions_pkg
+public
+	with Base_Types;
+	with config;
+	with constant_primitive_pkg;
+
+system Initial_Conditions
+features
+	tank1_initial_height_m : out data port Base_Types::Float;
+	tank2_initial_height_m : out data port Base_Types::Float;
+	tank1_pump_initial_state : out data port Base_Types::Float;
+	tank1_valve_initial_state : out data port Base_Types::Float;
+	tank2_p_valve_initial_state : out data port Base_Types::Float;
+	tank2_e_valve_initial_state : out data port Base_Types::Float;
+	
+	annex agree {**
+		
+		guarantee "tank1_initial_height_m equals the specified value in the config file":
+			tank1_initial_height_m = config.tank1_initial_vol_m3;
+			
+		guarantee "tank2_initial_height_m equals the specified value in the config file":
+			tank2_initial_height_m = config.tank1_initial_vol_m3;
+			
+		guarantee "tank1_pump_initial_state equals the specified value in the config file":
+			tank1_pump_initial_state = config.tank1_pump_initial_state;
+			
+		guarantee "tank1_valve_initial_state equals the specified value in the config file":
+			tank1_valve_initial_state = config.tank1_valve_initial_state;
+			
+		guarantee "tank2_p_valve_initial_state equals the specified value in the config file":
+			tank2_p_valve_initial_state = config.tank2_p_valve_initial_state;
+			
+		guarantee "tank2_e_valve_initial_state equals the specified value in the config file":
+			tank2_e_valve_initial_state = config.tank2_e_valve_initial_state;
+		
+	**};
+	
+end Initial_Conditions;
+
+system implementation Initial_Conditions.impl
+subcomponents
+	t1_height : system constant_primitive_pkg::constant_0.impl;
+	t2_height : system constant_primitive_pkg::constant_0.impl;
+	t1_pump : system constant_primitive_pkg::constant_0.impl;
+	t1_valve : system constant_primitive_pkg::constant_0.impl;
+	t2_p_valve : system constant_primitive_pkg::constant_0.impl;
+	t2_e_valve : system constant_primitive_pkg::constant_0.impl;
+	
+connections
+	t1_height_to_out : port t1_height.output -> tank1_initial_height_m {Communication_Properties::Timing => immediate;};
+	t2_height_to_out : port t2_height.output -> tank2_initial_height_m {Communication_Properties::Timing => immediate;};
+	t1_pump_to_out : port t1_pump.output -> tank1_pump_initial_state {Communication_Properties::Timing => immediate;};
+	t1_valve_to_out : port t1_valve.output -> tank1_valve_initial_state {Communication_Properties::Timing => immediate;};
+	t2_p_valve_to_out : port t2_p_valve.output -> tank2_p_valve_initial_state {Communication_Properties::Timing => immediate;};
+	t2_e_valve_to_out : port t2_e_valve.output -> tank2_e_valve_initial_state {Communication_Properties::Timing => immediate;};
+
+
+end Initial_Conditions.impl;
+
+end Initial_Conditions_pkg;
+

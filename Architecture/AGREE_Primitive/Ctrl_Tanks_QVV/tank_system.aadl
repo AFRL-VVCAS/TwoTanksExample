@@ -1,0 +1,157 @@
+package Tank_System_pkg
+public
+	with Base_Types;
+	with config;
+	with Controller_package;
+	with env_package;
+	with Updater_pkg;
+	with Tank_Constants_pkg;
+
+system Tank_System
+features
+	Tank1_Height: out data port Base_Types::Float;
+	Tank2_Height: out data port Base_Types::Float;
+	
+	annex agree {**
+		
+		-- Assumptions ----------------------------------
+		
+		assume "No sensors fail":
+			true;
+		-------------------------------------------------
+			
+		-- Safety Properties ----------------------------
+		guarantee "Tank 1 shall not overflow":
+			Tank1_Height <= config.max_tank1_height_m;
+			
+		guarantee "Tank 2 shall not overflow":
+			Tank2_Height <= config.max_tank2_height_m;
+
+		guarantee "Tank 1 liquid height shall initially be less than the low sensor height":
+			std.Initial(Tank1_Height < config.t1_sensor_lo_height_m);
+			
+		guarantee "Tank 2 liquid height shall initially be less than the low sensor height":
+			std.Initial(Tank2_Height < config.t2_sensor_lo_height_m);
+		
+		guarantee "The height of the tank 1 liquid shall not be over the tank 1 high safety level for more than the specified length of time":
+			std.AfterNReset_real_var(Tank1_Height < config.tank1_safety_hi_ht_m,config.high_safety_margin_s,(Tank1_Height >= config.tank1_safety_hi_ht_m),config.system_rate_s);
+			
+		guarantee "The height of the tank 1 liquid shall not be lower than the tank 1 low safety level (once it has already crossed it) for more than the specified length of time":
+			 std.AfterNReset_real_var(Tank1_Height > config.tank1_safety_lo_ht_m,config.low_safety_margin_s,std.AfterN_real_var(Tank1_Height <= config.tank1_safety_lo_ht_m,config.init_period_s,config.system_rate_s),config.system_rate_s);
+				
+		guarantee "The height of the tank 2 liquid shall not be over the tank 2 high safety level for more than the specified length of time":
+			std.AfterNReset_real_var(Tank2_Height < config.tank2_safety_hi_ht_m,config.high_safety_margin_s,(Tank2_Height >= config.tank2_safety_hi_ht_m),config.system_rate_s);
+			
+		-------------------------------------------------
+		
+		-- Sanity Checks (Designed to Fail) -------------
+--		guarantee "The tank height will not be bewteen the 2 safety values":
+--			not((Tank_Height > CtrlTanksExample.t1_safety_lo_ht_m) and (Tank_Height < CtrlTanksExample.t1_safety_hi_ht_m));
+--			
+--		guarantee "":
+--			false;
+
+--		guarantee "The emergency valve will never be on":
+--			Tank2_Height < config.tank2_safety_hi_ht_m; 
+		-------------------------------------------------
+		
+	**};
+end Tank_System;
+
+system implementation Tank_System.impl
+subcomponents
+	constants : system Tank_Constants_pkg::Tank_Constants.impl;
+	controller : system controller_package::Controller.impl;
+	env : system env_package::Two_Tank_Environment.Impl;
+	updater : system Updater_pkg::Updater.impl;
+
+connections
+	-- Setup Environment
+	ti_to_env : port constants.time_increment -> env.Time_Increment {Communication_Properties::Timing => immediate;};
+	t1sh_to_env : port constants.tank1_sensor_hi_height_m -> env.Sensor_T1_High_Ht {Communication_Properties::Timing => immediate;};
+	t1sl_to_env : port constants.tank1_sensor_lo_height_m -> env.Sensor_T1_Low_Ht {Communication_Properties::Timing => immediate;};
+	t1pfr_to_env : port constants.tank1_pump_flow_rate_m3s -> env.T1_Pump_FR {Communication_Properties::Timing => immediate;};
+	t1vfr_to_env : port constants.tank1_valve_flow_rate_m3s -> env.T1_Valve_FR {Communication_Properties::Timing => immediate;};
+	t1csa_to_env : port constants.tank1_cross_section_area_m2 -> env.T1_CSA {Communication_Properties::Timing => immediate;};
+	t1mv_to_env : port constants.tank1_max_vol_m3 -> env.T1_Max_Vol {Communication_Properties::Timing => immediate;};
+	
+	t2sh_to_env : port constants.tank2_sensor_hi_height_m -> env.Sensor_T2_High_Ht {Communication_Properties::Timing => immediate;};
+	t2sm_to_env : port constants.tank2_sensor_md_height_m -> env.Sensor_T2_Mid_Ht {Communication_Properties::Timing => immediate;};
+	t2sl_to_env : port constants.tank2_sensor_lo_height_m -> env.Sensor_T2_Low_Ht {Communication_Properties::Timing => immediate;};
+	t2pvfr_to_env : port constants.tank2_p_valve_flow_rate_m3s -> env.T2_P_Valve_FR {Communication_Properties::Timing => immediate;};
+	t2evfr_to_env : port constants.tank2_e_valve_flow_rate_m3s -> env.T2_E_Valve_FR {Communication_Properties::Timing => immediate;};
+	t2csa_to_env : port constants.tank2_cross_section_area_m2 -> env.T2_CSA {Communication_Properties::Timing => immediate;};
+	t2mv_to_env : port constants.tank2_max_vol_m3 -> env.T2_Max_Vol {Communication_Properties::Timing => immediate;};
+	
+	t1_ph_to_env : port updater.tank1_previous_height_m -> env.Prev_T1_Ht {Communication_Properties::Timing => immediate;};
+	t2_ph_to_env : port updater.tank2_previous_height_m -> env.Prev_T2_Ht {Communication_Properties::Timing => immediate;};
+	
+	ps_to_env : port controller.Pump_State -> env.Pump_On {Communication_Properties::Timing => immediate;};
+	vs_to_env : port controller.Valve_State -> env.Valve_T1_Open {Communication_Properties::Timing => immediate;};
+	pvs_to_env : port controller.P_Valve_State -> env.Valve_T2_P_Open {Communication_Properties::Timing => immediate;};
+	evs_to_env : port controller.E_Valve_State -> env.Valve_T2_E_Open {Communication_Properties::Timing => immediate;};
+	
+	-- Setup the Updater
+	t1lh_to_up : port env.Tank1_Height -> updater.tank1_liquid_height_m {Communication_Properties::Timing => immediate;};
+	t2lh_to_up : port env.Tank2_Height -> updater.tank2_liquid_height_m {Communication_Properties::Timing => immediate;};
+	ps_to_up : port controller.Pump_State -> updater.pump_state {Communication_Properties::Timing => immediate;};
+	vs_to_up : port controller.Valve_State -> updater.valve_state {Communication_Properties::Timing => immediate;};
+	pvs_to_up : port controller.P_Valve_State -> updater.production_valve_state {Communication_Properties::Timing => immediate;};
+	evs_to_up : port controller.E_Valve_State -> updater.emergency_valve_state {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Controller
+	pre_ps_to_cont : port updater.pre_pump_state -> controller.pre_Pump_State {Communication_Properties::Timing => immediate;};
+	pre_vs_to_cont : port updater.pre_valve_state -> controller.pre_Valve_State {Communication_Properties::Timing => immediate;};
+	pre_pvs_to_cont : port updater.pre_production_valve_state -> controller.pre_P_Valve_State {Communication_Properties::Timing => immediate;};
+	pre_evs_to_cont : port updater.pre_emergency_valve_state -> controller.pre_E_Valve_State {Communication_Properties::Timing => immediate;};
+	
+	t1_sh_to_cont : port env.Sensor_T1_High -> controller.tank1_SH_value {Communication_Properties::Timing => immediate;};
+	t1_sl_to_cont : port env.Sensor_T1_Low -> controller.tank1_SL_value {Communication_Properties::Timing => immediate;};
+	t2_sh_to_cont : port env.Sensor_T2_High -> controller.tank2_SH_value {Communication_Properties::Timing => immediate;};
+	t2_sm_to_cont : port env.Sensor_T2_Mid -> controller.tank2_SM_value {Communication_Properties::Timing => immediate;};
+	t2_sl_to_cont : port env.Sensor_T2_Low -> controller.tank2_SL_value {Communication_Properties::Timing => immediate;};
+	
+	-- Outputs
+	t1_lh_to_out : port env.Tank1_Height -> Tank1_Height {Communication_Properties::Timing => immediate;};
+	t2_lh_to_out : port env.Tank2_Height -> Tank2_Height {Communication_Properties::Timing => immediate;};
+	
+annex agree{**
+	-- controller outputs
+	assert(controller.Pump_State = 0.0 or controller.Pump_State = 1.0);
+	assert(controller.Valve_State = 0.0 or controller.Valve_State = 1.0);
+	assert(controller.P_Valve_State = 0.0 or controller.P_Valve_State = 1.0);
+	assert(controller.E_Valve_State = 0.0 or controller.E_Valve_State = 1.0);
+	assert(std.Initial(controller.Pump_State = 0.0));
+	assert(std.Initial(controller.Valve_State = 0.0));
+	assert(std.Initial(controller.P_Valve_State = 0.0));
+	assert(std.Initial(controller.E_Valve_State = 0.0));
+	
+	-- updater outputs
+	assert(updater.pre_pump_state = 0.0 or updater.pre_pump_state = 1.0);
+	assert(updater.pre_pump_state = prev(controller.Pump_State,0.0));
+	assert(updater.pre_valve_state = 0.0 or updater.pre_valve_state = 1.0);
+	assert(updater.pre_valve_state = prev(controller.Valve_State,0.0));
+	assert(updater.pre_production_valve_state = 0.0 or updater.pre_production_valve_state = 1.0);
+	assert(updater.pre_production_valve_state = prev(controller.P_Valve_State,0.0));
+	assert(updater.pre_emergency_valve_state = 0.0 or updater.pre_emergency_valve_state = 1.0);
+	assert(updater.pre_emergency_valve_state = prev(controller.E_Valve_State,0.0));
+	
+	-- env outputs
+	assert(env.Sensor_T1_High = 0.0 or env.Sensor_T1_High = 1.0);
+	assert(env.Sensor_T1_Low = 0.0 or env.Sensor_T1_Low = 1.0);
+	assert(env.Sensor_T1_High = 1.0 => env.Sensor_T1_Low = 1.0);
+	assert(env.Sensor_T2_High = 0.0 or env.Sensor_T2_High = 1.0);
+	assert(env.Sensor_T2_Mid = 0.0 or env.Sensor_T2_Mid = 1.0);
+	assert(env.Sensor_T2_Low = 0.0 or env.Sensor_T2_Low = 1.0);
+	assert(env.Sensor_T2_High = 1.0 => env.Sensor_T2_Mid = 1.0);
+	assert(env.Sensor_T2_Mid = 1.0 => env.Sensor_T2_Low = 1.0);
+	assert(updater.tank1_previous_height_m = prev(env.Tank1_Height,0.0));
+	assert(updater.tank2_previous_height_m = prev(env.Tank2_Height,0.0));
+	
+	
+**};
+	
+	
+end Tank_System.impl;
+
+end Tank_System_pkg;

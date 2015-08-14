@@ -1,0 +1,418 @@
+package env_package
+public 
+   with Base_Types;
+   with std;
+   with valve_package;
+   with pump_package;
+   with sensor_package;
+   with tank_package;
+   
+annex agree {** 
+
+	const tank1_initial_height_m : real = tank_package.tank1_initial_vol_m3 / tank_package.tank1_cross_section_area_m2;
+	const tank2_initial_height_m : real = tank_package.tank2_initial_vol_m3 / tank_package.tank2_cross_section_area_m2;
+	
+	node Tank1_Net_Flow_Constraint(Pump_On: bool, Valve_Open: bool, height: real) returns (in_range: bool);
+	var
+		netFlow : real;
+	let
+	
+		-- Need variable for initial tank height instead of stating 0.0
+		netFlow = std.Deltad(height, 0.0);		
+		
+		in_range = std.After1( 
+			-- if nothing is happening then the flow is 0.0 (no change)
+			if prev(not (Pump_On or Valve_Open),true) then (netFlow = 0.0)
+			else if prev((Pump_On and not Valve_Open),false) then 
+				(netFlow >= 0.0 and netFlow <= config.t1_pump_max_flow_rate_m3s)
+			else if prev((Pump_On and Valve_Open),false) then			
+				if (pre(height = config.max_tank1_vol_m3 / config.tank1_cross_section_area_m2) and (config.t1_pump_max_flow_rate_m3s > config.t1_valve_max_flow_rate_m3s)) then
+					netFlow = 0.0
+				else if (pre(height = 0.0) and (config.t1_pump_max_flow_rate_m3s < config.t1_valve_max_flow_rate_m3s)) then
+					netFlow = 0.0
+				else if (config.t1_pump_max_flow_rate_m3s = config.t1_valve_max_flow_rate_m3s) then
+					netFlow = 0.0					
+				else
+					(netFlow <= config.t1_pump_max_flow_rate_m3s) and netFlow >= -(config.t1_valve_max_flow_rate_m3s)
+			else if prev(((not Pump_On) and Valve_Open),false) then 
+				(netFlow >= -(config.t1_valve_max_flow_rate_m3s) and netFlow <= 0.0)
+			else false);
+					
+	tel;
+	
+	node Tank2_Net_Flow_Constraint(Valve_In: bool, Valve_P_Out: bool, Valve_E_Out: bool, height: real) returns (in_range: bool);
+	var
+		netFlow : real;
+	let
+		-- Need variable for initial tank height instead of stating 0.0
+		netFlow = std.Deltad(height, 0.0);
+		
+		in_range = std.After1( 
+			-- if nothing is happening then the flow is 0.0 (no change)
+			if prev(not (Valve_In or Valve_P_Out or Valve_E_Out),true) then (netFlow = 0.0)
+			else if prev((Valve_In and not Valve_P_Out and not Valve_E_Out),false) then 
+				(netFlow >= 0.0 and netFlow <= config.t1_valve_max_flow_rate_m3s)
+			else if prev((Valve_In and Valve_P_Out and not Valve_E_Out),false) then 
+				if (pre(height = config.max_tank2_vol_m3 / config.tank2_cs_area_m2) and (config.t1_valve_max_flow_rate_m3s > config.t2_p_valve_max_flow_rate_m3s)) then
+					netFlow = 0.0
+				else if (pre(height = 0.0) and (config.t1_valve_max_flow_rate_m3s < config.t2_p_valve_max_flow_rate_m3s)) then
+					netFlow = 0.0
+				else if (config.t1_valve_max_flow_rate_m3s = config.t2_p_valve_max_flow_rate_m3s) then
+					netFlow = 0.0					
+				else
+					(netFlow <= config.t1_valve_max_flow_rate_m3s) and netFlow >= -(config.t2_p_valve_max_flow_rate_m3s)
+			else if prev((Valve_In and not Valve_P_Out and Valve_E_Out),false) then 
+				if (pre(height = config.max_tank2_vol_m3 / config.tank2_cs_area_m2) and (config.t1_valve_max_flow_rate_m3s > config.t2_e_valve_max_flow_rate_m3s)) then
+					netFlow = 0.0
+				else if (pre(height = 0.0) and (config.t1_valve_max_flow_rate_m3s < config.t2_e_valve_max_flow_rate_m3s)) then
+					netFlow = 0.0
+				else if (config.t1_valve_max_flow_rate_m3s = config.t2_e_valve_max_flow_rate_m3s) then
+					netFlow = 0.0					
+				else
+					(netFlow <= config.t1_valve_max_flow_rate_m3s) and netFlow >= -(config.t2_e_valve_max_flow_rate_m3s)
+			else if prev((Valve_In and Valve_P_Out and Valve_E_Out),false) then 			
+				if (pre(height = config.max_tank2_vol_m3 / config.tank2_cs_area_m2) and (config.t1_valve_max_flow_rate_m3s > (config.t2_p_valve_max_flow_rate_m3s + config.t2_e_valve_max_flow_rate_m3s))) then
+					netFlow = 0.0
+				else if (pre(height = 0.0) and (config.t1_valve_max_flow_rate_m3s < (config.t2_p_valve_max_flow_rate_m3s + config.t2_e_valve_max_flow_rate_m3s))) then
+					netFlow = 0.0
+				else if (config.t1_valve_max_flow_rate_m3s = (config.t2_p_valve_max_flow_rate_m3s + config.t2_e_valve_max_flow_rate_m3s)) then
+					netFlow = 0.0					
+				else
+					(netFlow <= config.t1_valve_max_flow_rate_m3s) and netFlow >= -(config.t2_p_valve_max_flow_rate_m3s + config.t2_e_valve_max_flow_rate_m3s)
+			else if prev(((not Valve_In) and Valve_P_Out and Valve_E_Out),false) then 
+				(netFlow >= -(config.t2_p_valve_max_flow_rate_m3s + config.t2_e_valve_max_flow_rate_m3s) and netFlow <= 0.0)
+			else if prev(((not Valve_In) and Valve_P_Out and not Valve_E_Out),false) then
+				(netFlow >= -(config.t2_p_valve_max_flow_rate_m3s) and netFlow <= 0.0)
+			else if prev(((not Valve_In) and not Valve_P_Out and Valve_E_Out),false) then
+				(netFlow >= -(config.t2_e_valve_max_flow_rate_m3s) and netFlow <= 0.0)
+			else false);
+					
+	tel;
+   	
+**};
+
+system Two_Tank_Environment
+	features
+		Pump_On : in data port Base_Types::Boolean;
+		Valve_T1_Open : in data port Base_Types::Boolean;
+		Valve_T2_P_Open : in data port Base_Types::Boolean;
+		Valve_T2_E_Open : in data port Base_Types::Boolean;
+		Sensor_T1_High : out data port Base_Types::Boolean;
+		Sensor_T1_Low : out data port Base_Types::Boolean;
+		Sensor_T2_High : out data port Base_Types::Boolean;
+		Sensor_T2_Mid : out data port Base_Types::Boolean;
+		Sensor_T2_Low : out data port Base_Types::Boolean;
+		Tank1_Height : out data port Base_Types::Float;
+		Tank2_Height : out data port Base_Types::Float;
+		Pump_Flow : out data port Base_Types::Float;
+		Valve_T1_Flow : out data port Base_Types::Float;
+--		Valve_T2_In_Flow : out data port Base_Types::Float;
+		Valve_T2_P_Flow : out data port Base_Types::Float;
+		Valve_T2_E_Flow : out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		eq tank1_netFlow : real = Pump_Flow - Valve_T1_Flow;
+		eq tank1_netHtChg : real = tank1_netFlow / config.tank1_cross_section_area_m2;
+		eq tank2_netFlow : real = Valve_T1_Flow - Valve_T2_P_Flow - Valve_T2_E_Flow;
+		eq tank2_netHtChg : real = tank2_netFlow / config.tank2_cs_area_m2;
+		
+		-- Input Assumptions --------------------------------------
+		assume "The pump is Init off":
+			std.Init(not Pump_On);
+			
+		assume "The tank 1 valve is Init closed":
+			std.Init(not Valve_T1_Open);
+			
+		assume "The tank 2 production valve is Init closed":
+			std.Init(not Valve_T2_P_Open);
+			
+		assume "The tank 2 emergency valve is Init closed":
+			std.Init(not Valve_T2_E_Open);
+		-----------------------------------------------------------
+		
+		-- Sensor Guarantees --------------------------------------			
+		guarantee "The tank 1 sensor outputs will Init be false" :
+			std.Init(not Sensor_T1_High) and std.Init(not Sensor_T1_Low);
+			
+		guarantee "The tank 2 sensor outputs will Init be false" :
+			std.Init(not Sensor_T2_High) and std.Init(not Sensor_T2_Mid) and std.Init(not Sensor_T2_Low);			
+			
+		guarantee "Tank 1: If the tank height is greater than or equal to the sensor high height then Sensor_High is true" :
+			(false -> (Tank1_Height >= sensor_package.t1_sensor_hi_height_m)) => Sensor_T1_High;
+			
+		guarantee "Tank 1: If the tank height is less than the sensor high height then Sensor_High is false" :
+			(true -> (Tank1_Height < sensor_package.t1_sensor_hi_height_m)) => not Sensor_T1_High;
+			
+		guarantee "Tank 1: If the tank height is greater than or equal to the sensor low height then Sensor_Low is true" :
+			(false -> (Tank1_Height >= sensor_package.t1_sensor_lo_height_m)) => Sensor_T1_Low;
+			
+		guarantee "Tank 1: If the tank height is less than the sensor low height then Sensor_Low is false" :
+			(true -> (Tank1_Height < sensor_package.t1_sensor_lo_height_m)) => not Sensor_T1_Low;
+			
+		guarantee "Tank 2: If the tank height is greater than or equal to the sensor high height then Sensor_High is true" :
+			(false -> (Tank2_Height >= sensor_package.t2_sensor_hi_height_m)) => Sensor_T2_High;
+			
+		guarantee "Tank 2: If the tank height is less than the sensor high height then Sensor_High is false" :
+			(true -> (Tank2_Height < sensor_package.t2_sensor_hi_height_m)) => not Sensor_T2_High;
+			
+		guarantee "Tank 2: If the tank height is greater than or equal to the sensor mid height then Sensor_Mid is true" :
+			(false -> (Tank2_Height >= sensor_package.t2_sensor_md_height_m)) => Sensor_T2_Mid;
+			
+		guarantee "Tank 2: If the tank height is less than the sensor mid height then Sensor_Mid is false" :
+			(true -> (Tank2_Height < sensor_package.t2_sensor_md_height_m)) => not Sensor_T2_Mid;
+			
+		guarantee "Tank 2: If the tank height is greater than or equal to the sensor low height then Sensor_Low is true" :
+			(false -> (Tank2_Height >= sensor_package.t2_sensor_lo_height_m)) => Sensor_T2_Low;
+			
+		guarantee "Tank 2: If the tank height is less than the sensor low height then Sensor_Low is false" :
+			(true -> (Tank2_Height < sensor_package.t2_sensor_lo_height_m)) => not Sensor_T2_Low;
+		-----------------------------------------------------------	
+
+		-- Tank 1 Guarantees --------------------------------------
+		guarantee "The tank 1 is Init empty":
+			std.Init(Tank1_Height = 0.0);
+							
+		guarantee "The tank 1 volume delta shall be bounded by the in_range predicate" : 
+			env_package.Tank1_Net_Flow_Constraint(Pump_On, Valve_T1_Open, Tank1_Height);
+		
+		guarantee "The tank 1 current liquid height is equal to the previous tank 1 liquid height plus the additional tank 1 flow rate divided by the tank 1 cross-sectional area of the previous step" :
+			( (pre(Tank1_Height) + prev(tank1_netHtChg,0.0) >= 0.0) and (pre(Tank1_Height) + prev(tank1_netHtChg,0.0) <= (tank_package.max_tank1_vol_m3 / tank_package.tank1_cross_section_area_m2)) ) 
+			=> (Tank1_Height = (prev(Tank1_Height,env_package.tank1_initial_height_m) + prev(tank1_netHtChg,0.0)));
+		
+		guarantee "If the pump is on and the valve is close the water level will rise (increase), Init true":
+			prev((Pump_On and not Valve_T1_Open),false) => std.NonDecrease(Tank1_Height, true);
+		
+		guarantee "If the pump is off and the valve is open the water level will decrease or equal 0.0, Init true":
+			prev((not Pump_On and Valve_T1_Open),false) => std.NonIncreasing(Tank1_Height, true);	
+				
+		guarantee "If the pump and valve are both closed, the water level will remain the same" : 
+			prev(not(Pump_On or Valve_T1_Open),false) => std.NoChange(Tank1_Height, true);
+		-----------------------------------------------------------
+		
+		-- Tank 2 Guarantees --------------------------------------
+		guarantee "The tank 2 is Init empty":
+			std.Init(Tank2_Height = 0.0);
+			
+		guarantee "The tank 2 volume delta shall be bounded by the in_range predicate" : 
+			env_package.Tank2_Net_Flow_Constraint(Valve_T1_Open, Valve_T2_P_Open, Valve_T2_E_Open, Tank2_Height);
+			
+		guarantee "The tank 2 current liquid height is equal to the previous tank 2 liquid height plus the additional tank 2 flow rate divided by the tank 2 cross-sectional area of the previous step" :
+			( (pre(Tank2_Height) + prev(tank2_netHtChg,0.0) >= 0.0) and (pre(Tank2_Height) + prev(tank2_netHtChg,0.0) <= (tank_package.max_tank2_vol_m3 / tank_package.tank2_cross_section_area_m2)) ) 
+			=> (Tank2_Height = (prev(Tank2_Height,env_package.tank2_initial_height_m) + prev(tank2_netHtChg,0.0)));
+			
+		guarantee "If the tank 1 valve is open and both tank 2 valves are closed the water level will rise (increase), Init true":
+			prev((Valve_T1_Open and not Valve_T2_P_Open and not Valve_T2_E_Open),false) => std.NonDecrease(Tank2_Height, true);
+			
+		guarantee "If the tank 1 valve and the tank 2 production valves are open and the tank 2 emergency valve is closed the water level will rise (increase), Init true":
+			prev((Valve_T1_Open and Valve_T2_P_Open and not Valve_T2_E_Open),false) => std.NonDecrease(Tank2_Height, true);
+			
+		guarantee "If the tank 1 valve and both tank 2 valves are open the water level will decrease or equal 0.0, Init true":
+			prev((Valve_T1_Open and Valve_T2_P_Open and Valve_T2_E_Open),false) => std.NonIncreasing(Tank2_Height, true);
+			
+		guarantee "If the tank 1 valve and tank 2 emergency valve are open and the tank 2 production valve is closed the water level will decrease or equal 0.0, Init true":
+			prev((Valve_T1_Open and not Valve_T2_P_Open and Valve_T2_E_Open),false) => std.NonIncreasing(Tank2_Height, true);
+			
+		guarantee "If the tank 1 valve is closed and either of tank 2 valves are open the water level will decrease or equal 0.0, Init true":
+			prev((not Valve_T1_Open and (Valve_T2_P_Open or Valve_T2_E_Open)),false) => std.NonIncreasing(Tank2_Height, true);
+			
+		guarantee "If all the valves are closed, the water level will remain the same" : 
+			prev(not(Valve_T1_Open or Valve_T2_P_Open or Valve_T2_E_Open),false) => std.NoChange(Tank2_Height, true);
+		-----------------------------------------------------------
+		
+		-- Pump Guarantees ----------------------------------------
+		guarantee "If the pump is on then there should be a flow into the tank":
+			Pump_On => Pump_Flow = pump_package.t1_max_flow_rate_m3s;
+			
+		guarantee "If the pump is off then there should be no flow into the tank":
+			not Pump_On => Pump_Flow = 0.0;
+		-----------------------------------------------------------	
+
+		-- Valve Guarantees ---------------------------------------			
+		guarantee "If the tank 1 valve is open then there should be a flow from tank 1":
+			Valve_T1_Open => Valve_T1_Flow = valve_package.t1_max_flow_rate_m3s;
+			
+		guarantee "If the tank 1 valve is closed then there should be no flow from tank 1":
+			not Valve_T1_Open => Valve_T1_Flow = 0.0;
+			
+		guarantee "If the tank 2 production valve is open then there should be a output flow equal to the max production flow":
+			Valve_T2_P_Open => Valve_T2_P_Flow = valve_package.t2_p_max_flow_rate_m3s;
+			
+		guarantee "If the tank 2 production valve is closed then there should be no flow from the production valve":
+			not Valve_T2_P_Open => Valve_T2_P_Flow = 0.0;
+			
+		guarantee "If the tank 2 emergency valve is open then there should be a output flow equal to the max emergency flow":
+			Valve_T2_E_Open => Valve_T2_E_Flow = valve_package.t2_e_max_flow_rate_m3s;
+			
+		guarantee "If the tank 2 emergency valve is closed then there should be no flow from the emergency valve":
+			not Valve_T2_E_Open => Valve_T2_E_Flow = 0.0;
+		-----------------------------------------------------------
+		
+		guarantee "If the sensor high is on then the sensor low should be on" :
+			Sensor_T1_High => Sensor_T1_Low;
+		
+		-- Tank Connection Guarantees -----------------------------
+--		guarantee "The output flow of tank 1 is the input flow of tank 2":
+--			Valve_T1_Flow = Valve_T2_In_Flow;
+		-----------------------------------------------------------
+		
+	**};
+end Two_Tank_Environment;
+
+system implementation Two_Tank_Environment.Impl
+	subcomponents
+		P_sub : system pump_package::T1_Pump.Impl; 
+		V_T1_sub : system valve_package::T1_Valve.Impl;
+		V_T2_P_sub : system valve_package::T2_Production_Valve.Impl;
+		V_T2_E_sub : system valve_package::T2_Emergency_Valve.Impl; 
+		T1_sub : system tank_package::Tank_1.UniformTankImpl;
+		T2_sub : system tank_package::Tank_2.UniformTankImpl;
+		SH_T1_sub : system sensor_package::T1_Sensor_High.H_Impl;
+	    SL_T1_sub : system sensor_package::T1_Sensor_Low.L_Impl;
+	    SH_T2_sub : system sensor_package::T2_Sensor_High.H_Impl;
+	    SM_T2_sub : system sensor_package::T2_Sensor_Mid.M_Impl;
+	    SL_T2_sub : system sensor_package::T2_Sensor_Low.L_Impl; 
+	connections
+		-- Tank Height Outputs
+		T1_sub_TO_OUT : port T1_sub.Liq_Height_m -> Tank1_Height {Communication_Properties::Timing => immediate;};
+		T2_sub_TO_OUT : port T2_sub.Liq_Height_m -> Tank2_Height {Communication_Properties::Timing => immediate;};
+		
+		-- Sensor Input Data
+		T1_sub_TO_SH_T1_sub : port T1_sub.Liq_Height_m -> SH_T1_sub.Tank_Height {Communication_Properties::Timing => immediate;};
+		T1_sub_TO_SL_T1_sub : port T1_sub.Liq_Height_m -> SL_T1_sub.Tank_Height {Communication_Properties::Timing => immediate;};
+		T2_sub_TO_SH_T2_sub : port T2_sub.Liq_Height_m -> SH_T2_sub.Tank_Height {Communication_Properties::Timing => immediate;};
+		T2_sub_TO_SM_T2_sub : port T2_sub.Liq_Height_m -> SM_T2_sub.Tank_Height {Communication_Properties::Timing => immediate;};
+		T2_sub_TO_SL_T2_sub : port T2_sub.Liq_Height_m -> SL_T2_sub.Tank_Height {Communication_Properties::Timing => immediate;};
+		
+		-- Sensor Outputs
+		SH_T1_sub_TO_OUT : port SH_T1_sub.Sensor_Value -> Sensor_T1_High {Communication_Properties::Timing => immediate;};
+		SL_T1_sub_TO_OUT : port SL_T1_sub.Sensor_Value -> Sensor_T1_Low {Communication_Properties::Timing => immediate;};
+		SH_T2_sub_TO_OUT : port SH_T2_sub.Sensor_Value -> Sensor_T2_High {Communication_Properties::Timing => immediate;};
+		SM_T2_sub_TO_OUT : port SM_T2_sub.Sensor_Value -> Sensor_T2_Mid {Communication_Properties::Timing => immediate;};
+		SL_T2_sub_TO_OUT : port SL_T2_sub.Sensor_Value -> Sensor_T2_Low {Communication_Properties::Timing => immediate;};
+		
+		-- Pump Control
+		IN_po_TO_P_sub : port Pump_On -> P_sub.Pump_State {Communication_Properties::Timing => immediate;};
+		
+		-- Valve Control
+		IN_vo_TO_V_T1_sub : port Valve_T1_Open -> V_T1_sub.Valve_State {Communication_Properties::Timing => immediate;};
+		IN_vo_TO_V_T2_P_sub : port Valve_T2_P_Open -> V_T2_P_sub.Valve_State {Communication_Properties::Timing => immediate;};
+		IN_vo_TO_V_T2_E_sub : port Valve_T2_E_Open -> V_T2_E_sub.Valve_State {Communication_Properties::Timing => immediate;};
+		
+		-- Tank 1 Flows
+		P_sub_TO_T1_sub : port P_sub.Flow_Out -> T1_sub.Flow_In {Communication_Properties::Timing => immediate;};		
+		V_T1_sub_TO_T1_sub : port V_T1_sub.Flow_Out -> T1_sub.Flow_Out {Communication_Properties::Timing => immediate;};
+		
+		-- Tank 2 Flows
+		V_T1_sub_TO_T2_sub : port V_T1_sub.Flow_Out -> T2_sub.Flow_In {Communication_Properties::Timing => immediate;};
+		V_T2_P_sub_TO_T2_sub : port V_T2_P_sub.Flow_Out -> T2_sub.Flow_Production_Out {Communication_Properties::Timing => immediate;};
+		V_T2_E_sub_TO_T2_sub : port V_T2_E_sub.Flow_Out -> T2_sub.Flow_Emergency_Out {Communication_Properties::Timing => immediate;};
+		
+		-- Data to the environment
+		P_sub_TO_OUT : port P_sub.Flow_Out -> Pump_Flow {Communication_Properties::Timing => immediate;};
+		V_T1_sub_TO_OUT : port V_T1_sub.Flow_Out -> Valve_T1_Flow {Communication_Properties::Timing => immediate;};
+		V_T2_P_sub_TO_OUT : port V_T2_P_sub.Flow_Out -> Valve_T2_P_Flow {Communication_Properties::Timing => immediate;};
+		V_T2_E_sub_TO_OUT : port V_T2_E_sub.Flow_Out -> Valve_T2_E_Flow {Communication_Properties::Timing => immediate;};
+
+	annex agree {**
+		eq dummy : bool = true;
+	**};
+
+end Two_Tank_Environment.Impl;
+   
+system Single_Tank_Environment
+	features
+		Pump_On : in data port Base_Types::Boolean;
+		Valve_Open : in data port Base_Types::Boolean;
+		Sensor_High : out data port Base_Types::Boolean;
+		Sensor_Low : out data port Base_Types::Boolean;
+		Tank_Height : out data port Base_Types::Float;
+		Pump_Flow : out data port Base_Types::Float;
+		Valve_Flow : out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		-- Sensor Guarantees --------------------------------------			
+		guarantee "The sensor outputs will Init be false" :
+			std.Init(not Sensor_High) and std.Init(not Sensor_Low);
+			
+		guarantee "If the tank height is greater than or equal to the sensor high height then Sensor_High is true" :
+			(false -> (Tank_Height >= sensor_package.t1_sensor_hi_height_m)) => Sensor_High;
+			
+		guarantee "If the tank height is less than the sensor high height then Sensor_High is false" :
+			(true -> (Tank_Height < sensor_package.t1_sensor_hi_height_m)) => not Sensor_High;
+			
+		guarantee "If the tank height is greater than or equal to the sensor low height then Sensor_Low is true" :
+			(false -> (Tank_Height >= sensor_package.t1_sensor_lo_height_m)) => Sensor_Low;
+			
+		guarantee "If the tank height is less than the sensor low height then Sensor_Low is false" :
+			(true -> (Tank_Height < sensor_package.t1_sensor_lo_height_m)) => not Sensor_Low;
+		-----------------------------------------------------------	
+
+		-- Tank Guarantees ----------------------------------------	
+		guarantee "The tank is Init empty":
+			std.Init(Tank_Height = 0.0);
+							
+		guarantee "The tank volume delta shall be bounded by the in_range predicate" : 
+			env_package.Tank1_Net_Flow_Constraint(Pump_On, Valve_Open, Tank_Height);
+		
+		guarantee "The current liquid height is equal to the previous liquid height plus the additional flow rate / cross-sectional area of the previous step" :
+			( (pre(Tank_Height) + prev(((Pump_Flow - Valve_Flow)/tank_package.tank1_cross_section_area_m2),0.0) >= 0.0) and (pre(Tank_Height) + prev(((Pump_Flow - Valve_Flow)/tank_package.tank1_cross_section_area_m2),0.0) <= (tank_package.max_tank1_vol_m3 / tank_package.tank1_cross_section_area_m2)) ) 
+			=> (Tank_Height = (prev(Tank_Height,env_package.tank1_initial_height_m) + prev(((Pump_Flow - Valve_Flow)/tank_package.tank1_cross_section_area_m2),0.0)));
+		
+		guarantee "If the pump is on and the valve is close the water level will rise (increase), Init increasing":
+			prev((Pump_On and not Valve_Open),false) => std.NonDecrease(Tank_Height, true);
+		
+		guarantee "If the pump is off and the valve is open the water level will decrease or equal 0.0, Init true":
+			prev((not Pump_On and Valve_Open),false) => std.NonIncreasing(Tank_Height, true);	
+				
+		guarantee "If the pump and valve are both closed, the water level will remain the same" : 
+			prev(not(Pump_On or Valve_Open),false) => std.NoChange(Tank_Height, true);
+		-----------------------------------------------------------
+		
+		-- Pump Guarantees ----------------------------------------
+		guarantee "If the pump is on then there should be a flow into the tank":
+			Pump_On => Pump_Flow = pump_package.t1_max_flow_rate_m3s;
+			
+		guarantee "If the pump is off then there should be no flow into the tank":
+			not Pump_On => Pump_Flow = 0.0;
+		-----------------------------------------------------------	
+
+		-- Valve Guarantees ---------------------------------------			
+		guarantee "If the valve is open then there should be a flow from the tank":
+			Valve_Open => Valve_Flow = valve_package.t1_max_flow_rate_m3s;
+			
+		guarantee "If the valve is closed then there should be no flow from the tank":
+			not Valve_Open => Valve_Flow = 0.0;
+		-----------------------------------------------------------
+		
+	**};
+end Single_Tank_Environment;
+
+system implementation Single_Tank_Environment.Impl
+	subcomponents
+		P_sub : system pump_package::T1_Pump.Impl; 
+		V_sub : system valve_package::T1_Valve.Impl; 
+		T_sub : system tank_package::Tank_1.UniformTankImpl;
+		SH_sub : system sensor_package::T1_Sensor_High.H_Impl;
+	    SL_sub : system sensor_package::T1_Sensor_Low.L_Impl; 
+	connections
+		T_sub_TO_OUT : port T_sub.Liq_Height_m -> Tank_Height {Communication_Properties::Timing => immediate;};
+		T_sub_TO_SH_sub : port T_sub.Liq_Height_m -> SH_sub.Tank_Height {Communication_Properties::Timing => immediate;};
+		T_sub_TO_SL_sub : port T_sub.Liq_Height_m -> SL_sub.Tank_Height {Communication_Properties::Timing => immediate;};
+		SH_sub_TO_OUT : port SH_sub.Sensor_Value -> Sensor_High {Communication_Properties::Timing => immediate;};
+		SL_sub_TO_OUT : port SL_sub.Sensor_Value -> Sensor_Low {Communication_Properties::Timing => immediate;};
+		IN_po_TO_P_sub : port Pump_On -> P_sub.Pump_State {Communication_Properties::Timing => immediate;};
+		IN_vo_TO_V_sub : port Valve_Open -> V_sub.Valve_State {Communication_Properties::Timing => immediate;};
+		P_sub_TO_T_sub : port P_sub.Flow_Out -> T_sub.Flow_In {Communication_Properties::Timing => immediate;};
+		V_sub_TO_T_sub : port V_sub.Flow_Out -> T_sub.Flow_Out {Communication_Properties::Timing => immediate;};
+		P_sub_TO_OUT : port P_sub.Flow_Out -> Pump_Flow {Communication_Properties::Timing => immediate;};
+		V_sub_TO_OUT : port V_sub.Flow_Out -> Valve_Flow {Communication_Properties::Timing => immediate;};
+
+	annex agree {**
+		eq dummy : bool = true;
+	**};
+
+end Single_Tank_Environment.Impl; 
+   
+end env_package;

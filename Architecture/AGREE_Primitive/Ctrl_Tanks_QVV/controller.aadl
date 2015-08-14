@@ -1,0 +1,533 @@
+package controller_package
+public 
+   with Base_Types;
+   with std;
+   with two_input_and_primitive_pkg;
+   with binary_switch_primitive_pkg;
+   with not_primitive_pkg;
+   with constant_primitive_pkg;
+   with delay_primitive_pkg;
+   with relational_primitive_pkg;
+   
+system Controller
+features
+	tank1_SH_value : in data port Base_Types::Float;
+	tank1_SL_value : in data port Base_Types::Float;
+	pre_Pump_State : in data port Base_Types::Float;
+	pre_Valve_State : in data port Base_Types::Float;
+	
+	tank2_SH_value : in data port Base_Types::Float;
+	tank2_SM_value : in data port Base_Types::Float;
+	tank2_SL_value : in data port Base_Types::Float;
+	pre_P_Valve_State : in data port Base_Types::Float;
+	pre_E_Valve_State : in data port Base_Types::Float;
+	
+	Pump_State : out data port Base_Types::Float;
+	Valve_State : out data port Base_Types::Float;
+	
+	P_Valve_State : out data port Base_Types::Float;
+	E_Valve_State : out data port Base_Types::Float;
+	
+	annex agree {**
+		---------------------------------------------------------
+		-- Controller 1
+		---------------------------------------------------------
+		
+		-- assumptions
+		assume "If the high sensor is true, then the low sensor is True" : 
+			(tank1_SH_value = 1.0 => tank1_SL_value = 1.0);	
+		
+		assume "The tank 1 sensor inputs are valid" :
+			(tank1_SH_value = 0.0 or tank1_SH_value = 1.0) and (tank1_SL_value = 0.0 or tank1_SL_value = 1.0);
+			
+		assume "The Prev_Pump_State is the same as the output Pump_State in the previous step" : 
+			pre_Pump_State = prev(Pump_State,0.0);	
+			
+		assume "The Prev_Valve_State is the same as the output Valve_State in the previous step" : 
+			pre_Valve_State = prev(Valve_State,0.0);
+
+		-- Guarantees
+		guarantee "The pump is initially off":
+			std.Initial(Pump_State = 0.0);			
+			
+		guarantee "The valve is closed at the initial timestep" :
+			std.Initial(Valve_State = 0.0);
+
+		-- Liquid below Below Low sensor - just flow in
+		guarantee "After the initial time step, When SL_Input is False, the Pump shall be on and Valve shall be Closed" : 
+			true -> ((tank1_SL_value = 0.0) => ((Valve_State = 0.0) and Pump_State = 1.0));
+			
+		-- Liquid above high sensor - just flow out
+		guarantee "After the initial time step, When the SH_Input is true, the Pump shall be off and Valve shall be open" : 
+			true -> ((tank1_SH_value = 1.0) => ((Valve_State = 1.0) and (Pump_State = 0.0)));
+
+		-- Liquid between sensors - hold pump and valve states
+		guarantee "After the initial time step, When the SL_Input is True and the SH_Input is False, the Pump and Valve shall remain in their previous states" : 
+			true -> ((tank1_SH_value = 0.0 and tank1_SL_value = 1.0) => (Valve_State = prev(Valve_State,0.0) and Pump_State = prev(Pump_State,0.0)));
+			
+		guarantee "The controller 1 output controls are valid":
+			(Pump_State = 0.0 or Pump_State = 1.0) and (Valve_State = 0.0 or Valve_State = 1.0);
+			
+		---------------------------------------------------------
+		-- Controller 2
+		---------------------------------------------------------
+		
+		-- Assumptions
+		assume "If the high sensor is true, then the mid sensor is True" : 
+			(tank2_SH_value = 1.0 => tank2_SM_value = 1.0);
+			
+		assume "If the mid sensor is true, then the low sensor is True" : 
+			(tank2_SM_value = 1.0 => tank2_SL_value = 1.0);
+			
+		assume "The Tank 2 sensor inputs are valid" :
+			(tank2_SH_value = 0.0 or tank2_SH_value = 1.0) and (tank2_SM_value = 0.0 or tank2_SM_value = 1.0) and (tank2_SL_value = 0.0 or tank2_SL_value = 1.0);
+			
+		assume "The Prev_P_Valve is the same as the output Valve_Output_P_State in the previous step" : 
+			pre_P_Valve_State = prev(P_Valve_State,0.0);
+			
+		assume "The Prev_E_Valve is the same as the output Valve_Output_E_State in the previous step" : 
+			pre_E_Valve_State = prev(E_Valve_State,0.0);
+
+		-- Guarantees
+		guarantee "The output production valve is initially closed" :
+			std.Initial(P_Valve_State = 0.0);
+			
+		guarantee "The output emergency valve is initially closed" :
+			std.Initial(E_Valve_State = 0.0);
+
+		-- Liquid below Below Low sensor - just flow in
+		guarantee "After the initial time step, When SL_Input is False, the valves shall be Closed" : 
+			true -> ((tank2_SL_value = 0.0) => ((P_Valve_State = 0.0) and (E_Valve_State = 0.0)));
+			
+		-- Liquid below Below Mid sensor above low sensor
+		guarantee "After the initial time step, When SM_Input is False and the SL_Input is true, the production valve shall be open and the emergency valve shall be closed" : 
+			true -> ((tank2_SM_value = 0.0 and tank2_SL_value = 1.0) => (P_Valve_State = 1.0 and (E_Valve_State = 0.0)));
+			
+		-- Liquid above high sensor
+		guarantee "After the initial time step, When the SH_Input is true, both valves will be open" : 
+			true -> (tank2_SH_value = 1.0 => (P_Valve_State = 1.0 and E_Valve_State = 1.0));
+
+		-- Liquid between mid and high sensors, previously emergency valve open
+		guarantee "After the initial time step, When the SM_Input is True and the SH_Input is False and the emergency valve was previously open, the valves shall be Open" : 
+			true -> ((tank2_SH_value = 0.0 and tank2_SM_value = 1.0 and prev(E_Valve_State = 1.0,false) and Valve_State = 1.0) => (P_Valve_State = 1.0 and E_Valve_State = 1.0));
+				
+		-- Liquid between mid and high sensors, previously emergency valve closed
+		guarantee "After the initial time step, When the SM_Input is True and the SH_Input is False and the emergency valve was previously closed, the production valve shall be open and the emergency valve shall be closed" : 
+			true -> ((tank2_SH_value = 0.0 and tank2_SM_value = 1.0 and prev(E_Valve_State = 0.0,true)) => (P_Valve_State = 1.0 and E_Valve_State = 0.0));
+		
+		guarantee "The controller 2 output controls are valid":
+			(P_Valve_State = 0.0 or P_Valve_State = 1.0) and (E_Valve_State = 0.0 or E_Valve_State = 1.0);
+			
+	**};
+
+end Controller;
+
+system implementation Controller.impl
+subcomponents
+	Controller1 : system controller_package::Controller_Tank1.impl;
+	Controller2 : system controller_package::Controller_Tank2.impl;
+	T1_SH_B : system relational_primitive_pkg::compare_1.impl;
+	T1_SL_B : system relational_primitive_pkg::compare_1.impl;
+	T2_SH_B : system relational_primitive_pkg::compare_1.impl;
+	T2_SM_B : system relational_primitive_pkg::compare_1.impl;
+	T2_SL_B : system relational_primitive_pkg::compare_1.impl;
+	
+connections
+	-- Convert Sensors to Booleans
+	t1_sh_to_boolean : port tank1_SH_value -> T1_SH_B.input {Communication_Properties::Timing => immediate;};
+	t1_sl_to_boolean : port tank1_SL_value -> T1_SL_B.input {Communication_Properties::Timing => immediate;};
+	t2_sh_to_boolean : port tank2_SH_value -> T2_SH_B.input {Communication_Properties::Timing => immediate;};
+	t2_sm_to_boolean : port tank2_SM_value -> T2_SM_B.input {Communication_Properties::Timing => immediate;};
+	t2_sl_to_boolean : port tank2_SL_value -> T2_SL_B.input {Communication_Properties::Timing => immediate;};
+	
+	-- Inputs to Controller 1
+	t1_sh_b_to_c1 : port T1_SH_B.output -> Controller1.SH_Input {Communication_Properties::Timing => immediate;};
+	t1_sl_b_to_c1 : port T1_SL_B.output -> Controller1.SL_Input {Communication_Properties::Timing => immediate;};
+	pre_pump_to_c1 : port pre_Pump_State -> Controller1.Prev_Pump_State {Communication_Properties::Timing => immediate;};
+	pre_valve_to_c1 : port pre_Valve_state -> Controller1.Prev_Valve_State {Communication_Properties::Timing => immediate;};
+	
+	-- Outputs from Controller 1
+	c1_to_pump_state : port Controller1.Pump_State -> Pump_State {Communication_Properties::Timing => immediate;};
+	c1_to_valve_state : port Controller1.Valve_State -> Valve_State {Communication_Properties::Timing => immediate;};
+	
+	-- Inputs to Controller 2
+	t2_sh_b_to_c2 : port T2_SH_B.output -> Controller2.SH_Input {Communication_Properties::Timing => immediate;};
+	t2_sm_b_to_c2 : port T2_SM_B.output -> Controller2.SM_Input {Communication_Properties::Timing => immediate;};
+	t2_sl_b_to_c2 : port T2_SL_B.output -> Controller2.SL_Input {Communication_Properties::Timing => immediate;};
+	valve_state_to_c2 : port Controller1.Valve_State -> Controller2.Valve_Input_State {Communication_Properties::Timing => immediate;};
+	pre_p_valve_to_c2 : port pre_P_Valve_State -> Controller2.Prev_P_Valve {Communication_Properties::Timing => immediate;};
+	pre_e_valve_to_c2 : port pre_E_Valve_State -> Controller2.Prev_E_Valve {Communication_Properties::Timing => immediate;};
+	
+	-- Outputs from Controller 2
+	c2_to_pump_state : port Controller2.Valve_Output_P_State -> P_Valve_State {Communication_Properties::Timing => immediate;};
+	c2_to_valve_state : port Controller2.Valve_Output_E_State -> E_Valve_State {Communication_Properties::Timing => immediate;};
+	
+	annex agree {**
+		
+		eq dummy: real;
+	
+	**};
+	
+end Controller.impl;
+   
+system Controller_Tank1
+	features
+		SH_Input: in data port Base_Types::Boolean;
+		SL_Input: in data port Base_Types::Boolean;
+		Prev_Pump_State : in data port Base_Types::Float;
+		Prev_Valve_State : in data port Base_Types::Float;
+		
+		Pump_State: out data port Base_Types::Float;  -- commanded pump state and valve state	
+		Valve_State: out data port Base_Types::Float;
+	
+	annex agree {**
+
+		-- assumptions
+		assume "If the high sensor is true, then the low sensor is True" : 
+			(SH_Input => SL_Input);	
+			
+		assume "The Prev_Pump_State is the same as the output Pump_State in the previous step" : 
+			Prev_Pump_State = prev(Pump_State,0.0);	
+			
+		assume "The Prev_Valve_State is the same as the output Valve_State in the previous step" : 
+			Prev_Valve_State = prev(Valve_State,0.0);
+
+		-- Guarantees
+		guarantee "The pump is initially off":
+			std.Initial(Pump_State = 0.0);			
+			
+		guarantee "The valve is initially closed" :
+			std.Initial(Valve_State = 0.0);
+
+		-- Liquid below Below Low sensor - just flow in
+		guarantee "After the initial time step, When SL_Input is False, the Pump shall be on and Valve shall be Closed" : 
+			true -> ((not SL_Input) => ((Valve_State = 0.0) and Pump_State = 1.0));
+			
+		-- Liquid above high sensor - just flow out
+		guarantee "After the initial time step, When the SH_Input is true, the Pump shall be off and Valve shall be open" : 
+			true -> ((SH_Input) => ((Valve_State = 1.0) and (Pump_State = 0.0)));
+
+		-- Liquid between sensors - hold pump and valve states
+		guarantee "After the initial time step, When the SL_Input is True and the SH_Input is False, the Pump and Valve shall be in the previous state" : 
+			true -> ((not SH_Input and SL_Input) => (Valve_State = prev(Valve_State,0.0) and Pump_State = prev(Pump_State,0.0)));
+			
+		guarantee "The output controls are valid":
+			(Pump_State = 0.0 or Pump_State = 1.0) and (Valve_State = 0.0 or Valve_State = 1.0);
+			
+	**};
+end Controller_Tank1;
+
+system implementation Controller_Tank1.Impl
+subcomponents
+	AND : system two_input_and_primitive_pkg::two_input_and.impl;
+	SH_NOT : system not_primitive_pkg::not.impl;
+	SL_NOT : system not_primitive_pkg::not.impl;
+	One : system constant_primitive_pkg::constant_1.impl;
+	Zero : system constant_primitive_pkg::constant_0.impl;
+	NegOne : system constant_primitive_pkg::constant_neg1.impl;
+	Delay : system delay_primitive_pkg::delay_with_initial.impl;
+	Compare : system relational_primitive_pkg::relational_g.impl;
+	PSwitch1 : system binary_switch_primitive_pkg::binary_switch.impl;
+	PSwitch2 : system binary_switch_primitive_pkg::binary_switch.impl;
+	PSwitch3 : system binary_switch_primitive_pkg::binary_switch.impl;
+	PSwitch4 : system binary_switch_primitive_pkg::binary_switch.impl;
+	VSwitch1 : system binary_switch_primitive_pkg::binary_switch.impl;
+	VSwitch2 : system binary_switch_primitive_pkg::binary_switch.impl;
+	VSwitch3 : system binary_switch_primitive_pkg::binary_switch.impl;
+	VSwitch4 : system binary_switch_primitive_pkg::binary_switch.impl;
+	
+connections
+
+	-- Sensors to NOTs
+	SH_to_NOT : port SH_Input -> SH_NOT.input {Communication_Properties::Timing => immediate;};
+	SL_to_NOT : port SL_Input -> SL_NOT.input {Communication_Properties::Timing => immediate;};
+	
+	-- Setup the AND
+	SL_to_AND : port SL_Input -> AND.input1 {Communication_Properties::Timing => immediate;};
+	Not_SH_to_AND : port SH_NOT.output -> AND.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Delay
+	One_to_Delay : port One.output -> Delay.input {Communication_Properties::Timing => immediate;};
+	Zero_to_Delay : port Zero.output -> Delay.initial_value {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Compare
+	Delay_to_Compare : port Delay.output -> Compare.input1 {Communication_Properties::Timing => immediate;};
+	Zero_to_Compare : port Zero.output -> Compare.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Pump Switch 1
+	PrePump_to_PS1 : port Prev_Pump_State -> PSwitch1.true_case {Communication_Properties::Timing => immediate;};
+	Neg1_to_PS1 : port NegOne.output -> PSwitch1.false_case {Communication_Properties::Timing => immediate;};
+	AND_to_PS1 : port AND.output -> PSwitch1.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Pump Switch 2
+	zero_to_PS2 : port Zero.output -> PSwitch2.true_case {Communication_Properties::Timing => immediate;};
+	PS1_to_PS2 : port PSwitch1.output -> PSwitch2.false_case {Communication_Properties::Timing => immediate;};
+	SH_to_PS2 : port SH_Input -> PSwitch2.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Pump Switch 3
+	One_to_PS3 : port One.output -> PSwitch3.true_case {Communication_Properties::Timing => immediate;};
+	PS2_to_PS3 : port PSwitch2.output -> PSwitch3.false_case {Communication_Properties::Timing => immediate;};
+	NotSL_to_PS3 : port SL_Not.output -> PSwitch3.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Pump Switch 4
+	PS3_to_PS4 : port PSwitch3.output -> PSwitch4.true_case {Communication_Properties::Timing => immediate;};
+	Zero_to_PS4 : port Zero.output -> PSwitch4.false_case {Communication_Properties::Timing => immediate;};
+	Compare_to_PS4 : port Compare.output -> PSwitch4.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Valve Switch 1
+	PrePump_to_VS1 : port Prev_Valve_State -> VSwitch1.true_case {Communication_Properties::Timing => immediate;};
+	Neg1_to_VS1 : port NegOne.output -> VSwitch1.false_case {Communication_Properties::Timing => immediate;};
+	AND_to_VS1 : port AND.output -> VSwitch1.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Valve Switch 2
+	one_to_VS2 : port One.output -> VSwitch2.true_case {Communication_Properties::Timing => immediate;};
+	PS1_to_VS2 : port VSwitch1.output -> VSwitch2.false_case {Communication_Properties::Timing => immediate;};
+	SH_to_VS2 : port SH_Input -> VSwitch2.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Valve Switch 3
+	Zero_to_VS3 : port Zero.output -> VSwitch3.true_case {Communication_Properties::Timing => immediate;};
+	PS2_to_VS3 : port VSwitch2.output -> VSwitch3.false_case {Communication_Properties::Timing => immediate;};
+	NotSL_to_VS3 : port SL_Not.output -> VSwitch3.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Valve Switch 4
+	VS3_to_VS4 : port VSwitch3.output -> VSwitch4.true_case {Communication_Properties::Timing => immediate;};
+	Zero_to_VS4 : port Zero.output -> VSwitch4.false_case {Communication_Properties::Timing => immediate;};
+	Compare_to_VS4 : port Compare.output -> VSwitch4.control {Communication_Properties::Timing => immediate;};
+	
+	-- Output Control data
+	PS4_to_Pump_State : port PSwitch4.output -> Pump_State {Communication_Properties::Timing => immediate;};
+	VS4_to_Valve_State : port VSwitch4.output -> Valve_State {Communication_Properties::Timing => immediate;};
+
+	annex agree {**
+
+		eq dummy : real;	
+		
+	**};
+
+end Controller_Tank1.Impl;
+
+system Controller_Tank2
+	features
+		SH_Input: in data port Base_Types::Boolean;
+		SM_Input: in data port Base_Types::Boolean;
+		SL_Input: in data port Base_Types::Boolean;		
+		Valve_Input_State: in data port Base_Types::Float;
+		
+		Prev_P_Valve : in data port Base_Types::Float;
+		Prev_E_Valve : in data port Base_Types::Float;
+		
+		Valve_Output_P_State: out data port Base_Types::Float;
+		Valve_Output_E_State: out data port Base_Types::Float;
+	
+	annex agree {**
+
+		-- Assumptions
+		assume "If the high sensor is true, then the mid sensor is True" : 
+			(SH_Input => SM_Input);
+			
+		assume "If the mid sensor is true, then the low sensor is True" : 
+			(SM_Input => SL_Input);
+			
+		assume "Valve_Input_State is either 0.0 or 1.0":
+			(Valve_Input_State = 0.0) or (Valve_Input_State = 1.0);	
+			
+		assume "The Prev_P_Valve is the same as the output Valve_Output_P_State in the previous step" : 
+			Prev_P_Valve = prev(Valve_Output_P_State,0.0);
+			
+		assume "The Prev_E_Valve is the same as the output Valve_Output_E_State in the previous step" : 
+			Prev_E_Valve = prev(Valve_Output_E_State,0.0);
+
+		-- Guarantees
+		guarantee "The output production valve is initially closed" :
+			std.Initial(Valve_Output_P_State = 0.0);
+			
+		guarantee "The output emergency valve is initially closed" :
+			std.Initial(Valve_Output_E_State = 0.0);
+
+		-- Liquid below Below Low sensor - just flow in
+		guarantee "After the initial time step, When SL_Input is False, the valves shall be Closed" : 
+			true -> ((not SL_Input) => ((Valve_Output_P_State = 0.0) and (Valve_Output_E_State = 0.0)));
+			
+		-- Liquid below Below Mid sensor above low sensor
+		guarantee "After the initial time step, When SM_Input is False and the SL_Input is true, the production valve shall be open and the emergency valve shall be closed" : 
+			true -> ((not SM_Input and SL_Input) => (Valve_Output_P_State = 1.0 and (Valve_Output_E_State = 0.0)));
+			
+		-- Liquid above high sensor
+		guarantee "After the initial time step, When the SH_Input is true, both valves will be open" : 
+			true -> (SH_Input => (Valve_Output_P_State = 1.0 and Valve_Output_E_State = 1.0));
+
+		-- Liquid between mid and high sensors, previously emergency valve open
+		guarantee "After the initial time step, When the SM_Input is True and the SH_Input is False and the emergency valve was previously open, the valves shall be Open" : 
+			true -> ((not SH_Input and SM_Input and prev(Valve_Output_E_State = 1.0,false) and Valve_Input_State = 1.0) => (Valve_Output_P_State = 1.0 and Valve_Output_E_State = 1.0));
+				
+		-- Liquid between mid and high sensors, previously emergency valve closed
+		guarantee "After the initial time step, When the SM_Input is True and the SH_Input is False and the emergency valve was previously closed, the production valve shall be open and the emergency valve shall be closed" : 
+			true -> ((not SH_Input and SM_Input and prev(Valve_Output_E_State = 0.0,true)) => (Valve_Output_P_State = 1.0 and Valve_Output_E_State = 0.0));
+		
+		guarantee "The output controls are valid":
+			(Valve_Output_P_State = 0.0 or Valve_Output_P_State = 1.0) and (Valve_Output_E_State = 0.0 or Valve_Output_E_State = 1.0);
+			
+	**};
+end Controller_Tank2;
+
+system implementation Controller_Tank2.Impl
+subcomponents
+	AND1 : system two_input_and_primitive_pkg::two_input_and.impl;
+	AND2 : system two_input_and_primitive_pkg::two_input_and.impl;
+	AND3 : system two_input_and_primitive_pkg::two_input_and.impl;
+	AND4 : system two_input_and_primitive_pkg::two_input_and.impl;
+	AND5 : system two_input_and_primitive_pkg::two_input_and.impl;
+	AND6 : system two_input_and_primitive_pkg::two_input_and.impl;
+	AND7 : system two_input_and_primitive_pkg::two_input_and.impl;
+	AND8 : system two_input_and_primitive_pkg::two_input_and.impl;
+	SH_NOT : system not_primitive_pkg::not.impl;
+	SM_NOT : system not_primitive_pkg::not.impl;
+	SL_NOT : system not_primitive_pkg::not.impl;
+	PrevP_NOT : system not_primitive_pkg::not.impl;
+	PrevE_NOT : system not_primitive_pkg::not.impl;
+	Valve_NOT : system not_primitive_pkg::not.impl;
+	One : system constant_primitive_pkg::constant_1.impl;
+	Zero : system constant_primitive_pkg::constant_0.impl;
+	NegOne : system constant_primitive_pkg::constant_neg1.impl;
+	Delay : system delay_primitive_pkg::delay_with_initial.impl;
+	Compare : system relational_primitive_pkg::relational_g.impl;
+	Is_true1 : system relational_primitive_pkg::compare_1.impl; 
+	Is_true2 : system relational_primitive_pkg::compare_1.impl;
+	Is_true3 : system relational_primitive_pkg::compare_1.impl;
+	PSwitch1 : system binary_switch_primitive_pkg::binary_switch.impl;
+	PSwitch2 : system binary_switch_primitive_pkg::binary_switch.impl;
+	PSwitch3 : system binary_switch_primitive_pkg::binary_switch.impl;
+	PSwitch4 : system binary_switch_primitive_pkg::binary_switch.impl;
+	PSwitch5 : system binary_switch_primitive_pkg::binary_switch.impl;
+	PSwitch6 : system binary_switch_primitive_pkg::binary_switch.impl;
+	ESwitch1 : system binary_switch_primitive_pkg::binary_switch.impl;
+	ESwitch2 : system binary_switch_primitive_pkg::binary_switch.impl;
+	ESwitch3 : system binary_switch_primitive_pkg::binary_switch.impl;
+	ESwitch4 : system binary_switch_primitive_pkg::binary_switch.impl;
+	ESwitch5 : system binary_switch_primitive_pkg::binary_switch.impl;
+	ESwitch6 : system binary_switch_primitive_pkg::binary_switch.impl;
+	
+connections
+
+	-- Sensors to NOTs
+	SH_to_NOT : port SH_Input -> SH_NOT.input {Communication_Properties::Timing => immediate;};
+	SM_to_NOT : port SM_Input -> SM_NOT.input {Communication_Properties::Timing => immediate;};
+	SL_to_NOT : port SL_Input -> SL_NOT.input {Communication_Properties::Timing => immediate;};
+	
+	-- Values to Compares
+	PrevP_to_Is_True : port Prev_P_Valve -> Is_true1.input {Communication_Properties::Timing => immediate;};
+	PrevE_to_Is_True : port Prev_P_Valve -> Is_true2.input {Communication_Properties::Timing => immediate;};
+	Valve_to_Is_True : port Valve_Input_State -> Is_true3.input {Communication_Properties::Timing => immediate;};
+	
+	-- Previous Values to NOTs
+	PrevP_to_Not : port Is_true1.output -> PrevP_NOT.input {Communication_Properties::Timing => immediate;};
+	PrevE_to_Not : port Is_true2.output -> PrevE_NOT.input {Communication_Properties::Timing => immediate;};
+	Valve_to_Not : port Is_true3.output -> Valve_NOT.input {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Delay
+	One_to_Delay : port One.output -> Delay.input {Communication_Properties::Timing => immediate;};
+	Zero_to_Delay : port Zero.output -> Delay.initial_value {Communication_Properties::Timing => immediate;};
+	
+	-- Setup Compare
+	Delay_to_Compare : port Delay.output -> Compare.input1 {Communication_Properties::Timing => immediate;};
+	Zero_to_Compare : port Zero.output -> Compare.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Setup the first AND
+	PrevE_to_AND1 : port Is_true2.output -> AND1.input1 {Communication_Properties::Timing => immediate;};
+	PrevP_to_AND1 : port Is_true1.output -> AND1.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Setup the second AND
+	AND1_to_AND2 : port Is_true2.output -> AND2.input1 {Communication_Properties::Timing => immediate;};
+	NOT_SM_to_AND2 : port SM_NOT.output -> AND2.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Setup P Switch 1
+	One_to_PS1 : port One.output -> PSwitch1.true_case {Communication_Properties::Timing => immediate;};
+	PrevP_to_PS1 : port Prev_P_Valve -> PSwitch1.false_case {Communication_Properties::Timing => immediate;};
+	AND2_to_PS1 : port AND2.output -> PSwitch1.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup E Switch 1
+	Zero_to_ES1 : port Zero.output -> ESwitch1.true_case {Communication_Properties::Timing => immediate;};
+	PrevE_to_ES1 : port Prev_E_Valve -> ESwitch1.false_case {Communication_Properties::Timing => immediate;};
+	AND2_to_ES1 : port AND2.output -> ESwitch1.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup the third AND
+	SH_NOT_to_AND3 : port SH_NOT.output -> AND3.input1 {Communication_Properties::Timing => immediate;};
+	AND1_to_AND3 : port AND1.output -> AND3.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Setup the fourth AND
+	PrevValve_NOT_to_AND4 : port Valve_NOT.output -> AND4.input1 {Communication_Properties::Timing => immediate;};
+	AND3_to_AND4 : port AND3.output -> AND4.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Setup P Switch 2
+	one_to_PS2 : port One.output -> PSwitch2.true_case {Communication_Properties::Timing => immediate;};
+	PS1_to_PS2 : port PSwitch1.output -> PSwitch2.false_case {Communication_Properties::Timing => immediate;};
+	AND4_to_PS2 : port AND4.output -> PSwitch2.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup E Switch 2
+	zero_to_ES2 : port Zero.output -> ESwitch2.true_case {Communication_Properties::Timing => immediate;};
+	ES1_to_ES2 : port ESwitch1.output -> ESwitch2.false_case {Communication_Properties::Timing => immediate;};
+	AND4_to_ES2 : port AND4.output -> ESwitch2.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup the fifth AND
+	PrevE_NOT_to_AND5 : port PrevE_NOT.output -> AND5.input1 {Communication_Properties::Timing => immediate;};
+	PrevP_NOT_to_AND5 : port PrevP_NOT.output -> AND5.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Setup the sixth AND
+	SL_to_AND6 : port SL_Input -> AND6.input1 {Communication_Properties::Timing => immediate;};
+	AND5_to_AND6 : port AND5.output -> AND6.input2 {Communication_Properties::Timing => immediate;};
+	
+	-- Setup P Switch 3
+	One_to_PS3 : port One.output -> PSwitch3.true_case {Communication_Properties::Timing => immediate;};
+	PS2_to_PS3 : port PSwitch2.output -> PSwitch3.false_case {Communication_Properties::Timing => immediate;};
+	AND6_to_PS3 : port AND6.output -> PSwitch3.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup E Switch 3
+	Zero_to_ES3 : port Zero.output -> ESwitch3.true_case {Communication_Properties::Timing => immediate;};
+	ES2_to_ES3 : port ESwitch2.output -> ESwitch3.false_case {Communication_Properties::Timing => immediate;};
+	AND6_to_ES3 : port AND6.output -> ESwitch3.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup P Switch 4
+	One_to_PS4 : port One.output -> PSwitch4.true_case {Communication_Properties::Timing => immediate;};
+	PS3_to_PS4 : port PSwitch3.output -> PSwitch4.false_case {Communication_Properties::Timing => immediate;};
+	SH_to_PS4 : port SH_Input -> PSwitch4.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup E Switch 4
+	One_to_ES4 : port One.output -> ESwitch4.true_case {Communication_Properties::Timing => immediate;};
+	ES3_to_ES4 : port ESwitch3.output -> ESwitch4.false_case {Communication_Properties::Timing => immediate;};
+	SH_to_ES4 : port SH_Input -> ESwitch4.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup P Switch 5
+	Zero_to_PS5 : port Zero.output -> PSwitch5.true_case {Communication_Properties::Timing => immediate;};
+	PS4_to_PS5 : port PSwitch4.output -> PSwitch5.false_case {Communication_Properties::Timing => immediate;};
+	SL_NOT_to_PS5 : port SL_NOT.output -> PSwitch5.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup E Switch 5
+	Zero_to_ES5 : port Zero.output -> ESwitch5.true_case {Communication_Properties::Timing => immediate;};
+	ES4_to_ES5 : port ESwitch4.output -> ESwitch5.false_case {Communication_Properties::Timing => immediate;};
+	SL_NOT_to_ES5 : port SL_NOT.output -> ESwitch5.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup P Switch 6
+	PS5_to_PS6 : port PSwitch5.output -> PSwitch6.true_case {Communication_Properties::Timing => immediate;};
+	Zero_to_PS4 : port Zero.output -> PSwitch6.false_case {Communication_Properties::Timing => immediate;};
+	Compare_to_PS4 : port Compare.output -> PSwitch6.control {Communication_Properties::Timing => immediate;};
+	
+	-- Setup E Switch 6
+	ES5_to_ES6 : port ESwitch5.output -> ESwitch6.true_case {Communication_Properties::Timing => immediate;};
+	Zero_to_ES6 : port Zero.output -> ESwitch6.false_case {Communication_Properties::Timing => immediate;};
+	Compare_to_ES6 : port Compare.output -> ESwitch6.control {Communication_Properties::Timing => immediate;};
+	
+	-- Output Control data
+	PS5_to_Pump_State : port PSwitch6.output -> Valve_Output_P_State {Communication_Properties::Timing => immediate;};
+	VS5_to_Valve_State : port ESwitch6.output -> Valve_Output_E_State {Communication_Properties::Timing => immediate;};
+
+	annex agree {**
+
+		eq dummy : real;	
+		
+	**};
+
+end Controller_Tank2.Impl;
+      
+
+
+end controller_package;

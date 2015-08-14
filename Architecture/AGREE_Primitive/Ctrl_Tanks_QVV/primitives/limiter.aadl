@@ -1,0 +1,46 @@
+package limiter_primitive_pkg
+public
+	with Base_Types;
+
+
+system limiter
+features
+	
+	up : in data port Base_Types::Float;
+	input : in data port Base_Types::Float;
+	lo : in data port Base_Types::Float;
+	
+	output : out data port Base_Types::Float;
+	
+	annex agree{**
+		-- Assumptions
+		assume "upper limit is greater than lower limit":
+			up > lo;
+			
+		-- Guarantees
+		guarantee "If the input is greater than the upper limit then the output is eqaul to the upper limit":
+			(input > up) => (output = up); 
+			
+		guarantee "If the input is less than the lower limit then the output is eqaul to the lower limit":
+			(input < lo) => (output = lo); 
+			
+		guarantee "If the input is between the upper and lower limits then the output is eqaul to the input":
+			(input <= up and input >= lo) => (output = input); 
+		
+	**};
+
+end limiter;
+
+system implementation limiter.impl
+
+	annex agree{**
+		eq out : real = if input > up then up else if input < lo then lo else input;
+		
+		assert(output = out);
+	**};
+
+end limiter.impl;
+
+
+
+end limiter_primitive_pkg;

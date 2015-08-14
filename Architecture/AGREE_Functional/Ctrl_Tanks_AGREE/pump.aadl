@@ -1,0 +1,45 @@
+package pump_package
+public
+	with Base_Types;
+	with config;
+
+annex agree {**	
+	const t1_max_flow_rate_m3s : real = config.t1_pump_max_flow_rate_m3s;
+	const t1_zero_flow_rate_m3s : real = config.t1_pump_zero_flow_rate_m3s;
+**};
+
+system T1_Pump
+	features
+		Pump_State: in data port Base_Types::Boolean;
+		Flow_Out: out data port Base_Types::Float;
+		
+	annex agree {**
+		
+		guarantee "If the pump is on then the flow through the pump is the max flow rate" :
+			Pump_State => (Flow_Out = pump_package.t1_max_flow_rate_m3s);
+			
+		guarantee "If the pump is off then the flow rate through the pump is 0.0" :
+			(not Pump_State) => (Flow_Out = pump_package.t1_zero_flow_rate_m3s);
+			
+		guarantee "If the Flow in is the max pump rate, then the pump is receiving an ON signal" :
+			(Flow_Out = pump_package.t1_max_flow_rate_m3s) => Pump_State;
+			
+		guarantee "If the Flow in is 0.0, then the pump is receiving on OFF signal" :
+			(Flow_Out = pump_package.t1_zero_flow_rate_m3s) => not Pump_State;
+		
+	**};
+			
+end T1_Pump;
+
+system implementation T1_Pump.Impl
+	annex agree {**
+		
+		eq flow_rate : real = if (Pump_State) then pump_package.t1_max_flow_rate_m3s else pump_package.t1_zero_flow_rate_m3s;
+		
+		-- This is to assert that the output acts as it should
+		assert(Flow_Out = flow_rate);
+	**};
+end T1_Pump.Impl;
+
+
+end pump_package;
