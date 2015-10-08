@@ -1,7 +1,9 @@
 Contents of TwoTanks_Basic
 ===============================
 
-Last Updated: 20150109
+DISTRIBUTION A: Approved for Public Release; Distribution Unlimited (Case Number: 88ABW-2015-3145)
+
+Last Updated: 20151008
 
 ---------------------------------------------------------------------------
 Table of Contents
