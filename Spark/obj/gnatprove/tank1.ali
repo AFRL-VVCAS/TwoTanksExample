@@ -1,0 +1,138 @@
+V "GNAT Lib v18"
+A -x
+A ada
+A -gnatA
+A -gnata
+A -gnatc
+P GP FX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_FLOATING_POINT
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_ELABORATION_CODE
+RV SPARK_05
+
+U tank1%b		tank1.adb		44d6c2ae OO PK
+
+U tank1%s		tank1.ads		e8651566 OO PK
+
+D system.ads		20170911102249 4635ec04 system%s
+D tank1.ads		20180919223225 e8651566 tank1%s
+D tank1.adb		20180919211726 acb3d7c8 tank1%b
+X 2 tank1.ads
+2K9*Tank1 97l5 97e10 3|2b14 123l5 123t10
+4@19*Tank_State 18r29 19r20 36r28 37r44 44r29 45r20 53r29 54r20 61r28 62r49
+. 68r28 69r48 75r28 76r42 81r28 82r41 88r28 89r42 94r28 95r43 3|4r19
+8F9*Tank_Height_Float{float} 14r48 15r48 16r48 3|11r29 14r29 15r29 24r48
+. 25r48 26r48
+9F9*Tank_Area_Float{float} 13r48 3|10r29 23r48
+10F9*Tank_Volume_Float{float} 42r38 51r40 3|12r29 13r29 44r37 59r39
+13U14*Initialize 13>26 14>26 15>26 16>26 3|23b14 35l8 35t18
+13f26 Crossection_Area{9F9} 20r21 24r16 3|23b26 29r40 31r40
+14f26 Height{8F9} 21r21 25r16 27r35 30r33 3|24b26 30r40 31r59
+15f26 High_Sensor_Loc{8F9} 22r21 26r16 27r16 28r33 3|25b26 33r40
+16f26 Low_Sensor_Loc{8F9} 23r21 28r16 29r16 30r16 3|26b26 34r40
+34V13*Liquid_Height{float} 37r20 3|38b13 40r25
+42U14*Liquid_In 42>25 3|44b14 55l8 55t17
+42f25 Flow_In{10F9} 45r36 46r16 3|44b24 47r34 52r13
+51U14*Liquid_Out 51>26 3|59b14 68l8 68t18
+51f26 Flow_Out{10F9} 54r36 55r16 3|59b25 62r34 66r12
+59V13*High_Sensor_Status{boolean} 62r20 3|71b13 77r22 79r27
+66V13*Low_Sensor_Status{boolean} 69r20 3|83b13 88r21
+73V13*Valid_Sensors{boolean} 76r18 3|92b13 109s8
+79V13*Valid_Tank{boolean} 46s35 47s17 55s36 56s17 63s16 70s16 82r20 3|100b13
+86V13*No_Overflow{boolean} 89r20 3|112b13
+92V13*No_Underflow{boolean} 95r20 3|118b13
+X 3 tank1.adb
+8R9 Tank_Type 17e1 20r15
+10f10*Crossection_Area{2|9F9} 29m20 102r17
+11f10*Height{2|8F9} 30m20 103r17 105r40 108r42
+12f10*Max_Volume{2|10F9} 31m20 48r18 49r45 115r39
+13f10*Cur_Volume{2|10F9} 32m20 38r54 40r57 47r21 49m22 51m18 51r41 62r21
+. 63m19 65m19 65r42 74r42 75r46 78r58 80r61 86r42 89r58 94r45 95r53 104r17
+. 105r17 115r17 121r17
+14f10*H_Sensor_Loc{2|8F9} 33m20 74r17 78r33 94r20 106r17 108r17
+15f10*L_Sensor_Loc{2|8F9} 34m20 75r21 80r36 86r16 89r33 95r27 106r41 107r17
+20r4 The_Tank{8R9} 4r33 29m7 38r45 40r48 47r12 48r9 49m13 49r36 51m9 51r32
+. 62r12 63m10 65m10 65r33 74r8 74r33 75r12 75r37 78r24 78r49 80r27 80r52
+. 86r7 86r33 89r24 89r49 94r11 94r36 95r18 95r44 102r8 103r8 104r8 105r8
+. 105r31 106r8 106r32 107r8 108r8 108r33 115r8 115r30 121r8
+FD 1 system.ads
+FS .1 37K9 system
+FD 2 tank1.ads
+FS .1 2K9 tank1
+FS .2 13U14 tank1__initialize
+FS .3 34V13 tank1__liquid_height
+FS .4 42U14 tank1__liquid_in
+FS .5 51U14 tank1__liquid_out
+FS .6 59V13 tank1__high_sensor_status
+FS .7 66V13 tank1__low_sensor_status
+FS .8 73V13 tank1__valid_sensors
+FS .9 79V13 tank1__valid_tank
+FS .10 86V13 tank1__no_overflow
+FS .11 92V13 tank1__no_underflow
+FD 3 tank1.adb
+FS .1 2K14 tank1 -> 2.1
+FS .2 8V9 tank1__tank_typePredicate
+FS .3 8V9 tank1__tank_typePredicate -> 3.2
+FS .4 23U14 tank1__initialize -> 2.2
+FS .5 38V13 tank1__liquid_height -> 2.3
+FS .6 44U14 tank1__liquid_in -> 2.4
+FS .7 59U14 tank1__liquid_out -> 2.5
+FS .8 71V13 tank1__high_sensor_status -> 2.6
+FS .9 83V13 tank1__low_sensor_status -> 2.7
+FS .10 92V13 tank1__valid_sensors -> 2.8
+FS .11 100V13 tank1__valid_tank -> 2.9
+FS .12 112V13 tank1__no_overflow -> 2.10
+FS .13 118V13 tank1__no_underflow -> 2.11
+FX 2 tank1.ads .1 tank1
+F 73*13 tank1__valid_sensors 3|.11:109s8
+F 79*13 tank1__valid_tank .4:46s35 47s17 .5:55s36 56s17 .6:63s16 .7:70s16
+FX 2 tank1.ads .2 tank1__initialize
+F 13>26 tank1__initialize__crossection_area 20c21 24c16 3|.4:29c40 31c40
+F 14>26 tank1__initialize__height 21c21 25c16 27c35 30c33 3|.4:30c40 31c59
+F 15>26 tank1__initialize__high_sensor_loc 22c21 26c16 27c16 28c33 3|.4:33c40
+F 16>26 tank1__initialize__low_sensor_loc 23c21 28c16 29c16 30c16 3|.4:34c40
+FX 2 tank1.ads .4 tank1__liquid_in
+F 42>25 tank1__liquid_in__flow_in 45c36 46c16 3|.6:47c34 52c13
+FX 2 tank1.ads .5 tank1__liquid_out
+F 51>26 tank1__liquid_out__flow_out 54c36 55c16 3|.7:62c34 66c12
+FX 3 tank1.adb .1 tank1
+F 20*4 tank1__the_tank 4r33 .4:29m7 .5:38r45 40r48 .6:47r12 48r9 49m13 49r36
+. 51m9 51r32 .7:62r12 63m10 65m10 65r33 .8:74r8 74r33 75r12 75r37 78r24 78r49
+. 80r27 80r52 .9:86r7 86r33 89r24 89r49 .10:94r11 94r36 95r18 95r44 .11:102r8
+. 103r8 104r8 105r8 105r31 106r8 106r32 107r8 108r8 108r33 .12:115r8 115r30
+. .13:121r8
+
+QQ SPARKVERSION 18.2 (20180529)
+GG EK_STATE_MAP tank1__tank_state 1 tank1__the_tank
+GG EK_REMOTE_STATES RS 0
+GG EK_PREDEF_INIT_VARS PIV 0
+GG EK_GLOBALS tank1__initialize local FALSE E_PROCEDURE ORIGIN_FLOW proper_proof_in 0 proper_input 0 proper_output 1 tank1__tank_state refined_proof_in 0 refined_input 0 refined_output 1 tank1__the_tank calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__liquid_height local FALSE E_FUNCTION ORIGIN_FLOW proper_proof_in 0 proper_input 1 tank1__tank_state proper_output 0 refined_proof_in 0 refined_input 1 tank1__the_tank refined_output 0 calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__liquid_in local FALSE E_PROCEDURE ORIGIN_FLOW proper_proof_in 0 proper_input 1 tank1__tank_state proper_output 1 tank1__tank_state refined_proof_in 0 refined_input 1 tank1__the_tank refined_output 1 tank1__the_tank calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__liquid_out local FALSE E_PROCEDURE ORIGIN_FLOW proper_proof_in 0 proper_input 1 tank1__tank_state proper_output 1 tank1__tank_state refined_proof_in 0 refined_input 1 tank1__the_tank refined_output 1 tank1__the_tank calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__high_sensor_status local FALSE E_FUNCTION ORIGIN_FLOW proper_proof_in 0 proper_input 1 tank1__tank_state proper_output 0 refined_proof_in 0 refined_input 1 tank1__the_tank refined_output 0 calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__low_sensor_status local FALSE E_FUNCTION ORIGIN_FLOW proper_proof_in 0 proper_input 1 tank1__tank_state proper_output 0 refined_proof_in 0 refined_input 1 tank1__the_tank refined_output 0 calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__valid_sensors local FALSE E_FUNCTION ORIGIN_FLOW proper_proof_in 0 proper_input 1 tank1__tank_state proper_output 0 refined_proof_in 0 refined_input 1 tank1__the_tank refined_output 0 calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__valid_tank local FALSE E_FUNCTION ORIGIN_FLOW proper_proof_in 0 proper_input 1 tank1__tank_state proper_output 0 refined_proof_in 0 refined_input 1 tank1__the_tank refined_output 0 calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__no_overflow local FALSE E_FUNCTION ORIGIN_FLOW proper_proof_in 0 proper_input 1 tank1__tank_state proper_output 0 refined_proof_in 0 refined_input 1 tank1__the_tank refined_output 0 calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__no_underflow local FALSE E_FUNCTION ORIGIN_FLOW proper_proof_in 0 proper_input 1 tank1__tank_state proper_output 0 refined_proof_in 0 refined_input 1 tank1__the_tank refined_output 0 calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 tank1__the_tank LOCKS 0
+GG EK_GLOBALS tank1__tank_typePredicate local TRUE E_FUNCTION ORIGIN_FLOW proper_proof_in 0 proper_input 0 proper_output 0 refined_proof_in 0 refined_input 0 refined_output 0 calls_proof 0 calls 0 calls_conditional 0 local_var 0 local_ghost 0 FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 0 LOCKS 0
+GG EK_GLOBALS tank1 local FALSE E_PACKAGE ORIGIN_FLOW proper_proof_in 0 proper_input 0 proper_output 0 refined_proof_in 0 refined_input 0 refined_output 0 initializes 0 calls_proof 0 calls 0 calls_conditional 0 local_var 1 tank1__tank_state local_ghost 0 FALSE FALSE FALSE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 0 LOCKS 0
+GG EK_VOLATILES AR 0 AW 0 ER 0 EW 0
+GG EK_DIRECT_CALLS tank1__initialize 0
+GG EK_DIRECT_CALLS tank1__liquid_height 0
+GG EK_DIRECT_CALLS tank1__liquid_in 1 tank1__valid_tank
+GG EK_DIRECT_CALLS tank1__liquid_out 1 tank1__valid_tank
+GG EK_DIRECT_CALLS tank1__high_sensor_status 1 tank1__valid_tank
+GG EK_DIRECT_CALLS tank1__low_sensor_status 1 tank1__valid_tank
+GG EK_DIRECT_CALLS tank1__valid_sensors 0
+GG EK_DIRECT_CALLS tank1__valid_tank 1 tank1__valid_sensors
+GG EK_DIRECT_CALLS tank1__no_overflow 0
+GG EK_DIRECT_CALLS tank1__no_underflow 0
+GG EK_DIRECT_CALLS tank1__tank_typePredicate 0
+GG EK_DIRECT_CALLS tank1 0
+GG EK_END_MARKER

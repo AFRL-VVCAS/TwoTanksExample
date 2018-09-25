@@ -1,0 +1,3856 @@
+(* Module for axiomatizing type "short_short_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__short_short_integer
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type short_short_integer #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -128 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  127
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = short_short_integer, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type short_short_integer__ref #"system.ads" 1 0 0# =
+  { mutable short_short_integer__content "model_trace:" "name:" : short_short_integer }
+ 
+ function short_short_integer__ref___projection #"system.ads" 1 0 0# 
+   (a : short_short_integer__ref) : short_short_integer =
+  a.short_short_integer__content
+ 
+ meta "model_projection" function short_short_integer__ref___projection
+ 
+ meta "inline : no" function short_short_integer__ref___projection
+ 
+ val short_short_integer__havoc #"system.ads" 1 0 0# 
+   (x : short_short_integer__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "short_short_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__short_short_integer__rep
+ use        Standard__short_short_integer
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__short_short_integer.short_short_integer, 
+ predicate in_range = Standard__short_short_integer.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "short_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__short_integer
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type short_integer #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -32768 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  32767
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = short_integer, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type short_integer__ref #"system.ads" 1 0 0# =
+  { mutable short_integer__content "model_trace:" "name:" : short_integer }
+ 
+ function short_integer__ref___projection #"system.ads" 1 0 0# 
+   (a : short_integer__ref) : short_integer =
+  a.short_integer__content
+ 
+ meta "model_projection" function short_integer__ref___projection
+ 
+ meta "inline : no" function short_integer__ref___projection
+ 
+ val short_integer__havoc #"system.ads" 1 0 0# 
+   (x : short_integer__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "short_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__short_integer__rep
+ use        Standard__short_integer
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__short_integer.short_integer, 
+ predicate in_range = Standard__short_integer.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type integer #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -2147483648 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  2147483647
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = integer, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type integer__ref #"system.ads" 1 0 0# =
+  { mutable integer__content "model_trace:" "name:" : integer }
+ 
+ function integer__ref___projection #"system.ads" 1 0 0# 
+   (a : integer__ref) : integer =
+  a.integer__content
+ 
+ meta "model_projection" function integer__ref___projection
+ 
+ meta "inline : no" function integer__ref___projection
+ 
+ val integer__havoc #"system.ads" 1 0 0# 
+   (x : integer__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer__rep
+ use        Standard__integer
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__integer.integer, 
+ predicate in_range = Standard__integer.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "long_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__long_integer
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type long_integer #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -9223372036854775808 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  9223372036854775807
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = long_integer, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type long_integer__ref #"system.ads" 1 0 0# =
+  { mutable long_integer__content "model_trace:" "name:" : long_integer }
+ 
+ function long_integer__ref___projection #"system.ads" 1 0 0# 
+   (a : long_integer__ref) : long_integer =
+  a.long_integer__content
+ 
+ meta "model_projection" function long_integer__ref___projection
+ 
+ meta "inline : no" function long_integer__ref___projection
+ 
+ val long_integer__havoc #"system.ads" 1 0 0# 
+   (x : long_integer__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "long_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__long_integer__rep
+ use        Standard__long_integer
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__long_integer.long_integer, 
+ predicate in_range = Standard__long_integer.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "long_long_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__long_long_integer
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type long_long_integer #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -9223372036854775808 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  9223372036854775807
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = long_long_integer, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type long_long_integer__ref #"system.ads" 1 0 0# =
+  { mutable long_long_integer__content "model_trace:" "name:" : long_long_integer }
+ 
+ function long_long_integer__ref___projection #"system.ads" 1 0 0# 
+   (a : long_long_integer__ref) : long_long_integer =
+  a.long_long_integer__content
+ 
+ meta "model_projection" function long_long_integer__ref___projection
+ 
+ meta "inline : no" function long_long_integer__ref___projection
+ 
+ val long_long_integer__havoc #"system.ads" 1 0 0# 
+   (x : long_long_integer__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "long_long_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__long_long_integer__rep
+ use        Standard__long_long_integer
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__long_long_integer.long_long_integer, 
+ predicate in_range = Standard__long_long_integer.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "natural", created in Gnat2Why.Types.Translate_Type *)
+module Standard__natural
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type natural #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  0
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  2147483647
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = natural, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type natural__ref #"system.ads" 1 0 0# =
+  { mutable natural__content "model_trace:" "name:" : natural }
+ 
+ function natural__ref___projection #"system.ads" 1 0 0# 
+   (a : natural__ref) : natural =
+  a.natural__content
+ 
+ meta "model_projection" function natural__ref___projection
+ 
+ meta "inline : no" function natural__ref___projection
+ 
+ val natural__havoc #"system.ads" 1 0 0# 
+   (x : natural__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "natural", created in Gnat2Why.Types.Translate_Type *)
+module Standard__natural__rep
+ use        Standard__natural
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__natural.natural, 
+ predicate in_range = Standard__natural.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "positive", created in Gnat2Why.Types.Translate_Type *)
+module Standard__positive
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type positive #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  1
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  2147483647
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = positive, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type positive__ref #"system.ads" 1 0 0# =
+  { mutable positive__content "model_trace:" "name:" : positive }
+ 
+ function positive__ref___projection #"system.ads" 1 0 0# 
+   (a : positive__ref) : positive =
+  a.positive__content
+ 
+ meta "model_projection" function positive__ref___projection
+ 
+ meta "inline : no" function positive__ref___projection
+ 
+ val positive__havoc #"system.ads" 1 0 0# 
+   (x : positive__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "positive", created in Gnat2Why.Types.Translate_Type *)
+module Standard__positive__rep
+ use        Standard__positive
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__positive.positive, 
+ predicate in_range = Standard__positive.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "short_float", created in Gnat2Why.Types.Translate_Type *)
+module Standard__short_float
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ type short_float #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : Float32.t =
+  (Float32.neg (340282346638528859811704183484516925440.0:Float32.t))
+ 
+ function last #"system.ads" 1 0 0# 
+   : Float32.t =
+  (340282346638528859811704183484516925440.0:Float32.t)
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : Float32.t)  =
+  #"system.ads" 1 0 0# (Float32.t'isFinite x)
+ 
+ clone export "ada__model".Static_Float32 with
+ type t = short_float, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type short_float__ref #"system.ads" 1 0 0# =
+  { mutable short_float__content "model_trace:" "name:" : short_float }
+ 
+ function short_float__ref___projection #"system.ads" 1 0 0# 
+   (a : short_float__ref) : short_float =
+  a.short_float__content
+ 
+ meta "model_projection" function short_float__ref___projection
+ 
+ meta "inline : no" function short_float__ref___projection
+ 
+ val short_float__havoc #"system.ads" 1 0 0# 
+   (x : short_float__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "short_float", created in Gnat2Why.Types.Translate_Type *)
+module Standard__short_float__rep
+ use        Standard__short_float
+ use        "_gnatprove_standard".Float32
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Float32 with
+ type t = Standard__short_float.short_float, 
+ predicate in_range = Standard__short_float.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "float", created in Gnat2Why.Types.Translate_Type *)
+module Standard__float
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ type float #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : Float32.t =
+  (Float32.neg (340282346638528859811704183484516925440.0:Float32.t))
+ 
+ function last #"system.ads" 1 0 0# 
+   : Float32.t =
+  (340282346638528859811704183484516925440.0:Float32.t)
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : Float32.t)  =
+  #"system.ads" 1 0 0# (Float32.t'isFinite x)
+ 
+ clone export "ada__model".Static_Float32 with
+ type t = float, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type float__ref #"system.ads" 1 0 0# =
+  { mutable float__content "model_trace:" "name:" : float }
+ 
+ function float__ref___projection #"system.ads" 1 0 0# 
+   (a : float__ref) : float =
+  a.float__content
+ 
+ meta "model_projection" function float__ref___projection
+ 
+ meta "inline : no" function float__ref___projection
+ 
+ val float__havoc #"system.ads" 1 0 0# 
+   (x : float__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "float", created in Gnat2Why.Types.Translate_Type *)
+module Standard__float__rep
+ use        Standard__float
+ use        "_gnatprove_standard".Float32
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Float32 with
+ type t = Standard__float.float, 
+ predicate in_range = Standard__float.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "long_float", created in Gnat2Why.Types.Translate_Type *)
+module Standard__long_float
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float64
+
+ type long_float #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : Float64.t =
+  (Float64.neg (179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0:Float64.t))
+ 
+ function last #"system.ads" 1 0 0# 
+   : Float64.t =
+  (179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0:Float64.t)
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : Float64.t)  =
+  #"system.ads" 1 0 0# (Float64.t'isFinite x)
+ 
+ clone export "ada__model".Static_Float64 with
+ type t = long_float, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type long_float__ref #"system.ads" 1 0 0# =
+  { mutable long_float__content "model_trace:" "name:" : long_float }
+ 
+ function long_float__ref___projection #"system.ads" 1 0 0# 
+   (a : long_float__ref) : long_float =
+  a.long_float__content
+ 
+ meta "model_projection" function long_float__ref___projection
+ 
+ meta "inline : no" function long_float__ref___projection
+ 
+ val long_float__havoc #"system.ads" 1 0 0# 
+   (x : long_float__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "long_float", created in Gnat2Why.Types.Translate_Type *)
+module Standard__long_float__rep
+ use        Standard__long_float
+ use        "_gnatprove_standard".Float64
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Float64 with
+ type t = Standard__long_float.long_float, 
+ predicate in_range = Standard__long_float.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "character", created in Gnat2Why.Types.Translate_Type *)
+module Standard__character
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type character #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  0
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  255
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = character, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type character__ref #"system.ads" 1 0 0# =
+  { mutable character__content "model_trace:" "name:" : character }
+ 
+ function character__ref___projection #"system.ads" 1 0 0# 
+   (a : character__ref) : character =
+  a.character__content
+ 
+ meta "model_projection" function character__ref___projection
+ 
+ meta "inline : no" function character__ref___projection
+ 
+ val character__havoc #"system.ads" 1 0 0# 
+   (x : character__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "character", created in Gnat2Why.Types.Translate_Type *)
+module Standard__character__rep
+ use        Standard__character
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__character.character, 
+ predicate in_range = Standard__character.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "wide_character", created in Gnat2Why.Types.Translate_Type *)
+module Standard__wide_character
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type wide_character #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  0
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  65535
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = wide_character, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type wide_character__ref #"system.ads" 1 0 0# =
+  { mutable wide_character__content "model_trace:" "name:" : wide_character }
+ 
+ function wide_character__ref___projection #"system.ads" 1 0 0# 
+   (a : wide_character__ref) : wide_character =
+  a.wide_character__content
+ 
+ meta "model_projection" function wide_character__ref___projection
+ 
+ meta "inline : no" function wide_character__ref___projection
+ 
+ val wide_character__havoc #"system.ads" 1 0 0# 
+   (x : wide_character__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "wide_character", created in Gnat2Why.Types.Translate_Type *)
+module Standard__wide_character__rep
+ use        Standard__wide_character
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__wide_character.wide_character, 
+ predicate in_range = Standard__wide_character.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "wide_wide_character", created in Gnat2Why.Types.Translate_Type *)
+module Standard__wide_wide_character
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type wide_wide_character #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  0
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  2147483647
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = wide_wide_character, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type wide_wide_character__ref #"system.ads" 1 0 0# =
+  { mutable wide_wide_character__content "model_trace:" "name:" : wide_wide_character }
+ 
+ function wide_wide_character__ref___projection #"system.ads" 1 0 0# 
+   (a : wide_wide_character__ref) : wide_wide_character =
+  a.wide_wide_character__content
+ 
+ meta "model_projection" function wide_wide_character__ref___projection
+ 
+ meta "inline : no" function wide_wide_character__ref___projection
+ 
+ val wide_wide_character__havoc #"system.ads" 1 0 0# 
+   (x : wide_wide_character__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "wide_wide_character", created in Gnat2Why.Types.Translate_Type *)
+module Standard__wide_wide_character__rep
+ use        Standard__wide_wide_character
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__wide_wide_character.wide_wide_character, 
+ predicate in_range = Standard__wide_wide_character.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing the array theory associated to type "string", created in Why.Gen.Arrays.Create_Rep_Array_Theory *)
+module Array__Int__Standard__character
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__character
+ use        Standard__character__rep
+
+ function index_I1_one #"system.ads" 1 0 0# 
+   : int =
+  1
+ 
+ type component_type #"system.ads" 1 0 0# =
+  Standard__character.character
+ 
+ clone export "_gnatprove_standard".Array__1 with
+ type I1.t = int, 
+ predicate I1.le = Int.(<=), 
+ predicate I1.lt = Int.(<), 
+ predicate I1.gt = Int.(>), 
+ function I1.add = Int.(+), 
+ function I1.sub = Int.(-), 
+ function I1.one = index_I1_one, 
+ type component_type = component_type
+ 
+ function bool_eq #"system.ads" 1 0 0# 
+   (a : map) (a__first : int) (a__last : int) (b : map) (b__first : int) (b__last : int) : bool =
+  ( (if ((a__first <= a__last)) then (
+   ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+   (b__first > b__last))) /\ (forall temp___idx_78 #"system.ads" 1 0 0#  : int.
+   (if (( (a__first <= temp___idx_78) /\ (temp___idx_78 <= a__last) )) then (
+    ((Standard__character__rep.to_rep (get a temp___idx_78)) = (Standard__character__rep.to_rep (get b ((b__first - a__first) + temp___idx_78))))) else true)) )
+ 
+ axiom bool_eq_rev :
+  (forall a #"system.ads" 1 0 0#  b #"system.ads" 1 0 0#  : map.
+  (forall a__first #"system.ads" 1 0 0#  a__last #"system.ads" 1 0 0#  b__first #"system.ads" 1 0 0#  b__last #"system.ads" 1 0 0#  : int.
+   ( ((bool_eq b b__first b__last a a__first a__last) = True) -> ( (if ((a__first <= a__last)) then (
+    ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+    (b__first > b__last))) /\ (forall temp___idx_78 #"system.ads" 1 0 0#  : int.
+    (if (( (a__first <= temp___idx_78) /\ (temp___idx_78 <= a__last) )) then (
+     ((Standard__character__rep.to_rep (get a temp___idx_78)) = (Standard__character__rep.to_rep (get b ((b__first - a__first) + temp___idx_78))))) else true)) ) )))
+ 
+ function index_Index_one #"system.ads" 1 0 0# 
+   : int =
+  1
+ 
+ clone export "ada__model".Array_Int_Rep_Comparison_Axiom with
+ type component_type = component_type, 
+ function to_rep = Standard__character__rep.to_rep, 
+ type map = map, 
+ type Index.t = int, 
+ predicate Index.le = Int.(<=), 
+ predicate Index.lt = Int.(<), 
+ predicate Index.gt = Int.(>), 
+ function Index.add = Int.(+), 
+ function Index.sub = Int.(-), 
+ function Index.one = index_Index_one, 
+ function get = get, 
+ function bool_eq = bool_eq
+
+end
+
+(* Module for axiomatizing type "string", created in Gnat2Why.Types.Translate_Type *)
+module Standard__string
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        "_gnatprove_standard".Main
+ use        Standard__integer
+ use        Standard__positive
+ use        Standard__character
+ use        Array__Int__Standard__character
+ use        Standard__integer__rep
+
+ type component_type #"system.ads" 1 0 0# =
+  Standard__character.character
+ 
+ function index_1_id #"system.ads" 1 0 0# 
+   (x : int) : int =
+  x
+ 
+ clone export "ada__model".Unconstr_Array with
+ type map = Array__Int__Standard__character.map, 
+ function array_bool_eq = Array__Int__Standard__character.bool_eq, 
+ type index_base_type = Standard__integer.integer, 
+ type index_rep_type = int, 
+ function to_rep = Standard__integer__rep.to_rep, 
+ function rep_to_int = index_1_id, 
+ predicate in_range_base = Standard__integer.in_range, 
+ predicate index_dynamic_property = Standard__positive.dynamic_property, 
+ predicate index_rep_le = Int.(<=)
+ 
+ type string #"system.ads" 1 0 0# =
+  __t
+ 
+ meta "model_projection" function to_array
+ 
+ meta "inline : no" function to_array
+ 
+ meta "model_projection" function first
+ 
+ meta "inline : no" function first
+ 
+ meta "model_projection" function last
+ 
+ meta "inline : no" function last
+ 
+ function to_string #"system.ads" 1 0 0# 
+   (x : Main.__image) : string
+ 
+ function from_string #"system.ads" 1 0 0# 
+   (x : string) : Main.__image
+ 
+ type string__ref #"system.ads" 1 0 0# =
+  { mutable string__content "model_trace:" "name:" : string }
+ 
+ function string__ref___projection #"system.ads" 1 0 0# 
+   (a : string__ref) : string =
+  a.string__content
+ 
+ meta "model_projection" function string__ref___projection
+ 
+ meta "inline : no" function string__ref___projection
+ 
+ val string__havoc #"system.ads" 1 0 0# 
+   (x : string__ref) : unit
+  writes {x}
+
+end
+
+(* Module for axiomatizing the array theory associated to type "wide_string", created in Why.Gen.Arrays.Create_Rep_Array_Theory *)
+module Array__Int__Standard__wide_character
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__wide_character
+ use        Standard__wide_character__rep
+
+ function index_I1_one #"system.ads" 1 0 0# 
+   : int =
+  1
+ 
+ type component_type #"system.ads" 1 0 0# =
+  Standard__wide_character.wide_character
+ 
+ clone export "_gnatprove_standard".Array__1 with
+ type I1.t = int, 
+ predicate I1.le = Int.(<=), 
+ predicate I1.lt = Int.(<), 
+ predicate I1.gt = Int.(>), 
+ function I1.add = Int.(+), 
+ function I1.sub = Int.(-), 
+ function I1.one = index_I1_one, 
+ type component_type = component_type
+ 
+ function bool_eq #"system.ads" 1 0 0# 
+   (a : map) (a__first : int) (a__last : int) (b : map) (b__first : int) (b__last : int) : bool =
+  ( (if ((a__first <= a__last)) then (
+   ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+   (b__first > b__last))) /\ (forall temp___idx_84 #"system.ads" 1 0 0#  : int.
+   (if (( (a__first <= temp___idx_84) /\ (temp___idx_84 <= a__last) )) then (
+    ((Standard__wide_character__rep.to_rep (get a temp___idx_84)) = (Standard__wide_character__rep.to_rep (get b ((b__first - a__first) + temp___idx_84))))) else true)) )
+ 
+ axiom bool_eq_rev :
+  (forall a #"system.ads" 1 0 0#  b #"system.ads" 1 0 0#  : map.
+  (forall a__first #"system.ads" 1 0 0#  a__last #"system.ads" 1 0 0#  b__first #"system.ads" 1 0 0#  b__last #"system.ads" 1 0 0#  : int.
+   ( ((bool_eq b b__first b__last a a__first a__last) = True) -> ( (if ((a__first <= a__last)) then (
+    ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+    (b__first > b__last))) /\ (forall temp___idx_84 #"system.ads" 1 0 0#  : int.
+    (if (( (a__first <= temp___idx_84) /\ (temp___idx_84 <= a__last) )) then (
+     ((Standard__wide_character__rep.to_rep (get a temp___idx_84)) = (Standard__wide_character__rep.to_rep (get b ((b__first - a__first) + temp___idx_84))))) else true)) ) )))
+ 
+ function index_Index_one #"system.ads" 1 0 0# 
+   : int =
+  1
+ 
+ clone export "ada__model".Array_Int_Rep_Comparison_Axiom with
+ type component_type = component_type, 
+ function to_rep = Standard__wide_character__rep.to_rep, 
+ type map = map, 
+ type Index.t = int, 
+ predicate Index.le = Int.(<=), 
+ predicate Index.lt = Int.(<), 
+ predicate Index.gt = Int.(>), 
+ function Index.add = Int.(+), 
+ function Index.sub = Int.(-), 
+ function Index.one = index_Index_one, 
+ function get = get, 
+ function bool_eq = bool_eq
+
+end
+
+(* Module for axiomatizing type "wide_string", created in Gnat2Why.Types.Translate_Type *)
+module Standard__wide_string
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__integer
+ use        Standard__positive
+ use        Standard__wide_character
+ use        Standard__integer__rep
+ use        Array__Int__Standard__wide_character
+
+ type component_type #"system.ads" 1 0 0# =
+  Standard__wide_character.wide_character
+ 
+ function index_1_id #"system.ads" 1 0 0# 
+   (x : int) : int =
+  x
+ 
+ clone export "ada__model".Unconstr_Array with
+ type map = Array__Int__Standard__wide_character.map, 
+ function array_bool_eq = Array__Int__Standard__wide_character.bool_eq, 
+ type index_base_type = Standard__integer.integer, 
+ type index_rep_type = int, 
+ function to_rep = Standard__integer__rep.to_rep, 
+ function rep_to_int = index_1_id, 
+ predicate in_range_base = Standard__integer.in_range, 
+ predicate index_dynamic_property = Standard__positive.dynamic_property, 
+ predicate index_rep_le = Int.(<=)
+ 
+ type wide_string #"system.ads" 1 0 0# =
+  __t
+ 
+ meta "model_projection" function to_array
+ 
+ meta "inline : no" function to_array
+ 
+ meta "model_projection" function first
+ 
+ meta "inline : no" function first
+ 
+ meta "model_projection" function last
+ 
+ meta "inline : no" function last
+ 
+ type wide_string__ref #"system.ads" 1 0 0# =
+  { mutable wide_string__content "model_trace:" "name:" : wide_string }
+ 
+ function wide_string__ref___projection #"system.ads" 1 0 0# 
+   (a : wide_string__ref) : wide_string =
+  a.wide_string__content
+ 
+ meta "model_projection" function wide_string__ref___projection
+ 
+ meta "inline : no" function wide_string__ref___projection
+ 
+ val wide_string__havoc #"system.ads" 1 0 0# 
+   (x : wide_string__ref) : unit
+  writes {x}
+
+end
+
+(* Module for axiomatizing the array theory associated to type "wide_wide_string", created in Why.Gen.Arrays.Create_Rep_Array_Theory *)
+module Array__Int__Standard__wide_wide_character
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__wide_wide_character
+ use        Standard__wide_wide_character__rep
+
+ function index_I1_one #"system.ads" 1 0 0# 
+   : int =
+  1
+ 
+ type component_type #"system.ads" 1 0 0# =
+  Standard__wide_wide_character.wide_wide_character
+ 
+ clone export "_gnatprove_standard".Array__1 with
+ type I1.t = int, 
+ predicate I1.le = Int.(<=), 
+ predicate I1.lt = Int.(<), 
+ predicate I1.gt = Int.(>), 
+ function I1.add = Int.(+), 
+ function I1.sub = Int.(-), 
+ function I1.one = index_I1_one, 
+ type component_type = component_type
+ 
+ function bool_eq #"system.ads" 1 0 0# 
+   (a : map) (a__first : int) (a__last : int) (b : map) (b__first : int) (b__last : int) : bool =
+  ( (if ((a__first <= a__last)) then (
+   ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+   (b__first > b__last))) /\ (forall temp___idx_90 #"system.ads" 1 0 0#  : int.
+   (if (( (a__first <= temp___idx_90) /\ (temp___idx_90 <= a__last) )) then (
+    ((Standard__wide_wide_character__rep.to_rep (get a temp___idx_90)) = (Standard__wide_wide_character__rep.to_rep (get b ((b__first - a__first) + temp___idx_90))))) else true)) )
+ 
+ axiom bool_eq_rev :
+  (forall a #"system.ads" 1 0 0#  b #"system.ads" 1 0 0#  : map.
+  (forall a__first #"system.ads" 1 0 0#  a__last #"system.ads" 1 0 0#  b__first #"system.ads" 1 0 0#  b__last #"system.ads" 1 0 0#  : int.
+   ( ((bool_eq b b__first b__last a a__first a__last) = True) -> ( (if ((a__first <= a__last)) then (
+    ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+    (b__first > b__last))) /\ (forall temp___idx_90 #"system.ads" 1 0 0#  : int.
+    (if (( (a__first <= temp___idx_90) /\ (temp___idx_90 <= a__last) )) then (
+     ((Standard__wide_wide_character__rep.to_rep (get a temp___idx_90)) = (Standard__wide_wide_character__rep.to_rep (get b ((b__first - a__first) + temp___idx_90))))) else true)) ) )))
+ 
+ function index_Index_one #"system.ads" 1 0 0# 
+   : int =
+  1
+ 
+ clone export "ada__model".Array_Int_Rep_Comparison_Axiom with
+ type component_type = component_type, 
+ function to_rep = Standard__wide_wide_character__rep.to_rep, 
+ type map = map, 
+ type Index.t = int, 
+ predicate Index.le = Int.(<=), 
+ predicate Index.lt = Int.(<), 
+ predicate Index.gt = Int.(>), 
+ function Index.add = Int.(+), 
+ function Index.sub = Int.(-), 
+ function Index.one = index_Index_one, 
+ function get = get, 
+ function bool_eq = bool_eq
+
+end
+
+(* Module for axiomatizing type "wide_wide_string", created in Gnat2Why.Types.Translate_Type *)
+module Standard__wide_wide_string
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__integer
+ use        Standard__positive
+ use        Standard__wide_wide_character
+ use        Standard__integer__rep
+ use        Array__Int__Standard__wide_wide_character
+
+ type component_type #"system.ads" 1 0 0# =
+  Standard__wide_wide_character.wide_wide_character
+ 
+ function index_1_id #"system.ads" 1 0 0# 
+   (x : int) : int =
+  x
+ 
+ clone export "ada__model".Unconstr_Array with
+ type map = Array__Int__Standard__wide_wide_character.map, 
+ function array_bool_eq = Array__Int__Standard__wide_wide_character.bool_eq, 
+ type index_base_type = Standard__integer.integer, 
+ type index_rep_type = int, 
+ function to_rep = Standard__integer__rep.to_rep, 
+ function rep_to_int = index_1_id, 
+ predicate in_range_base = Standard__integer.in_range, 
+ predicate index_dynamic_property = Standard__positive.dynamic_property, 
+ predicate index_rep_le = Int.(<=)
+ 
+ type wide_wide_string #"system.ads" 1 0 0# =
+  __t
+ 
+ meta "model_projection" function to_array
+ 
+ meta "inline : no" function to_array
+ 
+ meta "model_projection" function first
+ 
+ meta "inline : no" function first
+ 
+ meta "model_projection" function last
+ 
+ meta "inline : no" function last
+ 
+ type wide_wide_string__ref #"system.ads" 1 0 0# =
+  { mutable wide_wide_string__content "model_trace:" "name:" : wide_wide_string }
+ 
+ function wide_wide_string__ref___projection #"system.ads" 1 0 0# 
+   (a : wide_wide_string__ref) : wide_wide_string =
+  a.wide_wide_string__content
+ 
+ meta "model_projection" function wide_wide_string__ref___projection
+ 
+ meta "inline : no" function wide_wide_string__ref___projection
+ 
+ val wide_wide_string__havoc #"system.ads" 1 0 0# 
+   (x : wide_wide_string__ref) : unit
+  writes {x}
+
+end
+
+(* Module for axiomatizing type "duration", created in Gnat2Why.Types.Translate_Type *)
+module Standard__duration
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        "_gnatprove_standard".Main
+
+ type duration #"system.ads" 1 0 0# 
+ 
+ function inv_small #"system.ads" 1 0 0# 
+   : Main.__fixed =
+  1000000000
+ 
+ function first #"system.ads" 1 0 0# 
+   : Main.__fixed =
+  ( -9223372036854775808 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : Main.__fixed =
+  9223372036854775807
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : Main.__fixed)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Fixed_Point with
+ type t = duration, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range, 
+ function inv_small = inv_small
+ 
+ type duration__ref #"system.ads" 1 0 0# =
+  { mutable duration__content "model_trace:" "name:" : duration }
+ 
+ function duration__ref___projection #"system.ads" 1 0 0# 
+   (a : duration__ref) : duration =
+  a.duration__content
+ 
+ meta "model_projection" function duration__ref___projection
+ 
+ meta "inline : no" function duration__ref___projection
+ 
+ val duration__havoc #"system.ads" 1 0 0# 
+   (x : duration__ref) : unit
+  writes {x}
+
+end
+
+(* Module for axiomatizing type "integer_8", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer_8
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type integer_8 #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -128 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  127
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = integer_8, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type integer_8__ref #"system.ads" 1 0 0# =
+  { mutable integer_8__content "model_trace:" "name:" : integer_8 }
+ 
+ function integer_8__ref___projection #"system.ads" 1 0 0# 
+   (a : integer_8__ref) : integer_8 =
+  a.integer_8__content
+ 
+ meta "model_projection" function integer_8__ref___projection
+ 
+ meta "inline : no" function integer_8__ref___projection
+ 
+ val integer_8__havoc #"system.ads" 1 0 0# 
+   (x : integer_8__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "integer_8", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer_8__rep
+ use        Standard__integer_8
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__integer_8.integer_8, 
+ predicate in_range = Standard__integer_8.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "integer_16", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer_16
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type integer_16 #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -32768 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  32767
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = integer_16, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type integer_16__ref #"system.ads" 1 0 0# =
+  { mutable integer_16__content "model_trace:" "name:" : integer_16 }
+ 
+ function integer_16__ref___projection #"system.ads" 1 0 0# 
+   (a : integer_16__ref) : integer_16 =
+  a.integer_16__content
+ 
+ meta "model_projection" function integer_16__ref___projection
+ 
+ meta "inline : no" function integer_16__ref___projection
+ 
+ val integer_16__havoc #"system.ads" 1 0 0# 
+   (x : integer_16__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "integer_16", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer_16__rep
+ use        Standard__integer_16
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__integer_16.integer_16, 
+ predicate in_range = Standard__integer_16.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "integer_32", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer_32
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type integer_32 #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -2147483648 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  2147483647
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = integer_32, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type integer_32__ref #"system.ads" 1 0 0# =
+  { mutable integer_32__content "model_trace:" "name:" : integer_32 }
+ 
+ function integer_32__ref___projection #"system.ads" 1 0 0# 
+   (a : integer_32__ref) : integer_32 =
+  a.integer_32__content
+ 
+ meta "model_projection" function integer_32__ref___projection
+ 
+ meta "inline : no" function integer_32__ref___projection
+ 
+ val integer_32__havoc #"system.ads" 1 0 0# 
+   (x : integer_32__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "integer_32", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer_32__rep
+ use        Standard__integer_32
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__integer_32.integer_32, 
+ predicate in_range = Standard__integer_32.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "integer_64", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer_64
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type integer_64 #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -9223372036854775808 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  9223372036854775807
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = integer_64, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type integer_64__ref #"system.ads" 1 0 0# =
+  { mutable integer_64__content "model_trace:" "name:" : integer_64 }
+ 
+ function integer_64__ref___projection #"system.ads" 1 0 0# 
+   (a : integer_64__ref) : integer_64 =
+  a.integer_64__content
+ 
+ meta "model_projection" function integer_64__ref___projection
+ 
+ meta "inline : no" function integer_64__ref___projection
+ 
+ val integer_64__havoc #"system.ads" 1 0 0# 
+   (x : integer_64__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "integer_64", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer_64__rep
+ use        Standard__integer_64
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__integer_64.integer_64, 
+ predicate in_range = Standard__integer_64.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "universal_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__universal_integer
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type universal_integer #"system.ads" 1 0 0# 
+ 
+ function first #"system.ads" 1 0 0# 
+   : int =
+  ( -9223372036854775808 )
+ 
+ function last #"system.ads" 1 0 0# 
+   : int =
+  9223372036854775807
+ 
+ predicate in_range #"system.ads" 1 0 0# 
+   (x : int)  =
+  #"system.ads" 1 0 0# ( (first <= x) /\ (x <= last) )
+ 
+ clone export "ada__model".Static_Discrete with
+ type t = universal_integer, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type universal_integer__ref #"system.ads" 1 0 0# =
+  { mutable universal_integer__content "model_trace:" "name:" : universal_integer }
+ 
+ function universal_integer__ref___projection #"system.ads" 1 0 0# 
+   (a : universal_integer__ref) : universal_integer =
+  a.universal_integer__content
+ 
+ meta "model_projection" function universal_integer__ref___projection
+ 
+ meta "inline : no" function universal_integer__ref___projection
+ 
+ val universal_integer__havoc #"system.ads" 1 0 0# 
+   (x : universal_integer__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "universal_integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__universal_integer__rep
+ use        Standard__universal_integer
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Int with
+ type t = Standard__universal_integer.universal_integer, 
+ predicate in_range = Standard__universal_integer.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "tank_height_float" defined at tank1.ads:8, created in Gnat2Why.Types.Translate_Type *)
+module Tank1__tank_height_float
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ type tank_height_float #"tank1.ads" 8 0 0# 
+ 
+ function first #"tank1.ads" 8 0 0# 
+   : Float32.t =
+  (0.0E-1:Float32.t)
+ 
+ function last #"tank1.ads" 8 0 0# 
+   : Float32.t =
+  (20.0:Float32.t)
+ 
+ predicate in_range #"tank1.ads" 8 0 0# 
+   (x : Float32.t)  =
+  #"tank1.ads" 8 0 0# ( (Float32.t'isFinite x) && ( (Float32.le first x) /\ (Float32.le x last) ) )
+ 
+ clone export "ada__model".Static_Float32 with
+ type t = tank_height_float, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type tank_height_float__ref #"tank1.ads" 8 0 0# =
+  { mutable tank_height_float__content "model_trace:" "name:" : tank_height_float }
+ 
+ function tank_height_float__ref___projection #"tank1.ads" 8 0 0# 
+   (a : tank_height_float__ref) : tank_height_float =
+  a.tank_height_float__content
+ 
+ meta "model_projection" function tank_height_float__ref___projection
+ 
+ meta "inline : no" function tank_height_float__ref___projection
+ 
+ val tank_height_float__havoc #"tank1.ads" 8 0 0# 
+   (x : tank_height_float__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "tank_height_float" defined at tank1.ads:8, created in Gnat2Why.Types.Translate_Type *)
+module Tank1__tank_height_float__rep
+ use        Tank1__tank_height_float
+ use        "_gnatprove_standard".Float32
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Float32 with
+ type t = Tank1__tank_height_float.tank_height_float, 
+ predicate in_range = Tank1__tank_height_float.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "tank_area_float" defined at tank1.ads:9, created in Gnat2Why.Types.Translate_Type *)
+module Tank1__tank_area_float
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ type tank_area_float #"tank1.ads" 9 0 0# 
+ 
+ function first #"tank1.ads" 9 0 0# 
+   : Float32.t =
+  (0.0E-1:Float32.t)
+ 
+ function last #"tank1.ads" 9 0 0# 
+   : Float32.t =
+  (10.0:Float32.t)
+ 
+ predicate in_range #"tank1.ads" 9 0 0# 
+   (x : Float32.t)  =
+  #"tank1.ads" 9 0 0# ( (Float32.t'isFinite x) && ( (Float32.le first x) /\ (Float32.le x last) ) )
+ 
+ clone export "ada__model".Static_Float32 with
+ type t = tank_area_float, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type tank_area_float__ref #"tank1.ads" 9 0 0# =
+  { mutable tank_area_float__content "model_trace:" "name:" : tank_area_float }
+ 
+ function tank_area_float__ref___projection #"tank1.ads" 9 0 0# 
+   (a : tank_area_float__ref) : tank_area_float =
+  a.tank_area_float__content
+ 
+ meta "model_projection" function tank_area_float__ref___projection
+ 
+ meta "inline : no" function tank_area_float__ref___projection
+ 
+ val tank_area_float__havoc #"tank1.ads" 9 0 0# 
+   (x : tank_area_float__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "tank_area_float" defined at tank1.ads:9, created in Gnat2Why.Types.Translate_Type *)
+module Tank1__tank_area_float__rep
+ use        Tank1__tank_area_float
+ use        "_gnatprove_standard".Float32
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Float32 with
+ type t = Tank1__tank_area_float.tank_area_float, 
+ predicate in_range = Tank1__tank_area_float.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for axiomatizing type "tank_volume_float" defined at tank1.ads:10, created in Gnat2Why.Types.Translate_Type *)
+module Tank1__tank_volume_float
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ type tank_volume_float #"tank1.ads" 10 0 0# 
+ 
+ function first #"tank1.ads" 10 0 0# 
+   : Float32.t =
+  (0.0E-1:Float32.t)
+ 
+ function last #"tank1.ads" 10 0 0# 
+   : Float32.t =
+  (200.0:Float32.t)
+ 
+ predicate in_range #"tank1.ads" 10 0 0# 
+   (x : Float32.t)  =
+  #"tank1.ads" 10 0 0# ( (Float32.t'isFinite x) && ( (Float32.le first x) /\ (Float32.le x last) ) )
+ 
+ clone export "ada__model".Static_Float32 with
+ type t = tank_volume_float, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type tank_volume_float__ref #"tank1.ads" 10 0 0# =
+  { mutable tank_volume_float__content "model_trace:" "name:" : tank_volume_float }
+ 
+ function tank_volume_float__ref___projection #"tank1.ads" 10 0 0# 
+   (a : tank_volume_float__ref) : tank_volume_float =
+  a.tank_volume_float__content
+ 
+ meta "model_projection" function tank_volume_float__ref___projection
+ 
+ meta "inline : no" function tank_volume_float__ref___projection
+ 
+ val tank_volume_float__havoc #"tank1.ads" 10 0 0# 
+   (x : tank_volume_float__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "tank_volume_float" defined at tank1.ads:10, created in Gnat2Why.Types.Translate_Type *)
+module Tank1__tank_volume_float__rep
+ use        Tank1__tank_volume_float
+ use        "_gnatprove_standard".Float32
+ use import "_gnatprove_standard".Main
+
+ clone export "ada__model".Rep_Proj_Float32 with
+ type t = Tank1__tank_volume_float.tank_volume_float, 
+ predicate in_range = Tank1__tank_volume_float.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline : no" function to_rep
+
+end
+
+(* Module for defining the constant "crossection_area" defined at tank1.ads:13, created in Gnat2Why.Decls.Translate_Constant *)
+module Tank1__initialize__crossection_area
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ function crossection_area #"tank1.ads" 13 0 0# "model" "model_trace:2864" "name:Crossection_Area" 
+   : Float32.t
+ 
+ function attr__ATTRIBUTE_ADDRESS #"tank1.ads" 9 0 0# 
+   : int
+
+end
+
+(* Module giving an empty axiom for the entity "crossection_area" defined at tank1.ads:13, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Tank1__initialize__crossection_area___axiom
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for defining the constant "height" defined at tank1.ads:14, created in Gnat2Why.Decls.Translate_Constant *)
+module Tank1__initialize__height
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ function height #"tank1.ads" 14 0 0# "model" "model_trace:2873" "name:Height" 
+   : Float32.t
+ 
+ function attr__ATTRIBUTE_ADDRESS #"tank1.ads" 8 0 0# 
+   : int
+
+end
+
+(* Module giving an empty axiom for the entity "height" defined at tank1.ads:14, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Tank1__initialize__height___axiom
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for defining the constant "high_sensor_loc" defined at tank1.ads:15, created in Gnat2Why.Decls.Translate_Constant *)
+module Tank1__initialize__high_sensor_loc
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ function high_sensor_loc #"tank1.ads" 15 0 0# "model" "model_trace:2882" "name:High_Sensor_Loc" 
+   : Float32.t
+ 
+ function attr__ATTRIBUTE_ADDRESS #"tank1.ads" 8 0 0# 
+   : int
+
+end
+
+(* Module giving an empty axiom for the entity "high_sensor_loc" defined at tank1.ads:15, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Tank1__initialize__high_sensor_loc___axiom
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for defining the constant "low_sensor_loc" defined at tank1.ads:16, created in Gnat2Why.Decls.Translate_Constant *)
+module Tank1__initialize__low_sensor_loc
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ function low_sensor_loc #"tank1.ads" 16 0 0# "model" "model_trace:2891" "name:Low_Sensor_Loc" 
+   : Float32.t
+ 
+ function attr__ATTRIBUTE_ADDRESS #"tank1.ads" 8 0 0# 
+   : int
+
+end
+
+(* Module giving an empty axiom for the entity "low_sensor_loc" defined at tank1.ads:16, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Tank1__initialize__low_sensor_loc___axiom
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for defining the constant "flow_in" defined at tank1.ads:42, created in Gnat2Why.Decls.Translate_Constant *)
+module Tank1__liquid_in__flow_in
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ function flow_in #"tank1.ads" 42 0 0# "model" "model_trace:2986" "name:Flow_In" 
+   : Float32.t
+ 
+ function attr__ATTRIBUTE_ADDRESS #"tank1.ads" 10 0 0# 
+   : int
+
+end
+
+(* Module giving an empty axiom for the entity "flow_in" defined at tank1.ads:42, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Tank1__liquid_in__flow_in___axiom
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for defining the constant "flow_out" defined at tank1.ads:51, created in Gnat2Why.Decls.Translate_Constant *)
+module Tank1__liquid_out__flow_out
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+
+ function flow_out #"tank1.ads" 51 0 0# "model" "model_trace:3029" "name:Flow_Out" 
+   : Float32.t
+ 
+ function attr__ATTRIBUTE_ADDRESS #"tank1.ads" 10 0 0# 
+   : int
+
+end
+
+(* Module giving an empty axiom for the entity "flow_out" defined at tank1.ads:51, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Tank1__liquid_out__flow_out___axiom
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for axiomatizing the record theory associated to type "tank_type" defined at tank1.adb:8, created in Why.Gen.Records.Create_Rep_Record_Theory_If_Needed *)
+module Tank1__tank_type__rep
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_area_float
+ use        Tank1__tank_area_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+
+ type __split_fields #"tank1.ads" 10 0 0# =
+  { rec__tank1__tank_type__crossection_area : Tank1__tank_area_float.tank_area_float; rec__tank1__tank_type__height : Tank1__tank_height_float.tank_height_float; rec__tank1__tank_type__max_volume : Tank1__tank_volume_float.tank_volume_float; rec__tank1__tank_type__cur_volume : Tank1__tank_volume_float.tank_volume_float; rec__tank1__tank_type__h_sensor_loc : Tank1__tank_height_float.tank_height_float; rec__tank1__tank_type__l_sensor_loc : Tank1__tank_height_float.tank_height_float }
+ 
+ type __split_fields__ref #"tank1.ads" 8 0 0# =
+  { mutable __split_fields__content "model_trace:" "name:" : __split_fields }
+ 
+ function __split_fields__ref___projection #"tank1.ads" 8 0 0# 
+   (a : __split_fields__ref) : __split_fields =
+  a.__split_fields__content
+ 
+ meta "model_projection" function __split_fields__ref___projection
+ 
+ meta "inline : no" function __split_fields__ref___projection
+ 
+ val __split_fields__havoc #"tank1.ads" 8 0 0# 
+   (x : __split_fields__ref) : unit
+  writes {x}
+ 
+ type __rep #"tank1.ads" 8 0 0# =
+  { __split_fields "model_trace:" "name:" : __split_fields }
+ 
+ function __rep___projection #"tank1.ads" 8 0 0# 
+   (a : __rep) : __split_fields =
+  a.__split_fields
+ 
+ meta "model_projection" function __rep___projection
+ 
+ meta "inline : no" function __rep___projection
+ 
+ function to_base #"tank1.ads" 8 0 0# 
+   (a : __rep) : __rep =
+  a
+ 
+ function of_base #"tank1.ads" 8 0 0# 
+   (a : __rep) : __rep =
+  a
+ 
+ predicate tank1__tank_type__crossection_area__pred #"tank1.ads" 8 0 0# 
+   (a : __rep)  =
+  #"tank1.ads" 8 0 0# true
+ 
+ val rec__tank1__tank_type__crossection_area_ #"tank1.adb" 8 0 0# 
+   (a : __rep) : Tank1__tank_area_float.tank_area_float
+  requires { #"tank1.ads" 9 0 0# (tank1__tank_type__crossection_area__pred a) }
+  ensures { #"tank1.ads" 9 0 0# (result = a.__split_fields.rec__tank1__tank_type__crossection_area) }
+ 
+ predicate tank1__tank_type__height__pred #"tank1.adb" 8 0 0# 
+   (a : __rep)  =
+  #"tank1.adb" 8 0 0# true
+ 
+ val rec__tank1__tank_type__height_ #"tank1.adb" 8 0 0# 
+   (a : __rep) : Tank1__tank_height_float.tank_height_float
+  requires { #"tank1.ads" 8 0 0# (tank1__tank_type__height__pred a) }
+  ensures { #"tank1.ads" 8 0 0# (result = a.__split_fields.rec__tank1__tank_type__height) }
+ 
+ predicate tank1__tank_type__max_volume__pred #"tank1.adb" 8 0 0# 
+   (a : __rep)  =
+  #"tank1.adb" 8 0 0# true
+ 
+ val rec__tank1__tank_type__max_volume_ #"tank1.adb" 8 0 0# 
+   (a : __rep) : Tank1__tank_volume_float.tank_volume_float
+  requires { #"tank1.ads" 10 0 0# (tank1__tank_type__max_volume__pred a) }
+  ensures { #"tank1.ads" 10 0 0# (result = a.__split_fields.rec__tank1__tank_type__max_volume) }
+ 
+ predicate tank1__tank_type__cur_volume__pred #"tank1.adb" 8 0 0# 
+   (a : __rep)  =
+  #"tank1.adb" 8 0 0# true
+ 
+ val rec__tank1__tank_type__cur_volume_ #"tank1.adb" 8 0 0# 
+   (a : __rep) : Tank1__tank_volume_float.tank_volume_float
+  requires { #"tank1.ads" 10 0 0# (tank1__tank_type__cur_volume__pred a) }
+  ensures { #"tank1.ads" 10 0 0# (result = a.__split_fields.rec__tank1__tank_type__cur_volume) }
+ 
+ predicate tank1__tank_type__h_sensor_loc__pred #"tank1.adb" 8 0 0# 
+   (a : __rep)  =
+  #"tank1.adb" 8 0 0# true
+ 
+ val rec__tank1__tank_type__h_sensor_loc_ #"tank1.adb" 8 0 0# 
+   (a : __rep) : Tank1__tank_height_float.tank_height_float
+  requires { #"tank1.ads" 8 0 0# (tank1__tank_type__h_sensor_loc__pred a) }
+  ensures { #"tank1.ads" 8 0 0# (result = a.__split_fields.rec__tank1__tank_type__h_sensor_loc) }
+ 
+ predicate tank1__tank_type__l_sensor_loc__pred #"tank1.adb" 8 0 0# 
+   (a : __rep)  =
+  #"tank1.adb" 8 0 0# true
+ 
+ val rec__tank1__tank_type__l_sensor_loc_ #"tank1.adb" 8 0 0# 
+   (a : __rep) : Tank1__tank_height_float.tank_height_float
+  requires { #"tank1.ads" 8 0 0# (tank1__tank_type__l_sensor_loc__pred a) }
+  ensures { #"tank1.ads" 8 0 0# (result = a.__split_fields.rec__tank1__tank_type__l_sensor_loc) }
+ 
+ function bool_eq #"tank1.adb" 8 0 0# 
+   (a : __rep) (b : __rep) : bool =
+  (if (( ( ( ( ( ((Tank1__tank_area_float__rep.to_rep a.__split_fields.rec__tank1__tank_type__crossection_area) = (Tank1__tank_area_float__rep.to_rep b.__split_fields.rec__tank1__tank_type__crossection_area)) /\ ((Tank1__tank_height_float__rep.to_rep a.__split_fields.rec__tank1__tank_type__height) = (Tank1__tank_height_float__rep.to_rep b.__split_fields.rec__tank1__tank_type__height)) ) /\ ((Tank1__tank_volume_float__rep.to_rep a.__split_fields.rec__tank1__tank_type__max_volume) = (Tank1__tank_volume_float__rep.to_rep b.__split_fields.rec__tank1__tank_type__max_volume)) ) /\ ((Tank1__tank_volume_float__rep.to_rep a.__split_fields.rec__tank1__tank_type__cur_volume) = (Tank1__tank_volume_float__rep.to_rep b.__split_fields.rec__tank1__tank_type__cur_volume)) ) /\ ((Tank1__tank_height_float__rep.to_rep a.__split_fields.rec__tank1__tank_type__h_sensor_loc) = (Tank1__tank_height_float__rep.to_rep b.__split_fields.rec__tank1__tank_type__h_sensor_loc)) ) /\ ((Tank1__tank_height_float__rep.to_rep a.__split_fields.rec__tank1__tank_type__l_sensor_loc) = (Tank1__tank_height_float__rep.to_rep b.__split_fields.rec__tank1__tank_type__l_sensor_loc)) )) then (
+   True) else (
+   False))
+
+end
+
+(* Module for axiomatizing type "tank_type" defined at tank1.adb:8, created in Gnat2Why.Types.Translate_Type *)
+module Tank1__tank_type
+ use export Tank1__tank_type__rep
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+
+ type tank_type #"tank1.adb" 8 0 0# =
+  __rep
+ 
+ function value__size #"tank1.adb" 8 0 0# 
+   : int
+ 
+ function object__size #"tank1.adb" 8 0 0# 
+   (a : tank_type) : int
+ 
+ function value__alignment #"tank1.adb" 8 0 0# 
+   : int
+ 
+ function object__alignment #"tank1.adb" 8 0 0# 
+   (a : tank_type) : int
+ 
+ axiom value__size_axiom :
+  ((value__size ) >= 0)
+ 
+ axiom object__size_axiom :
+  (forall a #"tank1.adb" 8 0 0#  : tank_type.
+   ((object__size a) >= 0))
+ 
+ axiom value__alignment_axiom :
+  ((value__alignment ) >= 0)
+ 
+ axiom object__alignment_axiom :
+  (forall a #"tank1.adb" 8 0 0#  : tank_type.
+   ((object__alignment a) >= 0))
+ 
+ function tank1__tank_type__crossection_area__first__bit #"tank1.adb" 8 0 0# 
+   : int
+ 
+ function tank1__tank_type__crossection_area__last__bit #"tank1.adb" 8 0 0# 
+   : int
+ 
+ function tank1__tank_type__crossection_area__position #"tank1.adb" 8 0 0# 
+   : int
+ 
+ axiom tank1__tank_type__crossection_area__first__bit_axiom :
+  ((tank1__tank_type__crossection_area__first__bit ) >= 0)
+ 
+ axiom tank1__tank_type__crossection_area__last__bit_axiom :
+  ((tank1__tank_type__crossection_area__last__bit ) > (tank1__tank_type__crossection_area__first__bit ))
+ 
+ axiom tank1__tank_type__crossection_area__position_axiom :
+  ((tank1__tank_type__crossection_area__position ) >= 0)
+ 
+ function tank1__tank_type__height__first__bit #"tank1.adb" 10 0 0# 
+   : int
+ 
+ function tank1__tank_type__height__last__bit #"tank1.adb" 10 0 0# 
+   : int
+ 
+ function tank1__tank_type__height__position #"tank1.adb" 10 0 0# 
+   : int
+ 
+ axiom tank1__tank_type__height__first__bit_axiom :
+  ((tank1__tank_type__height__first__bit ) >= 0)
+ 
+ axiom tank1__tank_type__height__last__bit_axiom :
+  ((tank1__tank_type__height__last__bit ) > (tank1__tank_type__height__first__bit ))
+ 
+ axiom tank1__tank_type__height__position_axiom :
+  ((tank1__tank_type__height__position ) >= 0)
+ 
+ function tank1__tank_type__max_volume__first__bit #"tank1.adb" 11 0 0# 
+   : int
+ 
+ function tank1__tank_type__max_volume__last__bit #"tank1.adb" 11 0 0# 
+   : int
+ 
+ function tank1__tank_type__max_volume__position #"tank1.adb" 11 0 0# 
+   : int
+ 
+ axiom tank1__tank_type__max_volume__first__bit_axiom :
+  ((tank1__tank_type__max_volume__first__bit ) >= 0)
+ 
+ axiom tank1__tank_type__max_volume__last__bit_axiom :
+  ((tank1__tank_type__max_volume__last__bit ) > (tank1__tank_type__max_volume__first__bit ))
+ 
+ axiom tank1__tank_type__max_volume__position_axiom :
+  ((tank1__tank_type__max_volume__position ) >= 0)
+ 
+ function tank1__tank_type__cur_volume__first__bit #"tank1.adb" 12 0 0# 
+   : int
+ 
+ function tank1__tank_type__cur_volume__last__bit #"tank1.adb" 12 0 0# 
+   : int
+ 
+ function tank1__tank_type__cur_volume__position #"tank1.adb" 12 0 0# 
+   : int
+ 
+ axiom tank1__tank_type__cur_volume__first__bit_axiom :
+  ((tank1__tank_type__cur_volume__first__bit ) >= 0)
+ 
+ axiom tank1__tank_type__cur_volume__last__bit_axiom :
+  ((tank1__tank_type__cur_volume__last__bit ) > (tank1__tank_type__cur_volume__first__bit ))
+ 
+ axiom tank1__tank_type__cur_volume__position_axiom :
+  ((tank1__tank_type__cur_volume__position ) >= 0)
+ 
+ function tank1__tank_type__h_sensor_loc__first__bit #"tank1.adb" 13 0 0# 
+   : int
+ 
+ function tank1__tank_type__h_sensor_loc__last__bit #"tank1.adb" 13 0 0# 
+   : int
+ 
+ function tank1__tank_type__h_sensor_loc__position #"tank1.adb" 13 0 0# 
+   : int
+ 
+ axiom tank1__tank_type__h_sensor_loc__first__bit_axiom :
+  ((tank1__tank_type__h_sensor_loc__first__bit ) >= 0)
+ 
+ axiom tank1__tank_type__h_sensor_loc__last__bit_axiom :
+  ((tank1__tank_type__h_sensor_loc__last__bit ) > (tank1__tank_type__h_sensor_loc__first__bit ))
+ 
+ axiom tank1__tank_type__h_sensor_loc__position_axiom :
+  ((tank1__tank_type__h_sensor_loc__position ) >= 0)
+ 
+ function tank1__tank_type__l_sensor_loc__first__bit #"tank1.adb" 14 0 0# 
+   : int
+ 
+ function tank1__tank_type__l_sensor_loc__last__bit #"tank1.adb" 14 0 0# 
+   : int
+ 
+ function tank1__tank_type__l_sensor_loc__position #"tank1.adb" 14 0 0# 
+   : int
+ 
+ axiom tank1__tank_type__l_sensor_loc__first__bit_axiom :
+  ((tank1__tank_type__l_sensor_loc__first__bit ) >= 0)
+ 
+ axiom tank1__tank_type__l_sensor_loc__last__bit_axiom :
+  ((tank1__tank_type__l_sensor_loc__last__bit ) > (tank1__tank_type__l_sensor_loc__first__bit ))
+ 
+ axiom tank1__tank_type__l_sensor_loc__position_axiom :
+  ((tank1__tank_type__l_sensor_loc__position ) >= 0)
+ 
+ function user_eq #"tank1.adb" 15 0 0# 
+   (a : tank_type) (b : tank_type) : bool
+ 
+ function dummy #"tank1.adb" 8 0 0# 
+   : tank_type
+ 
+ type tank_type__ref #"tank1.adb" 8 0 0# =
+  { mutable tank_type__content "model_trace:" "name:" : tank_type }
+ 
+ function tank_type__ref___projection #"tank1.adb" 8 0 0# 
+   (a : tank_type__ref) : tank_type =
+  a.tank_type__content
+ 
+ meta "model_projection" function tank_type__ref___projection
+ 
+ meta "inline : no" function tank_type__ref___projection
+ 
+ val tank_type__havoc #"tank1.adb" 8 0 0# 
+   (x : tank_type__ref) : unit
+  writes {x}
+
+end
+
+(* Module for defining the constant "I1b" defined at tank1.adb:8, created in Gnat2Why.Decls.Translate_Constant *)
+module Tank1__tank_typePredicate__I1b
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+
+ function i1b #"tank1.adb" 8 0 0# 
+   : Tank1__tank_type.tank_type
+ 
+ function attr__ATTRIBUTE_ADDRESS #"tank1.adb" 8 0 0# 
+   : int
+
+end
+
+(* Module giving an empty axiom for the entity "I1b" defined at tank1.adb:8, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Tank1__tank_typePredicate__I1b___axiom
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for possibly declaring a logic function for "tank_typePredicate" defined at tank1.adb:8, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__tank_typePredicate
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+
+ function tank_typePredicate #"tank1.adb" 8 0 0# 
+   (i1b : Tank1__tank_type.tank_type) : bool
+ 
+ predicate tank_typePredicate__function_guard #"tank1.adb" 8 0 0# 
+   (result : bool) (i1b : Tank1__tank_type.tank_type) 
+
+end
+(* Module for defining a ref holding the value of variable "the_tank" defined at tank1.adb:20, created in Gnat2Why.Decls.Translate_Variable *)
+module Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+
+ val the_tank__split_fields #"tank1.adb" 20 0 0# "model_projected" "model_trace:2398" "name:The_Tank"  : Tank1__tank_type.__split_fields__ref 
+ 
+ function attr__ATTRIBUTE_ADDRESS #"tank1.adb" 8 0 0# 
+   : int
+
+end
+
+(* Module giving an empty axiom for the entity "the_tank" defined at tank1.adb:20, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Tank1__the_tank___axiom
+ use import "_gnatprove_standard".Main
+
+
+end
+(* Module giving axioms for type "short_short_integer", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__short_short_integer___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__short_short_integer
+
+ predicate dynamic_invariant #"tank1.adb" 8 0 0# "inline" 
+   (temp___expr_3 : int) (temp___is_init_0 : bool) (temp___skip_constant_1 : bool) (temp___do_toplevel_2 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_0 \/ (Standard__short_short_integer.first <= Standard__short_short_integer.last) )) then (
+   (Standard__short_short_integer.dynamic_property Standard__short_short_integer.first Standard__short_short_integer.last temp___expr_3)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_4 : int) (temp___skip_top_level_5 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "short_integer", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__short_integer___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__short_integer
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_9 : int) (temp___is_init_6 : bool) (temp___skip_constant_7 : bool) (temp___do_toplevel_8 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_6 \/ (Standard__short_integer.first <= Standard__short_integer.last) )) then (
+   (Standard__short_integer.dynamic_property Standard__short_integer.first Standard__short_integer.last temp___expr_9)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_10 : int) (temp___skip_top_level_11 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "integer", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__integer___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__integer
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_15 : int) (temp___is_init_12 : bool) (temp___skip_constant_13 : bool) (temp___do_toplevel_14 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_12 \/ (Standard__integer.first <= Standard__integer.last) )) then (
+   (Standard__integer.dynamic_property Standard__integer.first Standard__integer.last temp___expr_15)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_16 : int) (temp___skip_top_level_17 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "long_integer", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__long_integer___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__long_integer
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_21 : int) (temp___is_init_18 : bool) (temp___skip_constant_19 : bool) (temp___do_toplevel_20 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_18 \/ (Standard__long_integer.first <= Standard__long_integer.last) )) then (
+   (Standard__long_integer.dynamic_property Standard__long_integer.first Standard__long_integer.last temp___expr_21)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_22 : int) (temp___skip_top_level_23 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "long_long_integer", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__long_long_integer___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__long_long_integer
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_27 : int) (temp___is_init_24 : bool) (temp___skip_constant_25 : bool) (temp___do_toplevel_26 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_24 \/ (Standard__long_long_integer.first <= Standard__long_long_integer.last) )) then (
+   (Standard__long_long_integer.dynamic_property Standard__long_long_integer.first Standard__long_long_integer.last temp___expr_27)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_28 : int) (temp___skip_top_level_29 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "natural", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__natural___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__natural
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_33 : int) (temp___is_init_30 : bool) (temp___skip_constant_31 : bool) (temp___do_toplevel_32 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_30 \/ (Standard__natural.first <= Standard__natural.last) )) then (
+   (Standard__natural.dynamic_property Standard__natural.first Standard__natural.last temp___expr_33)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_34 : int) (temp___skip_top_level_35 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "positive", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__positive___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__positive
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_39 : int) (temp___is_init_36 : bool) (temp___skip_constant_37 : bool) (temp___do_toplevel_38 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_36 \/ (Standard__positive.first <= Standard__positive.last) )) then (
+   (Standard__positive.dynamic_property Standard__positive.first Standard__positive.last temp___expr_39)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_40 : int) (temp___skip_top_level_41 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "short_float", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__short_float___axiom
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Standard__short_float
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_45 : Float32.t) (temp___is_init_42 : bool) (temp___skip_constant_43 : bool) (temp___do_toplevel_44 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_42 \/ (Float32.le Standard__short_float.first Standard__short_float.last) )) then (
+   (Standard__short_float.dynamic_property Standard__short_float.first Standard__short_float.last temp___expr_45)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_46 : Float32.t) (temp___skip_top_level_47 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "float", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__float___axiom
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Standard__float
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_51 : Float32.t) (temp___is_init_48 : bool) (temp___skip_constant_49 : bool) (temp___do_toplevel_50 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_48 \/ (Float32.le Standard__float.first Standard__float.last) )) then (
+   (Standard__float.dynamic_property Standard__float.first Standard__float.last temp___expr_51)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_52 : Float32.t) (temp___skip_top_level_53 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "long_float", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__long_float___axiom
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float64
+ use        Standard__long_float
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_57 : Float64.t) (temp___is_init_54 : bool) (temp___skip_constant_55 : bool) (temp___do_toplevel_56 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_54 \/ (Float64.le Standard__long_float.first Standard__long_float.last) )) then (
+   (Standard__long_float.dynamic_property Standard__long_float.first Standard__long_float.last temp___expr_57)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_58 : Float64.t) (temp___skip_top_level_59 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "character", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__character___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__character
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_63 : int) (temp___is_init_60 : bool) (temp___skip_constant_61 : bool) (temp___do_toplevel_62 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_60 \/ (Standard__character.first <= Standard__character.last) )) then (
+   (Standard__character.dynamic_property Standard__character.first Standard__character.last temp___expr_63)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_64 : int) (temp___skip_top_level_65 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "wide_character", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__wide_character___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__wide_character
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_69 : int) (temp___is_init_66 : bool) (temp___skip_constant_67 : bool) (temp___do_toplevel_68 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_66 \/ (Standard__wide_character.first <= Standard__wide_character.last) )) then (
+   (Standard__wide_character.dynamic_property Standard__wide_character.first Standard__wide_character.last temp___expr_69)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_70 : int) (temp___skip_top_level_71 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "wide_wide_character", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__wide_wide_character___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__wide_wide_character
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_75 : int) (temp___is_init_72 : bool) (temp___skip_constant_73 : bool) (temp___do_toplevel_74 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_72 \/ (Standard__wide_wide_character.first <= Standard__wide_wide_character.last) )) then (
+   (Standard__wide_wide_character.dynamic_property Standard__wide_wide_character.first Standard__wide_wide_character.last temp___expr_75)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_76 : int) (temp___skip_top_level_77 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "string", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__string___axiom
+ use import "_gnatprove_standard".Main
+ use        Standard__string
+ use        Standard__positive
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_82 : Standard__string.string) (temp___is_init_79 : bool) (temp___skip_constant_80 : bool) (temp___do_toplevel_81 : bool)  =
+  #"system.ads" 1 0 0# (if (temp___skip_constant_80) then (
+   true) else (
+   (Standard__string.dynamic_property Standard__positive.first Standard__positive.last (Standard__string.first temp___expr_82) (Standard__string.last temp___expr_82))))
+
+end
+
+(* Module giving axioms for type "wide_string", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__wide_string___axiom
+ use import "_gnatprove_standard".Main
+ use        Standard__positive
+ use        Standard__wide_string
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_88 : Standard__wide_string.wide_string) (temp___is_init_85 : bool) (temp___skip_constant_86 : bool) (temp___do_toplevel_87 : bool)  =
+  #"system.ads" 1 0 0# (if (temp___skip_constant_86) then (
+   true) else (
+   (Standard__wide_string.dynamic_property Standard__positive.first Standard__positive.last (Standard__wide_string.first temp___expr_88) (Standard__wide_string.last temp___expr_88))))
+
+end
+
+(* Module giving axioms for type "wide_wide_string", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__wide_wide_string___axiom
+ use import "_gnatprove_standard".Main
+ use        Standard__positive
+ use        Standard__wide_wide_string
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_94 : Standard__wide_wide_string.wide_wide_string) (temp___is_init_91 : bool) (temp___skip_constant_92 : bool) (temp___do_toplevel_93 : bool)  =
+  #"system.ads" 1 0 0# (if (temp___skip_constant_92) then (
+   true) else (
+   (Standard__wide_wide_string.dynamic_property Standard__positive.first Standard__positive.last (Standard__wide_wide_string.first temp___expr_94) (Standard__wide_wide_string.last temp___expr_94))))
+
+end
+
+(* Module giving axioms for type "duration", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__duration___axiom
+ use import "_gnatprove_standard".Main
+ use        Standard__duration
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_99 : Standard__duration.duration) (temp___is_init_96 : bool) (temp___skip_constant_97 : bool) (temp___do_toplevel_98 : bool)  =
+  #"system.ads" 1 0 0# true
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_100 : Standard__duration.duration) (temp___skip_top_level_101 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "integer_8", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__integer_8___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__integer_8
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_105 : int) (temp___is_init_102 : bool) (temp___skip_constant_103 : bool) (temp___do_toplevel_104 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_102 \/ (Standard__integer_8.first <= Standard__integer_8.last) )) then (
+   (Standard__integer_8.dynamic_property Standard__integer_8.first Standard__integer_8.last temp___expr_105)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_106 : int) (temp___skip_top_level_107 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "integer_16", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__integer_16___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__integer_16
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_111 : int) (temp___is_init_108 : bool) (temp___skip_constant_109 : bool) (temp___do_toplevel_110 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_108 \/ (Standard__integer_16.first <= Standard__integer_16.last) )) then (
+   (Standard__integer_16.dynamic_property Standard__integer_16.first Standard__integer_16.last temp___expr_111)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_112 : int) (temp___skip_top_level_113 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "integer_32", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__integer_32___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__integer_32
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_117 : int) (temp___is_init_114 : bool) (temp___skip_constant_115 : bool) (temp___do_toplevel_116 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_114 \/ (Standard__integer_32.first <= Standard__integer_32.last) )) then (
+   (Standard__integer_32.dynamic_property Standard__integer_32.first Standard__integer_32.last temp___expr_117)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_118 : int) (temp___skip_top_level_119 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "integer_64", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__integer_64___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__integer_64
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_123 : int) (temp___is_init_120 : bool) (temp___skip_constant_121 : bool) (temp___do_toplevel_122 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_120 \/ (Standard__integer_64.first <= Standard__integer_64.last) )) then (
+   (Standard__integer_64.dynamic_property Standard__integer_64.first Standard__integer_64.last temp___expr_123)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_124 : int) (temp___skip_top_level_125 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module giving axioms for type "universal_integer", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__universal_integer___axiom
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        Standard__universal_integer
+
+ predicate dynamic_invariant #"system.ads" 1 0 0# "inline" 
+   (temp___expr_129 : int) (temp___is_init_126 : bool) (temp___skip_constant_127 : bool) (temp___do_toplevel_128 : bool)  =
+  #"system.ads" 1 0 0# (if (( temp___is_init_126 \/ (Standard__universal_integer.first <= Standard__universal_integer.last) )) then (
+   (Standard__universal_integer.dynamic_property Standard__universal_integer.first Standard__universal_integer.last temp___expr_129)) else true)
+ 
+ predicate default_initial_assumption #"system.ads" 1 0 0# "inline" 
+   (temp___expr_130 : int) (temp___skip_top_level_131 : bool)  =
+  #"system.ads" 1 0 0# true
+
+end
+
+(* Module for possibly declaring a logic function for "initialize" defined at tank1.ads:13, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__initialize
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for possibly declaring a logic function for "liquid_height" defined at tank1.ads:34, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__liquid_height
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_type
+
+ function liquid_height #"tank1.ads" 34 0 0# 
+   (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : Float32.t
+ 
+ predicate liquid_height__function_guard #"system.ads" 1 0 0# 
+   (result : Float32.t) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+ 
+ namespace Refine
+  function liquid_height #"tank1.ads" 34 0 0# 
+    (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : Float32.t
+  
+  predicate liquid_height__function_guard #"system.ads" 1 0 0# 
+    (result : Float32.t) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+
+ end
+
+end
+
+(* Module for possibly declaring a logic function for "valid_tank" defined at tank1.ads:79, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__valid_tank
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+
+ function valid_tank #"tank1.ads" 79 0 0# 
+   (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : bool
+ 
+ predicate valid_tank__function_guard #"tank1.adb" 8 0 0# 
+   (result : bool) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+
+end
+
+(* Module for possibly declaring a logic function for "liquid_in" defined at tank1.ads:42, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__liquid_in
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for possibly declaring a logic function for "liquid_out" defined at tank1.ads:51, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__liquid_out
+ use import "_gnatprove_standard".Main
+
+
+end
+
+(* Module for possibly declaring a logic function for "high_sensor_status" defined at tank1.ads:59, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__high_sensor_status
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+
+ function high_sensor_status #"tank1.ads" 59 0 0# 
+   (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : bool
+ 
+ predicate high_sensor_status__function_guard #"tank1.adb" 8 0 0# 
+   (result : bool) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+ 
+ namespace Refine
+  function high_sensor_status #"tank1.ads" 59 0 0# 
+    (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : bool
+  
+  predicate high_sensor_status__function_guard #"tank1.adb" 8 0 0# 
+    (result : bool) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+
+ end
+
+end
+
+(* Module for possibly declaring a logic function for "low_sensor_status" defined at tank1.ads:66, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__low_sensor_status
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+
+ function low_sensor_status #"tank1.ads" 66 0 0# 
+   (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : bool
+ 
+ predicate low_sensor_status__function_guard #"tank1.adb" 8 0 0# 
+   (result : bool) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+ 
+ namespace Refine
+  function low_sensor_status #"tank1.ads" 66 0 0# 
+    (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : bool
+  
+  predicate low_sensor_status__function_guard #"tank1.adb" 8 0 0# 
+    (result : bool) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+
+ end
+
+end
+
+(* Module for possibly declaring a logic function for "valid_sensors" defined at tank1.ads:73, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__valid_sensors
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+
+ function valid_sensors #"tank1.ads" 73 0 0# 
+   (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : bool
+ 
+ predicate valid_sensors__function_guard #"tank1.adb" 8 0 0# 
+   (result : bool) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+
+end
+
+(* Module for possibly declaring a logic function for "no_overflow" defined at tank1.ads:86, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__no_overflow
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+
+ function no_overflow #"tank1.ads" 86 0 0# 
+   (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : bool
+ 
+ predicate no_overflow__function_guard #"tank1.adb" 8 0 0# 
+   (result : bool) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+
+end
+
+(* Module for possibly declaring a logic function for "no_underflow" defined at tank1.ads:92, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Tank1__no_underflow
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+
+ function no_underflow #"tank1.ads" 92 0 0# 
+   (tank1__the_tank__fields : Tank1__tank_type.__split_fields) : bool
+ 
+ predicate no_underflow__function_guard #"tank1.adb" 8 0 0# 
+   (result : bool) (tank1__the_tank__fields : Tank1__tank_type.__split_fields) 
+
+end
+
+(* Module giving axioms for type "tank_height_float" defined at tank1.ads:8, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Tank1__tank_height_float___axiom
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_height_float
+
+ predicate dynamic_invariant #"tank1.adb" 8 0 0# "inline" 
+   (temp___expr_135 : Float32.t) (temp___is_init_132 : bool) (temp___skip_constant_133 : bool) (temp___do_toplevel_134 : bool)  =
+  #"tank1.ads" 8 0 0# (if (( temp___is_init_132 \/ (Float32.le Tank1__tank_height_float.first Tank1__tank_height_float.last) )) then (
+   (Tank1__tank_height_float.dynamic_property Tank1__tank_height_float.first Tank1__tank_height_float.last temp___expr_135)) else true)
+ 
+ predicate default_initial_assumption #"tank1.ads" 8 0 0# "inline" 
+   (temp___expr_136 : Float32.t) (temp___skip_top_level_137 : bool)  =
+  #"tank1.ads" 8 0 0# true
+
+end
+
+(* Module giving axioms for type "tank_area_float" defined at tank1.ads:9, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Tank1__tank_area_float___axiom
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_area_float
+
+ predicate dynamic_invariant #"tank1.ads" 8 0 0# "inline" 
+   (temp___expr_141 : Float32.t) (temp___is_init_138 : bool) (temp___skip_constant_139 : bool) (temp___do_toplevel_140 : bool)  =
+  #"tank1.ads" 9 0 0# (if (( temp___is_init_138 \/ (Float32.le Tank1__tank_area_float.first Tank1__tank_area_float.last) )) then (
+   (Tank1__tank_area_float.dynamic_property Tank1__tank_area_float.first Tank1__tank_area_float.last temp___expr_141)) else true)
+ 
+ predicate default_initial_assumption #"tank1.ads" 9 0 0# "inline" 
+   (temp___expr_142 : Float32.t) (temp___skip_top_level_143 : bool)  =
+  #"tank1.ads" 9 0 0# true
+
+end
+
+(* Module giving axioms for type "tank_volume_float" defined at tank1.ads:10, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Tank1__tank_volume_float___axiom
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_volume_float
+
+ predicate dynamic_invariant #"tank1.ads" 9 0 0# "inline" 
+   (temp___expr_147 : Float32.t) (temp___is_init_144 : bool) (temp___skip_constant_145 : bool) (temp___do_toplevel_146 : bool)  =
+  #"tank1.ads" 10 0 0# (if (( temp___is_init_144 \/ (Float32.le Tank1__tank_volume_float.first Tank1__tank_volume_float.last) )) then (
+   (Tank1__tank_volume_float.dynamic_property Tank1__tank_volume_float.first Tank1__tank_volume_float.last temp___expr_147)) else true)
+ 
+ predicate default_initial_assumption #"tank1.ads" 10 0 0# "inline" 
+   (temp___expr_148 : Float32.t) (temp___skip_top_level_149 : bool)  =
+  #"tank1.ads" 10 0 0# true
+
+end
+
+(* Module giving axioms for type "tank_type" defined at tank1.adb:8, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Tank1__tank_type___axiom
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__tank_type
+
+ predicate dynamic_invariant #"tank1.ads" 10 0 0# "inline" 
+   (temp___expr_163 : Tank1__tank_type.tank_type) (temp___is_init_160 : bool) (temp___skip_constant_161 : bool) (temp___do_toplevel_162 : bool)  =
+  #"tank1.adb" 8 0 0# (if (temp___do_toplevel_162) then (
+   (if (temp___is_init_160) then (
+    (let temp___164 = temp___expr_163 in (
+     (Float32.le (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields temp___164))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__max_volume (Tank1__tank_type.__split_fields temp___164))))))
+   ) else true)) else true)
+ 
+ predicate default_initial_assumption #"tank1.adb" 8 0 0# "inline" 
+   (temp___expr_165 : Tank1__tank_type.tank_type) (temp___skip_top_level_166 : bool)  =
+  #"tank1.adb" 8 0 0# true
+ 
+ predicate dynamic_predicate #"tank1.adb" 8 0 0# "inline" 
+   (temp___173 : Tank1__tank_type.tank_type)  =
+  #"tank1.adb" 8 0 0# (let temp___174 = temp___173 in (
+   (Float32.le (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields temp___174))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__max_volume (Tank1__tank_type.__split_fields temp___174))))))
+
+
+end
+(* Module for declaring a program function (and possibly an axiom) for "initialize" defined at tank1.ads:13, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Tank1__initialize___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+
+ val initialize #"tank1.ads" 13 0 0# 
+   (crossection_area : Float32.t) (height : Float32.t) (high_sensor_loc : Float32.t) (low_sensor_loc : Float32.t) : unit
+  requires { #"tank1.ads" 8 0 0# ( ( ( ( ( ( (Float32.gt crossection_area (0.0E-1:Float32.t)) /\ (Float32.gt height (0.0E-1:Float32.t)) ) /\ (Float32.gt high_sensor_loc (0.0E-1:Float32.t)) ) /\ (Float32.le high_sensor_loc height) ) /\ (Float32.lt low_sensor_loc high_sensor_loc) ) /\ (Float32.ge low_sensor_loc (0.0E-1:Float32.t)) ) /\ (Float32.lt low_sensor_loc height) ) }
+  ensures { #"tank1.ads" 14 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True True True) }
+  writes {Tank1__the_tank.the_tank__split_fields}
+
+end
+
+(* Module giving a program function and a defining axiom for the expression function "liquid_height" defined at tank1.ads:34, created in Gnat2Why.Subprograms.Translate_Expression_Function_Body *)
+module Tank1__liquid_height___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Standard__float___axiom
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__liquid_height
+
+ val liquid_height #"tank1.ads" 34 0 0# 
+   (__void_param : unit) : Float32.t
+  requires { #"system.ads" 1 0 0# true }
+  ensures { #"system.ads" 1 0 0# ( ( (result = (Tank1__liquid_height.liquid_height Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__liquid_height.liquid_height__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ (Standard__float___axiom.dynamic_invariant result True False True) ) }
+  reads {Tank1__the_tank.the_tank__split_fields}
+ 
+ namespace Refine
+  val liquid_height #"tank1.ads" 34 0 0# 
+    (__void_param : unit) : Float32.t
+   requires { #"system.ads" 1 0 0# true }
+   ensures { #"system.ads" 1 0 0# ( ( (result = (Tank1__liquid_height.Refine.liquid_height Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__liquid_height.Refine.liquid_height__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ ( (Standard__float___axiom.dynamic_invariant result True False True) /\ ( (result = (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) /\ (Float32.eq result (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) ) ) }
+   reads {Tank1__the_tank.the_tank__split_fields}
+
+ end
+ 
+ axiom liquid_height__post_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__liquid_height.liquid_height tank1__the_tank__fields)].
+   ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) -> (let result = (Tank1__liquid_height.liquid_height tank1__the_tank__fields) in (
+    (if ((Tank1__liquid_height.liquid_height__function_guard result tank1__the_tank__fields)) then (
+     ( ( true /\ (Standard__float___axiom.dynamic_invariant result True False True) ) /\ true )) else true)))
+    ))
+ 
+ axiom liquid_height__post_refine_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__liquid_height.Refine.liquid_height tank1__the_tank__fields)].
+   ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) -> (let result = (Tank1__liquid_height.Refine.liquid_height tank1__the_tank__fields) in (
+    (if ((Tank1__liquid_height.Refine.liquid_height__function_guard result tank1__the_tank__fields)) then (
+     ( ( (Float32.eq result (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) /\ (Standard__float___axiom.dynamic_invariant result True False True) ) /\ true )) else true)))
+    ))
+ 
+ axiom liquid_height__def_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__liquid_height.Refine.liquid_height tank1__the_tank__fields)].
+   ( ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) /\ (let result = (Tank1__liquid_height.Refine.liquid_height tank1__the_tank__fields) in (
+    (Tank1__liquid_height.Refine.liquid_height__function_guard result tank1__the_tank__fields)))
+    ) -> ((Tank1__liquid_height.Refine.liquid_height tank1__the_tank__fields) = (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) ))
+
+end
+
+(* Module giving a program function and a defining axiom for the expression function "valid_tank" defined at tank1.ads:79, created in Gnat2Why.Subprograms.Translate_Expression_Function_Body *)
+module Tank1__valid_tank___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_area_float
+ use        Tank1__tank_area_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_tank
+ use        Tank1__valid_sensors
+
+ val valid_tank #"tank1.ads" 79 0 0# 
+   (__void_param : unit) : bool
+  requires { #"tank1.ads" 79 0 0# true }
+  ensures { #"tank1.ads" 79 0 0# ( ( (result = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ ( (result = True) <-> ( ( ( ( ( ( ( (Float32.gt (Tank1__tank_area_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__crossection_area (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (0.0E-1:Float32.t)) /\ (Float32.gt (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__height (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (0.0E-1:Float32.t)) ) /\ (Float32.ge (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (0.0E-1:Float32.t)) ) /\ (Float32.le (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__height (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) /\ (Float32.gt (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) /\ (Float32.ge (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (0.0E-1:Float32.t)) ) /\ (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__height (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) /\ ((epsilon temp___result_150 : bool.
+   ( (temp___result_150 = (Tank1__valid_sensors.valid_sensors Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_sensors.valid_sensors__function_guard temp___result_150 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) ) ) ) }
+  reads {Tank1__the_tank.the_tank__split_fields}
+ 
+ axiom valid_tank__post_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__valid_tank.valid_tank tank1__the_tank__fields)].
+   ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) -> (let result = (Tank1__valid_tank.valid_tank tank1__the_tank__fields) in (
+    (if ((Tank1__valid_tank.valid_tank__function_guard result tank1__the_tank__fields)) then (
+     ( ( true /\ true ) /\ true )) else true)))
+    ))
+ 
+ axiom valid_tank__def_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__valid_tank.valid_tank tank1__the_tank__fields)].
+   ( (let result = (Tank1__valid_tank.valid_tank tank1__the_tank__fields) in (
+    (Tank1__valid_tank.valid_tank__function_guard result tank1__the_tank__fields)))
+    -> ( ((Tank1__valid_tank.valid_tank tank1__the_tank__fields) = True) <-> ( ( ( ( ( ( ( (Float32.gt (Tank1__tank_area_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__crossection_area (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (0.0E-1:Float32.t)) /\ (Float32.gt (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__height (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (0.0E-1:Float32.t)) ) /\ (Float32.ge (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (0.0E-1:Float32.t)) ) /\ (Float32.le (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__height (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) ) /\ (Float32.gt (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) ) /\ (Float32.ge (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (0.0E-1:Float32.t)) ) /\ (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__height (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) ) /\ ((epsilon temp___result_151 : bool.
+    ( (temp___result_151 = (Tank1__valid_sensors.valid_sensors tank1__the_tank__fields)) /\ (Tank1__valid_sensors.valid_sensors__function_guard temp___result_151 tank1__the_tank__fields) )) = True) ) ) ))
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "liquid_in" defined at tank1.ads:42, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Tank1__liquid_in___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_tank
+
+ val liquid_in #"tank1.ads" 42 0 0# 
+   (flow_in : Float32.t) : unit
+  requires { #"tank1.ads" 10 0 0# ( (Float32.ge flow_in (0.0E-1:Float32.t)) /\ ((epsilon temp___result_152 : bool.
+   ( (temp___result_152 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_152 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) ) }
+  ensures { #"tank1.adb" 8 0 0# ( ((epsilon temp___result_153 : bool.
+   ( (temp___result_153 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_153 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) /\ (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True True True) ) }
+  reads {Tank1__the_tank.the_tank__split_fields}
+  writes {Tank1__the_tank.the_tank__split_fields}
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "liquid_out" defined at tank1.ads:51, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Tank1__liquid_out___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_tank
+
+ val liquid_out #"tank1.ads" 51 0 0# 
+   (flow_out : Float32.t) : unit
+  requires { #"tank1.ads" 10 0 0# ( (Float32.ge flow_out (0.0E-1:Float32.t)) /\ ((epsilon temp___result_154 : bool.
+   ( (temp___result_154 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_154 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) ) }
+  ensures { #"tank1.adb" 8 0 0# ( ((epsilon temp___result_155 : bool.
+   ( (temp___result_155 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_155 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) /\ (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True True True) ) }
+  reads {Tank1__the_tank.the_tank__split_fields}
+  writes {Tank1__the_tank.the_tank__split_fields}
+
+end
+
+(* Module giving a program function and a defining axiom for the expression function "high_sensor_status" defined at tank1.ads:59, created in Gnat2Why.Subprograms.Translate_Expression_Function_Body *)
+module Tank1__high_sensor_status___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_tank
+ use        Tank1__high_sensor_status
+
+ val high_sensor_status #"tank1.ads" 59 0 0# 
+   (__void_param : unit) : bool
+  requires { #"tank1.ads" 59 0 0# ((epsilon temp___result_156 : bool.
+   ( (temp___result_156 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_156 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) }
+  ensures { #"tank1.adb" 8 0 0# ( ( (result = (Tank1__high_sensor_status.high_sensor_status Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__high_sensor_status.high_sensor_status__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ true ) }
+  reads {Tank1__the_tank.the_tank__split_fields}
+ 
+ namespace Refine
+  val high_sensor_status #"tank1.ads" 59 0 0# 
+    (__void_param : unit) : bool
+   requires { #"tank1.ads" 59 0 0# ((epsilon temp___result_156 : bool.
+    ( (temp___result_156 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_156 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) }
+   ensures { #"tank1.adb" 8 0 0# ( ( (result = (Tank1__high_sensor_status.Refine.high_sensor_status Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__high_sensor_status.Refine.high_sensor_status__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ ( ( (result = True) <-> ( (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) /\ (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) ) /\ ( ( (result = True) <-> (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) /\ (if ((result = True)) then (
+    (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))) else (
+    true)) ) ) ) }
+   reads {Tank1__the_tank.the_tank__split_fields}
+
+ end
+ 
+ axiom high_sensor_status__post_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__high_sensor_status.high_sensor_status tank1__the_tank__fields)].
+   ( ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) /\ ((epsilon temp___result_157 : bool.
+    ( (temp___result_157 = (Tank1__valid_tank.valid_tank tank1__the_tank__fields)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_157 tank1__the_tank__fields) )) = True) ) -> (let result = (Tank1__high_sensor_status.high_sensor_status tank1__the_tank__fields) in (
+    (if ((Tank1__high_sensor_status.high_sensor_status__function_guard result tank1__the_tank__fields)) then (
+     ( ( true /\ true ) /\ true )) else true)))
+    ))
+ 
+ axiom high_sensor_status__post_refine_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__high_sensor_status.Refine.high_sensor_status tank1__the_tank__fields)].
+   ( ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) /\ ((epsilon temp___result_157 : bool.
+    ( (temp___result_157 = (Tank1__valid_tank.valid_tank tank1__the_tank__fields)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_157 tank1__the_tank__fields) )) = True) ) -> (let result = (Tank1__high_sensor_status.Refine.high_sensor_status tank1__the_tank__fields) in (
+    (if ((Tank1__high_sensor_status.Refine.high_sensor_status__function_guard result tank1__the_tank__fields)) then (
+     ( ( ( ( (result = True) <-> (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) ) /\ (if ((result = True)) then (
+      (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))))) else (
+      true)) ) /\ true ) /\ true )) else true)))
+    ))
+ 
+ axiom high_sensor_status__def_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__high_sensor_status.Refine.high_sensor_status tank1__the_tank__fields)].
+   ( (let result = (Tank1__high_sensor_status.Refine.high_sensor_status tank1__the_tank__fields) in (
+    (Tank1__high_sensor_status.Refine.high_sensor_status__function_guard result tank1__the_tank__fields)))
+    -> ( ((Tank1__high_sensor_status.Refine.high_sensor_status tank1__the_tank__fields) = True) <-> ( (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) /\ (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) ) ) ))
+
+end
+
+(* Module giving a program function and a defining axiom for the expression function "low_sensor_status" defined at tank1.ads:66, created in Gnat2Why.Subprograms.Translate_Expression_Function_Body *)
+module Tank1__low_sensor_status___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_tank
+ use        Tank1__low_sensor_status
+
+ val low_sensor_status #"tank1.ads" 66 0 0# 
+   (__void_param : unit) : bool
+  requires { #"tank1.ads" 66 0 0# ((epsilon temp___result_158 : bool.
+   ( (temp___result_158 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_158 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) }
+  ensures { #"tank1.adb" 8 0 0# ( ( (result = (Tank1__low_sensor_status.low_sensor_status Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__low_sensor_status.low_sensor_status__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ true ) }
+  reads {Tank1__the_tank.the_tank__split_fields}
+ 
+ namespace Refine
+  val low_sensor_status #"tank1.ads" 66 0 0# 
+    (__void_param : unit) : bool
+   requires { #"tank1.ads" 66 0 0# ((epsilon temp___result_158 : bool.
+    ( (temp___result_158 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_158 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) }
+   ensures { #"tank1.adb" 8 0 0# ( ( (result = (Tank1__low_sensor_status.Refine.low_sensor_status Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__low_sensor_status.Refine.low_sensor_status__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ ( ( (result = True) <-> (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) /\ ( (result = True) <-> (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) ) ) }
+   reads {Tank1__the_tank.the_tank__split_fields}
+
+ end
+ 
+ axiom low_sensor_status__post_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__low_sensor_status.low_sensor_status tank1__the_tank__fields)].
+   ( ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) /\ ((epsilon temp___result_159 : bool.
+    ( (temp___result_159 = (Tank1__valid_tank.valid_tank tank1__the_tank__fields)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_159 tank1__the_tank__fields) )) = True) ) -> (let result = (Tank1__low_sensor_status.low_sensor_status tank1__the_tank__fields) in (
+    (if ((Tank1__low_sensor_status.low_sensor_status__function_guard result tank1__the_tank__fields)) then (
+     ( ( true /\ true ) /\ true )) else true)))
+    ))
+ 
+ axiom low_sensor_status__post_refine_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__low_sensor_status.Refine.low_sensor_status tank1__the_tank__fields)].
+   ( ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) /\ ((epsilon temp___result_159 : bool.
+    ( (temp___result_159 = (Tank1__valid_tank.valid_tank tank1__the_tank__fields)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_159 tank1__the_tank__fields) )) = True) ) -> (let result = (Tank1__low_sensor_status.Refine.low_sensor_status tank1__the_tank__fields) in (
+    (if ((Tank1__low_sensor_status.Refine.low_sensor_status__function_guard result tank1__the_tank__fields)) then (
+     ( ( ( (result = True) <-> (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) ) /\ true ) /\ true )) else true)))
+    ))
+ 
+ axiom low_sensor_status__def_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__low_sensor_status.Refine.low_sensor_status tank1__the_tank__fields)].
+   ( (let result = (Tank1__low_sensor_status.Refine.low_sensor_status tank1__the_tank__fields) in (
+    (Tank1__low_sensor_status.Refine.low_sensor_status__function_guard result tank1__the_tank__fields)))
+    -> ( ((Tank1__low_sensor_status.Refine.low_sensor_status tank1__the_tank__fields) = True) <-> (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) ) ))
+
+end
+
+(* Module giving a program function and a defining axiom for the expression function "valid_sensors" defined at tank1.ads:73, created in Gnat2Why.Subprograms.Translate_Expression_Function_Body *)
+module Tank1__valid_sensors___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_sensors
+
+ val valid_sensors #"tank1.ads" 73 0 0# 
+   (__void_param : unit) : bool
+  requires { #"tank1.ads" 73 0 0# true }
+  ensures { #"tank1.ads" 73 0 0# ( ( (result = (Tank1__valid_sensors.valid_sensors Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_sensors.valid_sensors__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ ( (result = True) <-> (if ((Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))) then (
+   (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))) else (
+   true)) ) ) }
+  reads {Tank1__the_tank.the_tank__split_fields}
+ 
+ axiom valid_sensors__post_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__valid_sensors.valid_sensors tank1__the_tank__fields)].
+   ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) -> (let result = (Tank1__valid_sensors.valid_sensors tank1__the_tank__fields) in (
+    (if ((Tank1__valid_sensors.valid_sensors__function_guard result tank1__the_tank__fields)) then (
+     ( ( true /\ true ) /\ true )) else true)))
+    ))
+ 
+ axiom valid_sensors__def_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__valid_sensors.valid_sensors tank1__the_tank__fields)].
+   ( (let result = (Tank1__valid_sensors.valid_sensors tank1__the_tank__fields) in (
+    (Tank1__valid_sensors.valid_sensors__function_guard result tank1__the_tank__fields)))
+    -> ( ((Tank1__valid_sensors.valid_sensors tank1__the_tank__fields) = True) <-> (if ((Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))))) then (
+    (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))))) else (
+    true)) ) ))
+
+end
+
+(* Module giving a program function and a defining axiom for the expression function "no_overflow" defined at tank1.ads:86, created in Gnat2Why.Subprograms.Translate_Expression_Function_Body *)
+module Tank1__no_overflow___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__no_overflow
+
+ val no_overflow #"tank1.ads" 86 0 0# 
+   (__void_param : unit) : bool
+  requires { #"tank1.ads" 86 0 0# true }
+  ensures { #"tank1.ads" 86 0 0# ( ( (result = (Tank1__no_overflow.no_overflow Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__no_overflow.no_overflow__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ ( (result = True) <-> (Float32.lt (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__max_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) ) }
+  reads {Tank1__the_tank.the_tank__split_fields}
+ 
+ axiom no_overflow__post_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__no_overflow.no_overflow tank1__the_tank__fields)].
+   ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) -> (let result = (Tank1__no_overflow.no_overflow tank1__the_tank__fields) in (
+    (if ((Tank1__no_overflow.no_overflow__function_guard result tank1__the_tank__fields)) then (
+     ( ( true /\ true ) /\ true )) else true)))
+    ))
+ 
+ axiom no_overflow__def_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__no_overflow.no_overflow tank1__the_tank__fields)].
+   ( (let result = (Tank1__no_overflow.no_overflow tank1__the_tank__fields) in (
+    (Tank1__no_overflow.no_overflow__function_guard result tank1__the_tank__fields)))
+    -> ( ((Tank1__no_overflow.no_overflow tank1__the_tank__fields) = True) <-> (Float32.lt (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__max_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields })))) ) ))
+
+end
+
+(* Module giving a program function and a defining axiom for the expression function "no_underflow" defined at tank1.ads:92, created in Gnat2Why.Subprograms.Translate_Expression_Function_Body *)
+module Tank1__no_underflow___axiom
+ use        Tank1__the_tank
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__no_underflow
+
+ val no_underflow #"tank1.ads" 92 0 0# 
+   (__void_param : unit) : bool
+  requires { #"tank1.ads" 92 0 0# true }
+  ensures { #"tank1.ads" 92 0 0# ( ( (result = (Tank1__no_underflow.no_underflow Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__no_underflow.no_underflow__function_guard result Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) ) /\ ( (result = True) <-> (Float32.gt (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (0.0E-1:Float32.t)) ) ) }
+  reads {Tank1__the_tank.the_tank__split_fields}
+ 
+ axiom no_underflow__post_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__no_underflow.no_underflow tank1__the_tank__fields)].
+   ( (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = tank1__the_tank__fields } True True True) -> (let result = (Tank1__no_underflow.no_underflow tank1__the_tank__fields) in (
+    (if ((Tank1__no_underflow.no_underflow__function_guard result tank1__the_tank__fields)) then (
+     ( ( true /\ true ) /\ true )) else true)))
+    ))
+ 
+ axiom no_underflow__def_axiom :
+  (forall tank1__the_tank__fields #"tank1.adb" 20 0 0#  : Tank1__tank_type.__split_fields [(Tank1__no_underflow.no_underflow tank1__the_tank__fields)].
+   ( (let result = (Tank1__no_underflow.no_underflow tank1__the_tank__fields) in (
+    (Tank1__no_underflow.no_underflow__function_guard result tank1__the_tank__fields)))
+    -> ( ((Tank1__no_underflow.no_underflow tank1__the_tank__fields) = True) <-> (Float32.gt (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = tank1__the_tank__fields }))) (0.0E-1:Float32.t)) ) ))
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "tank_typePredicate" defined at tank1.adb:8, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Tank1__tank_typePredicate___axiom
+ use import "_gnatprove_standard".Main
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__tank_typePredicate
+
+ val tank_typePredicate #"tank1.adb" 8 0 0# 
+   (i1b : Tank1__tank_type.tank_type) : bool
+  requires { #"tank1.adb" 8 0 0# true }
+  ensures { #"tank1.adb" 8 0 0# ( ( (result = (Tank1__tank_typePredicate.tank_typePredicate i1b)) /\ (Tank1__tank_typePredicate.tank_typePredicate__function_guard result i1b) ) /\ true ) }
+ 
+ axiom tank_typePredicate__post_axiom :
+  (forall i1b #"tank1.adb" 8 0 0#  : Tank1__tank_type.tank_type [(Tank1__tank_typePredicate.tank_typePredicate i1b)].
+   ( (Tank1__tank_type___axiom.dynamic_invariant i1b True True True) -> (let result = (Tank1__tank_typePredicate.tank_typePredicate i1b) in (
+    (if ((Tank1__tank_typePredicate.tank_typePredicate__function_guard result i1b)) then (
+     ( ( true /\ true ) /\ true )) else true)))
+    ))
+
+end
+
+(* Module for checking absence of run-time errors and package initial condition on package elaboration of "tank1" defined at tank1.ads:2, created in Gnat2Why.Subprograms.Generate_VCs_For_Package_Elaboration *)
+module Tank1__package_def
+ use import "_gnatprove_standard".Main
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+
+ let def #"tank1.adb" 8 0 0# "GP_Subp:tank1.ads:2" "W:diverges:N" 
+   (__void_param : unit)
+  requires { #"tank1.adb" 8 0 0# true }
+  ensures { #"tank1.adb" 8 0 0# true }
+   =
+  ( #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = () in (
+   ()))
+   end ;
+  #"tank1.adb" 20 0 0# assume { #"tank1.adb" 20 0 0# (Tank1__tank_type___axiom.default_initial_assumption { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } False) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } False False True) };
+  ( "GP_Sloc:tank1.adb:123:1" () ) )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "initialize" defined at tank1.ads:13, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__initialize__subprogram_def
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        "_gnatprove_standard".Boolean
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_area_float
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_area_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__initialize__crossection_area
+ use        Tank1__initialize__height
+ use        Tank1__initialize__high_sensor_loc
+ use        Tank1__initialize__low_sensor_loc
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__initialize__crossection_area___axiom
+ use        Tank1__initialize__height___axiom
+ use        Tank1__initialize__high_sensor_loc___axiom
+ use        Tank1__initialize__low_sensor_loc___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ let def #"tank1.adb" 8 0 0# "W:diverges:N" "GP_Subp:tank1.ads:13" 
+   (__void_param : unit)
+  requires { #"tank1.adb" 8 0 0# true }
+  ensures { #"tank1.adb" 8 0 0# true }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:13 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } False False True) };
+  #"tank1.ads" 9 0 0# assume { #"tank1.ads" 9 0 0# (Tank1__tank_area_float___axiom.dynamic_invariant Tank1__initialize__crossection_area.crossection_area True False True) };
+  #"tank1.ads" 8 0 0# assume { #"tank1.ads" 8 0 0# (Tank1__tank_height_float___axiom.dynamic_invariant Tank1__initialize__height.height True False True) };
+  #"tank1.ads" 8 0 0# assume { #"tank1.ads" 8 0 0# (Tank1__tank_height_float___axiom.dynamic_invariant Tank1__initialize__high_sensor_loc.high_sensor_loc True False True) };
+  #"tank1.ads" 8 0 0# assume { #"tank1.ads" 8 0 0# (Tank1__tank_height_float___axiom.dynamic_invariant Tank1__initialize__low_sensor_loc.low_sensor_loc True False True) };
+  #"tank1.ads" 16 0 0# assume { #"tank1.ads" 16 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:13 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:13 *)
+  ;
+  #"tank1.ads" 16 0 0# abstract ensures {true}(let _ = (Boolean.andb((Boolean.andb((Boolean.andb((Boolean.andb((Boolean.andb((Boolean.andb((Float32.gt(Tank1__initialize__crossection_area.crossection_area) ((0.0E-1:Float32.t)))) ((Float32.gt(Tank1__initialize__height.height) ((0.0E-1:Float32.t)))))) ((Float32.gt(Tank1__initialize__high_sensor_loc.high_sensor_loc) ((0.0E-1:Float32.t)))))) ((Float32.le(Tank1__initialize__high_sensor_loc.high_sensor_loc) (Tank1__initialize__height.height))))) ((Float32.lt(Tank1__initialize__low_sensor_loc.low_sensor_loc) (Tank1__initialize__high_sensor_loc.high_sensor_loc))))) ((Float32.ge(Tank1__initialize__low_sensor_loc.low_sensor_loc) ((0.0E-1:Float32.t)))))) ((Float32.lt(Tank1__initialize__low_sensor_loc.low_sensor_loc) (Tank1__initialize__height.height)))) in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:13 *)
+  ;
+  #"tank1.ads" 14 0 0# assume { #"tank1.ads" 14 0 0# ( ( ( ( ( ( (Float32.gt Tank1__initialize__crossection_area.crossection_area (0.0E-1:Float32.t)) /\ (Float32.gt Tank1__initialize__height.height (0.0E-1:Float32.t)) ) /\ (Float32.gt Tank1__initialize__high_sensor_loc.high_sensor_loc (0.0E-1:Float32.t)) ) /\ (Float32.le Tank1__initialize__high_sensor_loc.high_sensor_loc Tank1__initialize__height.height) ) /\ (Float32.lt Tank1__initialize__low_sensor_loc.low_sensor_loc Tank1__initialize__high_sensor_loc.high_sensor_loc) ) /\ (Float32.ge Tank1__initialize__low_sensor_loc.low_sensor_loc (0.0E-1:Float32.t)) ) /\ (Float32.lt Tank1__initialize__low_sensor_loc.low_sensor_loc Tank1__initialize__height.height) ) };
+  #"tank1.ads" 14 0 0# try
+   ( ( "GP_Sloc:tank1.adb:29:7" () );
+   ( "GP_Sloc:tank1.adb:29:16" (let temp___178 = (let temp___177 = { Tank1__tank_type.__split_fields = { Tank1__tank_type.rec__tank1__tank_type__crossection_area = (Tank1__tank_area_float__rep.of_rep(Tank1__initialize__crossection_area.crossection_area)); Tank1__tank_type.rec__tank1__tank_type__height = (Tank1__tank_height_float__rep.of_rep(Tank1__initialize__height.height)); Tank1__tank_type.rec__tank1__tank_type__max_volume = (Tank1__tank_volume_float__rep.of_rep((Float32.mul_rne(Tank1__initialize__crossection_area.crossection_area) (Tank1__initialize__height.height)))); Tank1__tank_type.rec__tank1__tank_type__cur_volume = (Tank1__tank_volume_float__rep.of_rep((0.0E-1:Float32.t))); Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc = (Tank1__tank_height_float__rep.of_rep(Tank1__initialize__high_sensor_loc.high_sensor_loc)); Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc = (Tank1__tank_height_float__rep.of_rep(Tank1__initialize__low_sensor_loc.low_sensor_loc)) } } in (
+    ( #"tank1.ads" 16 0 0# assert { #"tank1.ads" 16 0 0# ( #"tank1.ads" 16 0 0# "model_vc" "keep_on_simp" "GP_Sloc:tank1.adb:29:19" "GP_Reason:VC_PREDICATE_CHECK" "GP_Id:2" "comment:      The_Tank := (Crossection_Area => Crossection_Area,
+                  ^ tank1.adb:29:19:VC_PREDICATE_CHECK" "GP_Shape:the_tank_assign__aggr" (Tank1__tank_type___axiom.dynamic_predicate temp___177) ) };
+    temp___177 )))
+    in (
+    #"tank1.adb" 29 0 0# Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content <- ( (Tank1__tank_type.__split_fields(temp___178)) )))
+    );
+   #"tank1.adb" 23 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 23 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end  )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "liquid_height" defined at tank1.ads:34, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__liquid_height__subprogram_def
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ val tank1__liquid_height__result #"tank1.ads" 34 0 0# "model_projected" "model_trace:2949@result" "name:Liquid_Height"  : Float32.t__ref 
+ 
+ let def #"system.ads" 1 0 0# "W:diverges:N" "GP_Subp:tank1.ads:34" 
+   (__void_param : unit)
+  requires { #"system.ads" 1 0 0# true }
+  ensures { #"system.ads" 1 0 0# true }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:34 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:34 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:34 *)
+  ;
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:34 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  #"tank1.adb" 40 0 0# abstract ensures {( #"tank1.adb" 40 0 0# "model_vc" "keep_on_simp" "GP_Sloc:tank1.adb:40:24" "GP_Reason:VC_REFINED_POST" "GP_Id:3" "comment:       Refined_Post => (Liquid_Height'Result = The_Tank.Cur_Volume);
+                       ^ tank1.adb:40:24:VC_REFINED_POST" "GP_Shape:pragargs__cmp" (Float32.eq tank1__liquid_height__result.Float32.t__content (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) )}( #"tank1.adb" 8 0 0# try
+   ( ( "GP_Sloc:tank1.adb:38:45" () );
+   ( "GP_Sloc:tank1.adb:38:53" ( #"tank1.adb" 38 0 0# tank1__liquid_height__result.Float32.t__content <- ( (Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))) );
+   #"tank1.adb" 38 0 0# raise Return__exc ) );
+   #"tank1.adb" 38 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 38 0 0# abstract ensures {true}(let _ = (Float32.eq(tank1__liquid_height__result.Float32.t__content) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))))) in (
+   ()))
+   end  ) end ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  tank1__liquid_height__result.Float32.t__content )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "valid_tank" defined at tank1.ads:79, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__valid_tank__subprogram_def
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_area_float
+ use        Tank1__tank_area_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_sensors___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__valid_sensors___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ val tank1__valid_tank__result #"tank1.ads" 79 0 0# "model_projected" "model_trace:3155@result" "name:Valid_Tank"  : bool__ref 
+ 
+ let def #"tank1.ads" 79 0 0# "W:diverges:N" "GP_Subp:tank1.ads:79" 
+   (__void_param : unit)
+  requires { #"tank1.ads" 79 0 0# true }
+  ensures { #"tank1.ads" 79 0 0# true }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:79 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:79 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:79 *)
+  ;
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:79 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  #"tank1.adb" 8 0 0# try
+   ( ( "GP_Sloc:tank1.adb:102:8" () );
+   ( "GP_Sloc:tank1.adb:108:49" ( #"tank1.adb" 108 0 0# tank1__valid_tank__result.bool__content <- ( ( ( ( ( ( ( ( (Float32.gt((Tank1__tank_area_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__crossection_area((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((0.0E-1:Float32.t))) && (Float32.gt((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__height((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((0.0E-1:Float32.t))) ) && (Float32.ge((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((0.0E-1:Float32.t))) ) && (Float32.le((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__height((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))))) ) && (Float32.gt((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))))) ) && (Float32.ge((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((0.0E-1:Float32.t))) ) && (Float32.le((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__height((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))))) ) && (Tank1__valid_sensors___axiom.valid_sensors(())) ) );
+   #"tank1.adb" 108 0 0# raise Return__exc ) );
+   #"tank1.adb" 100 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 100 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  tank1__valid_tank__result.bool__content )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "liquid_in" defined at tank1.ads:42, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__liquid_in__subprogram_def
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        "_gnatprove_standard".Boolean
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__liquid_in__flow_in
+ use        Tank1__valid_tank
+ use        Tank1__valid_tank___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__liquid_in__flow_in___axiom
+ use        Tank1__valid_sensors___axiom
+ use        Tank1__valid_tank___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ let def #"tank1.adb" 100 0 0# "W:diverges:N" "GP_Subp:tank1.ads:42" 
+   (__void_param : unit)
+  requires { #"tank1.adb" 100 0 0# true }
+  ensures { #"tank1.adb" 100 0 0# ( #"tank1.ads" 47 0 0# "model_vc_post" "keep_on_simp" "GP_Sloc:tank1.ads:47:16" "GP_Reason:VC_POSTCONDITION" "GP_Id:9" "comment:       Post => (Valid_Tank);
+               ^ tank1.ads:47:16:VC_POSTCONDITION" "GP_Shape:pragargs__call_valid_tank" ( "GP_Pretty_Ada:3393" "GP_Sloc:tank1.ads:47:16" ((epsilon temp___result_186 : bool.
+   ( (temp___result_186 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_186 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) ) ) }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:42 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True False True) };
+  #"tank1.ads" 10 0 0# assume { #"tank1.ads" 10 0 0# (Tank1__tank_volume_float___axiom.dynamic_invariant Tank1__liquid_in__flow_in.flow_in True False True) };
+  #"tank1.ads" 42 0 0# assume { #"tank1.ads" 42 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:42 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:42 *)
+  ;
+  #"tank1.ads" 42 0 0# abstract ensures {true}(let _ = (Boolean.andb((Float32.ge(Tank1__liquid_in__flow_in.flow_in) ((0.0E-1:Float32.t)))) ((Tank1__valid_tank___axiom.valid_tank(())))) in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:42 *)
+  ;
+  #"tank1.ads" 79 0 0# assume { #"tank1.ads" 79 0 0# ( (Float32.ge Tank1__liquid_in__flow_in.flow_in (0.0E-1:Float32.t)) /\ ((epsilon temp___result_185 : bool.
+   ( (temp___result_185 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_185 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) ) };
+  #"tank1.adb" 8 0 0# try
+   ( ( "GP_Sloc:tank1.adb:47:12" () );
+   ( "GP_Sloc:tank1.adb:48:9" () );
+   ( "GP_Sloc:tank1.adb:47:7" (if ((Float32.gt((Float32.add_rne((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) (Tank1__liquid_in__flow_in.flow_in))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__max_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))))) then (
+    ( ( "GP_Sloc:tank1.adb:49:13" () );
+    ( "GP_Sloc:tank1.adb:49:36" () );
+    ( "GP_Sloc:tank1.adb:49:33" (let temp___184 = (let temp___183 = (let temp___182 = { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } in (
+     ( #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = (Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields(temp___182)))) in (
+      ()))
+      end ;
+     { ( temp___182 ) with Tank1__tank_type.__split_fields = { ( (Tank1__tank_type.__split_fields(temp___182)) ) with Tank1__tank_type.rec__tank1__tank_type__cur_volume = (Tank1__tank_volume_float__rep.of_rep((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__max_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))))) } } )))
+     in (
+     ( #"tank1.adb" 8 0 0# assert { #"tank1.adb" 8 0 0# ( #"tank1.adb" 8 0 0# "model_vc" "keep_on_simp" "GP_Reason:VC_PREDICATE_CHECK" "GP_Shape:if__the_tank_assign__selectcomp" "GP_Sloc:tank1.adb:49:21" "GP_Id:7" "comment:            The_Tank.Cur_Volume := The_Tank.Max_Volume;
+                    ^ tank1.adb:49:21:VC_PREDICATE_CHECK" (Tank1__tank_type___axiom.dynamic_predicate temp___183) ) };
+     temp___183 )))
+     in (
+     #"tank1.adb" 49 0 0# Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content <- ( (Tank1__tank_type.__split_fields(temp___184)) )))
+     ) )) else (
+    ( ( "GP_Sloc:tank1.adb:51:9" () );
+    ( "GP_Sloc:tank1.adb:51:32" () );
+    ( "GP_Sloc:tank1.adb:51:29" (let temp___181 = (let temp___180 = (let temp___179 = { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } in (
+     ( #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = (Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields(temp___179)))) in (
+      ()))
+      end ;
+     { ( temp___179 ) with Tank1__tank_type.__split_fields = { ( (Tank1__tank_type.__split_fields(temp___179)) ) with Tank1__tank_type.rec__tank1__tank_type__cur_volume = (Tank1__tank_volume_float__rep.of_rep(( #"tank1.adb" 51 0 0# "model_vc" "keep_on_simp" "GP_Sloc:tank1.adb:51:52" "GP_Reason:VC_RANGE_CHECK" "GP_Id:5" "comment:        The_Tank.Cur_Volume := The_Tank.Cur_Volume +
+                                                   ^ tank1.adb:51:52:VC_RANGE_CHECK" "GP_Shape:if__the_tank_assign__add" (Tank1__tank_volume_float.range_check_((Float32.add_rne((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) (Tank1__liquid_in__flow_in.flow_in)))) ))) } } )))
+     in (
+     ( #"tank1.ads" 42 0 0# assert { #"tank1.ads" 42 0 0# ( #"tank1.ads" 42 0 0# "model_vc" "keep_on_simp" "GP_Reason:VC_PREDICATE_CHECK" "GP_Sloc:tank1.adb:51:17" "GP_Id:6" "comment:        The_Tank.Cur_Volume := The_Tank.Cur_Volume +
+                ^ tank1.adb:51:17:VC_PREDICATE_CHECK" "GP_Shape:if__the_tank_assign__selectcomp" (Tank1__tank_type___axiom.dynamic_predicate temp___180) ) };
+     temp___180 )))
+     in (
+     #"tank1.adb" 51 0 0# Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content <- ( (Tank1__tank_type.__split_fields(temp___181)) )))
+     ) ))) );
+   #"tank1.adb" 44 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 44 0 0# abstract ensures {true}(let _ = (Tank1__valid_tank___axiom.valid_tank(())) in (
+   ()))
+   end  )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "liquid_out" defined at tank1.ads:51, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__liquid_out__subprogram_def
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        "_gnatprove_standard".Boolean
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_tank
+ use        Tank1__valid_tank___axiom
+ use        Tank1__liquid_out__flow_out
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__liquid_out__flow_out___axiom
+ use        Tank1__valid_sensors___axiom
+ use        Tank1__valid_tank___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ let def #"tank1.ads" 79 0 0# "W:diverges:N" "GP_Subp:tank1.ads:51" 
+   (__void_param : unit)
+  requires { #"tank1.ads" 79 0 0# true }
+  ensures { #"tank1.ads" 79 0 0# ( #"tank1.ads" 56 0 0# "model_vc_post" "keep_on_simp" "GP_Reason:VC_POSTCONDITION" "GP_Shape:pragargs__call_valid_tank" "GP_Sloc:tank1.ads:56:16" "GP_Id:15" "comment:       Post => (Valid_Tank);
+               ^ tank1.ads:56:16:VC_POSTCONDITION" ( "GP_Pretty_Ada:3447" "GP_Sloc:tank1.ads:56:16" ((epsilon temp___result_194 : bool.
+   ( (temp___result_194 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_194 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) ) ) }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:51 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True False True) };
+  #"tank1.ads" 10 0 0# assume { #"tank1.ads" 10 0 0# (Tank1__tank_volume_float___axiom.dynamic_invariant Tank1__liquid_out__flow_out.flow_out True False True) };
+  #"tank1.ads" 51 0 0# assume { #"tank1.ads" 51 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:51 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:51 *)
+  ;
+  #"tank1.ads" 51 0 0# abstract ensures {true}(let _ = (Boolean.andb((Float32.ge(Tank1__liquid_out__flow_out.flow_out) ((0.0E-1:Float32.t)))) ((Tank1__valid_tank___axiom.valid_tank(())))) in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:51 *)
+  ;
+  #"tank1.ads" 79 0 0# assume { #"tank1.ads" 79 0 0# ( (Float32.ge Tank1__liquid_out__flow_out.flow_out (0.0E-1:Float32.t)) /\ ((epsilon temp___result_193 : bool.
+   ( (temp___result_193 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_193 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) ) };
+  #"tank1.adb" 8 0 0# try
+   ( ( "GP_Sloc:tank1.adb:62:12" () );
+   ( "GP_Sloc:tank1.adb:62:7" (if ((Float32.lt((Float32.sub_rne((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) (Tank1__liquid_out__flow_out.flow_out))) ((0.0E-1:Float32.t)))) then (
+    ( ( "GP_Sloc:tank1.adb:63:10" () );
+    ( "GP_Sloc:tank1.adb:63:30" (let temp___192 = (let temp___191 = (let temp___190 = { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } in (
+     ( #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = (Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields(temp___190)))) in (
+      ()))
+      end ;
+     { ( temp___190 ) with Tank1__tank_type.__split_fields = { ( (Tank1__tank_type.__split_fields(temp___190)) ) with Tank1__tank_type.rec__tank1__tank_type__cur_volume = (Tank1__tank_volume_float__rep.of_rep((0.0E-1:Float32.t))) } } )))
+     in (
+     ( #"tank1.adb" 63 0 0# assert { #"tank1.adb" 63 0 0# ( #"tank1.adb" 63 0 0# "model_vc" "keep_on_simp" "GP_Reason:VC_PREDICATE_CHECK" "GP_Shape:if__the_tank_assign__selectcomp" "GP_Sloc:tank1.adb:63:18" "GP_Id:13" "comment:         The_Tank.Cur_Volume := 0.0;
+                 ^ tank1.adb:63:18:VC_PREDICATE_CHECK" (Tank1__tank_type___axiom.dynamic_predicate temp___191) ) };
+     temp___191 )))
+     in (
+     #"tank1.adb" 63 0 0# Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content <- ( (Tank1__tank_type.__split_fields(temp___192)) )))
+     ) )) else (
+    ( ( "GP_Sloc:tank1.adb:65:10" () );
+    ( "GP_Sloc:tank1.adb:65:33" () );
+    ( "GP_Sloc:tank1.adb:65:30" (let temp___189 = (let temp___188 = (let temp___187 = { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } in (
+     ( #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = (Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields(temp___187)))) in (
+      ()))
+      end ;
+     { ( temp___187 ) with Tank1__tank_type.__split_fields = { ( (Tank1__tank_type.__split_fields(temp___187)) ) with Tank1__tank_type.rec__tank1__tank_type__cur_volume = (Tank1__tank_volume_float__rep.of_rep(( #"tank1.adb" 65 0 0# "model_vc" "keep_on_simp" "GP_Reason:VC_RANGE_CHECK" "GP_Sloc:tank1.adb:65:53" "GP_Id:11" "comment:         The_Tank.Cur_Volume := The_Tank.Cur_Volume - 
+                                                    ^ tank1.adb:65:53:VC_RANGE_CHECK" "GP_Shape:if__the_tank_assign__sub" (Tank1__tank_volume_float.range_check_((Float32.sub_rne((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) (Tank1__liquid_out__flow_out.flow_out)))) ))) } } )))
+     in (
+     ( #"tank1.ads" 51 0 0# assert { #"tank1.ads" 51 0 0# ( #"tank1.ads" 51 0 0# "model_vc" "keep_on_simp" "GP_Reason:VC_PREDICATE_CHECK" "GP_Shape:if__the_tank_assign__selectcomp" "GP_Sloc:tank1.adb:65:18" "GP_Id:12" "comment:         The_Tank.Cur_Volume := The_Tank.Cur_Volume - 
+                 ^ tank1.adb:65:18:VC_PREDICATE_CHECK" (Tank1__tank_type___axiom.dynamic_predicate temp___188) ) };
+     temp___188 )))
+     in (
+     #"tank1.adb" 65 0 0# Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content <- ( (Tank1__tank_type.__split_fields(temp___189)) )))
+     ) ))) );
+   #"tank1.adb" 59 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 59 0 0# abstract ensures {true}(let _ = (Tank1__valid_tank___axiom.valid_tank(())) in (
+   ()))
+   end  )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "high_sensor_status" defined at tank1.ads:59, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__high_sensor_status__subprogram_def
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        "_gnatprove_standard".Float32
+ use        "_gnatprove_standard".Boolean
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_tank
+ use        Tank1__valid_tank___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__valid_sensors___axiom
+ use        Tank1__valid_tank___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ val tank1__high_sensor_status__result #"tank1.ads" 59 0 0# "model_projected" "model_trace:3065@result" "name:High_Sensor_Status"  : bool__ref 
+ 
+ let def #"tank1.ads" 59 0 0# "W:diverges:N" "GP_Subp:tank1.ads:59" 
+   (__void_param : unit)
+  requires { #"tank1.ads" 59 0 0# true }
+  ensures { #"tank1.ads" 59 0 0# true }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:59 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:59 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:59 *)
+  ;
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = (Tank1__valid_tank___axiom.valid_tank(())) in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:59 *)
+  ;
+  #"tank1.ads" 79 0 0# assume { #"tank1.ads" 79 0 0# ((epsilon temp___result_195 : bool.
+   ( (temp___result_195 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_195 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) };
+  #"tank1.adb" 77 0 0# abstract ensures {( #"tank1.adb" 77 0 0# "model_vc" "keep_on_simp" "GP_Reason:VC_REFINED_POST" "GP_Sloc:tank1.adb:77:20" "GP_Id:16" "comment:   Refined_Post => ((High_Sensor_Status'Result = 
+                   ^ tank1.adb:77:20:VC_REFINED_POST" "GP_Shape:pragargs__andthen" ( ( (tank1__high_sensor_status__result.bool__content = True) <-> (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) /\ (if ((tank1__high_sensor_status__result.bool__content = True)) then (
+   (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))) else (
+   true)) ) )}( #"system.ads" 1 0 0# try
+   ( ( "GP_Sloc:tank1.adb:74:8" () );
+   ( "GP_Sloc:tank1.adb:74:33" () );
+   ( "GP_Sloc:tank1.adb:74:54" ( #"tank1.adb" 74 0 0# tank1__high_sensor_status__result.bool__content <- ( ( (Float32.le((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))))) && (Float32.le((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))))) ) );
+   #"tank1.adb" 74 0 0# raise Return__exc ) );
+   #"tank1.adb" 71 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 71 0 0# abstract ensures {true}(let _ = ( ((Boolean.to_int(tank1__high_sensor_status__result.bool__content)) = (Boolean.to_int((Float32.le((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))))))) && (if (tank1__high_sensor_status__result.bool__content) then (
+   (Float32.le((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))))) else (
+   (Boolean.of_int(1)))) ) in (
+   ()))
+   end  ) end ;
+  #"tank1.adb" 79 0 0# assume { #"tank1.adb" 79 0 0# true };
+  #"tank1.adb" 79 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  tank1__high_sensor_status__result.bool__content )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "low_sensor_status" defined at tank1.ads:66, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__low_sensor_status__subprogram_def
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        "_gnatprove_standard".Boolean
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__valid_tank
+ use        Tank1__valid_tank___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__valid_sensors___axiom
+ use        Tank1__valid_tank___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ val tank1__low_sensor_status__result #"tank1.ads" 66 0 0# "model_projected" "model_trace:3096@result" "name:Low_Sensor_Status"  : bool__ref 
+ 
+ let def #"tank1.ads" 66 0 0# "W:diverges:N" "GP_Subp:tank1.ads:66" 
+   (__void_param : unit)
+  requires { #"tank1.ads" 66 0 0# true }
+  ensures { #"tank1.ads" 66 0 0# true }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:66 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:66 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:66 *)
+  ;
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = (Tank1__valid_tank___axiom.valid_tank(())) in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:66 *)
+  ;
+  #"tank1.ads" 79 0 0# assume { #"tank1.ads" 79 0 0# ((epsilon temp___result_196 : bool.
+   ( (temp___result_196 = (Tank1__valid_tank.valid_tank Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content)) /\ (Tank1__valid_tank.valid_tank__function_guard temp___result_196 Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content) )) = True) };
+  #"tank1.adb" 88 0 0# abstract ensures {( #"tank1.adb" 88 0 0# "model_vc" "keep_on_simp" "GP_Reason:VC_REFINED_POST" "GP_Shape:pragargs__cmp" "GP_Sloc:tank1.adb:88:20" "GP_Id:17" "comment:   Refined_Post => (Low_Sensor_Status'Result = 
+                   ^ tank1.adb:88:20:VC_REFINED_POST" ( (tank1__low_sensor_status__result.bool__content = True) <-> (Float32.le (Tank1__tank_height_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))) (Tank1__tank_volume_float__rep.to_rep (Tank1__tank_type.rec__tank1__tank_type__cur_volume (Tank1__tank_type.__split_fields { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))) ) )}( #"tank1.adb" 8 0 0# try
+   ( ( "GP_Sloc:tank1.adb:86:7" () );
+   ( "GP_Sloc:tank1.adb:86:33" () );
+   ( "GP_Sloc:tank1.adb:86:30" ( #"tank1.adb" 86 0 0# tank1__low_sensor_status__result.bool__content <- ( (Float32.le((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))))) );
+   #"tank1.adb" 86 0 0# raise Return__exc ) );
+   #"tank1.adb" 83 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 83 0 0# abstract ensures {true}(let _ = ((Boolean.to_int(tank1__low_sensor_status__result.bool__content)) = (Boolean.to_int((Float32.le((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))))))) in (
+   ()))
+   end  ) end ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  tank1__low_sensor_status__result.bool__content )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "valid_sensors" defined at tank1.ads:73, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__valid_sensors__subprogram_def
+ use import "_gnatprove_standard".Main
+ use import "int".Int
+ use        "_gnatprove_standard".Float32
+ use        "_gnatprove_standard".Boolean
+ use        Tank1__tank_height_float
+ use        Tank1__tank_height_float__rep
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ val tank1__valid_sensors__result #"tank1.ads" 73 0 0# "model_projected" "model_trace:3127@result" "name:Valid_Sensors"  : bool__ref 
+ 
+ let def #"tank1.ads" 73 0 0# "W:diverges:N" "GP_Subp:tank1.ads:73" 
+   (__void_param : unit)
+  requires { #"tank1.ads" 73 0 0# true }
+  ensures { #"tank1.ads" 73 0 0# true }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:73 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:73 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:73 *)
+  ;
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:73 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  #"tank1.adb" 8 0 0# try
+   ( ( "GP_Sloc:tank1.adb:94:11" () );
+   ( "GP_Sloc:tank1.adb:94:36" () );
+   ( "GP_Sloc:tank1.adb:94:8" ( #"tank1.adb" 94 0 0# tank1__valid_sensors__result.bool__content <- ( (if ((Float32.le((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__h_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))))) then (
+    (Float32.le((Tank1__tank_height_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__l_sensor_loc((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))))) else (
+    (Boolean.of_int(1)))) );
+   #"tank1.adb" 94 0 0# raise Return__exc ) );
+   #"tank1.adb" 92 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 92 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  tank1__valid_sensors__result.bool__content )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "no_overflow" defined at tank1.ads:86, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__no_overflow__subprogram_def
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ val tank1__no_overflow__result #"tank1.ads" 86 0 0# "model_projected" "model_trace:3185@result" "name:No_Overflow"  : bool__ref 
+ 
+ let def #"tank1.ads" 86 0 0# "W:diverges:N" "GP_Subp:tank1.ads:86" 
+   (__void_param : unit)
+  requires { #"tank1.ads" 86 0 0# true }
+  ensures { #"tank1.ads" 86 0 0# true }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:86 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:86 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:86 *)
+  ;
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:86 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  #"tank1.adb" 8 0 0# try
+   ( ( "GP_Sloc:tank1.adb:115:8" () );
+   ( "GP_Sloc:tank1.adb:115:30" () );
+   ( "GP_Sloc:tank1.adb:115:28" ( #"tank1.adb" 115 0 0# tank1__no_overflow__result.bool__content <- ( (Float32.lt((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__max_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content })))))))) );
+   #"tank1.adb" 115 0 0# raise Return__exc ) );
+   #"tank1.adb" 112 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 112 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  tank1__no_overflow__result.bool__content )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "no_underflow" defined at tank1.ads:92, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__no_underflow__subprogram_def
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__the_tank
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__the_tank___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ val tank1__no_underflow__result #"tank1.ads" 92 0 0# "model_projected" "model_trace:3213@result" "name:No_Underflow"  : bool__ref 
+ 
+ let def #"tank1.ads" 92 0 0# "W:diverges:N" "GP_Subp:tank1.ads:92" 
+   (__void_param : unit)
+  requires { #"tank1.ads" 92 0 0# true }
+  ensures { #"tank1.ads" 92 0 0# true }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.ads:92 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant { Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content } True False True) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.ads:92 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.ads:92 *)
+  ;
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.ads:92 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  #"tank1.adb" 8 0 0# try
+   ( ( "GP_Sloc:tank1.adb:121:8" () );
+   ( "GP_Sloc:tank1.adb:121:28" ( #"tank1.adb" 121 0 0# tank1__no_underflow__result.bool__content <- ( (Float32.gt((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields({ Tank1__tank_type.__split_fields = Tank1__the_tank.the_tank__split_fields.Tank1__tank_type.__split_fields__content }))))))) ((0.0E-1:Float32.t))) );
+   #"tank1.adb" 121 0 0# raise Return__exc ) );
+   #"tank1.adb" 118 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 118 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  tank1__no_underflow__result.bool__content )
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "tank_typePredicate" defined at tank1.adb:8, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Tank1__tank_typePredicate__subprogram_def
+ use import "_gnatprove_standard".Main
+ use        "_gnatprove_standard".Float32
+ use        Tank1__tank_volume_float
+ use        Tank1__tank_volume_float__rep
+ use        Tank1__tank_type
+ use        Tank1__tank_type___axiom
+ use        Tank1__tank_typePredicate__I1b
+ use        Tank1__tank_type___axiom
+ use        Tank1__tank_height_float___axiom
+ use        Tank1__tank_area_float___axiom
+ use        Tank1__tank_volume_float___axiom
+ use        Tank1__tank_typePredicate__I1b___axiom
+
+ val tank1__tank_typePredicate__result #"tank1.adb" 8 0 0#  : bool__ref 
+ 
+ let def #"tank1.adb" 8 0 0# "W:diverges:N" "GP_Subp:tank1.adb:8" 
+   (__void_param : unit)
+  requires { #"tank1.adb" 8 0 0# true }
+  ensures { #"tank1.adb" 8 0 0# true }
+   =
+  ( () (* Assume dynamic invariants of inputs of the subprogram tank1.adb:8 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# (Tank1__tank_type___axiom.dynamic_invariant Tank1__tank_typePredicate__I1b.i1b True False False) };
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram tank1.adb:8 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram tank1.adb:8 *)
+  ;
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  () (* Assume Pre of the subprogram tank1.adb:8 *)
+  ;
+  #"tank1.adb" 8 0 0# assume { #"tank1.adb" 8 0 0# true };
+  #"tank1.adb" 8 0 0# try
+   ( ( "GP_Sloc:tank1.adb:8:9" ( #"tank1.adb" 8 0 0# tank1__tank_typePredicate__result.bool__content <- ( (Float32.le((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__cur_volume((Tank1__tank_type.__split_fields(Tank1__tank_typePredicate__I1b.i1b))))))) ((Tank1__tank_volume_float__rep.to_rep((Tank1__tank_type.rec__tank1__tank_type__max_volume((Tank1__tank_type.__split_fields(Tank1__tank_typePredicate__I1b.i1b)))))))) );
+   #"tank1.adb" 8 0 0# raise Return__exc ) );
+   #"tank1.adb" 8 0 0# raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+  #"tank1.adb" 8 0 0# abstract ensures {true}(let _ = True in (
+   ()))
+   end ;
+  tank1__tank_typePredicate__result.bool__content )
+end

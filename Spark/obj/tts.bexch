@@ -1,0 +1,24 @@
+[GENERATED OBJECT FILE]
+b__tts.o
+[PROJECT FILES]
+/home/erika/Documents/TwoTanks/TwoTankSystem/twotanksystem.gpr
+20180707154639
+[BOUND OBJECT FILES]
+/home/erika/Documents/TwoTanks/TwoTankSystem/obj/control.o
+/home/erika/Documents/TwoTanks/TwoTankSystem/obj/pump.o
+/home/erika/Documents/TwoTanks/TwoTankSystem/obj/tank1.o
+/home/erika/Documents/TwoTanks/TwoTankSystem/obj/tank2.o
+/home/erika/Documents/TwoTanks/TwoTankSystem/obj/valve.o
+/home/erika/Documents/TwoTanks/TwoTankSystem/obj/tts.o
+[GENERATED SOURCE FILES]
+b__tts.ads
+b__tts.adb
+b__tts.ali
+[RESULTING OPTIONS]
+-L/home/erika/Documents/TwoTanks/TwoTankSystem/obj/
+-L/home/erika/Documents/TwoTanks/TwoTankSystem/obj/
+-L/home/erika/TOOLS/Gnat/lib/gcc/x86_64-pc-linux-gnu/6.4.1/adalib/
+-static
+-static-libgcc
+/home/erika/TOOLS/Gnat/lib/gcc/x86_64-pc-linux-gnu/6.4.1/adalib/libgnat.a
+-ldl

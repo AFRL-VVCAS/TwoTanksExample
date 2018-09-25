@@ -1,0 +1,157 @@
+{
+  "spark": [
+    {
+      "name": "Tank2",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 2
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Tank2.Valid_Tank",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 84
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.Initialize",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 13
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.Liquid_Height",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 40
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.Liquid_In",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 47
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.Liquid_Out",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 56
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.High_Sensor_Status",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 64
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.Mid_Sensor_Status",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 71
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.Low_Sensor_Status",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 78
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.No_Overflow",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 90
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.No_Underflow",
+      "sloc": [
+        {
+          "file": "tank2.ads",
+          "line": 96
+        }
+      ],
+      "spark": "spec"
+    },
+    {
+      "name": "Tank2.Tank_TypePredicate",
+      "sloc": [
+        {
+          "file": "tank2.adb",
+          "line": 7
+        }
+      ],
+      "spark": "all"
+    }
+  ],
+  "flow": [
+  ],
+  "proof": [
+  ],
+  "assumptions": [
+    {
+      "assumptions": [
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Tank2.Tank_TypePredicate",
+          "sloc": [
+            {
+              "file": "tank2.adb",
+              "line": 7
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "timings": {
+    "marking": 3.41000006301329E-04,
+    "globals (basic)": 2.24999996135011E-04,
+    "globals/properties (advanced)": 6.74000009894371E-04,
+    "flow analysis": 2.60200002230704E-03,
+    "codepeer results": 1.99999999495049E-06,
+    "init_why_sections": 1.34000001708046E-04,
+    "translation of standard": 2.49899993650615E-03,
+    "translation of compilation unit": 6.73699984326959E-03,
+    "proof": 1.99999999495049E-06
+  }
+}

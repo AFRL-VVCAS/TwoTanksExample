@@ -1,0 +1,34 @@
+V "GNAT Lib v18"
+A -gnata
+P ZX
+
+RN
+RV NO_FLOATING_POINT
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U valve%b		valve.adb		765de0d6 NE OO PK
+W system.assertions%s	s-assert.adb		s-assert.ali
+
+U valve%s		valve.ads		6b79fcca EE NE OO PK
+
+D ada.ads		20170727072659 76789da1 ada%s
+D a-unccon.ads		20170725134137 0e9b276f ada.unchecked_conversion%s
+D system.ads		20170911102249 4635ec04 system%s
+D s-assert.ads		20170725134137 cd8d2c94 system.assertions%s
+D s-exctab.ads		20170725134137 54135002 system.exception_table%s
+D s-stalib.ads		20170725134137 09bd3940 system.standard_library%s
+D valve.ads		20180706150704 6b79fcca valve%s
+D valve.adb		20180706150704 1d241c1c valve%b
+X 7 valve.ads
+5K9*Valve 30l5 30e10 8|2b14 43l5 43t10
+9F9*Valve_Type<float> 13r39 21r37 8|7r39 20r37
+13V13*Valve_Operate{float} 13>28 14>24 16r20 18r27 8|7b13 17l8 17t21
+13f28 Valve{9F9} 16r45 17r27 8|7b28 13r23
+14b24 Enable{boolean} 16r52 8|8b24 12r10
+21V13*Valid_Valve{boolean} 17s15 21>26 23r20 8|20b13 29l8 29t19
+21f26 Valve{9F9} 23r42 8|20b26 24r10
+26V13*Valid_Flow{boolean} 18s16 26>25 28r20 8|32b13 41l8 41t18
+26f25 Flow{float} 28r41 8|32b25 36r10
+

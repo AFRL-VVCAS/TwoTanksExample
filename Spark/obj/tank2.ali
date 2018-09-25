@@ -1,0 +1,67 @@
+V "GNAT Lib v18"
+A -gnatA
+A -gnata
+A -mtune=generic
+A -march=x86-64
+P ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_FLOATING_POINT
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U tank2%b		tank2.adb		b64b9d7d NE OO PK
+W system.assertions%s	s-assert.adb		s-assert.ali
+
+U tank2%s		tank2.ads		559455e2 EE NE OO PK
+
+D ada.ads		20170727072659 76789da1 ada%s
+D a-unccon.ads		20170725134137 0e9b276f ada.unchecked_conversion%s
+D system.ads		20170911102249 4635ec04 system%s
+D s-assert.ads		20170725134137 cd8d2c94 system.assertions%s
+D s-exctab.ads		20170725134137 54135002 system.exception_table%s
+D s-stalib.ads		20170725134137 09bd3940 system.standard_library%s
+D tank2.ads		20180920064754 559455e2 tank2%s
+D tank2.adb		20180920064608 e3dfc89f tank2%b
+X 7 tank2.ads
+2K9*Tank2 101l5 101e10 8|1b14 112l5 112t10
+4@19*Tank_State 19r29 20r20 42r28 43r44 49r29 50r20 58r29 59r20 66r28 67r49
+. 73r28 74r48 80r28 81r48 86r28 87r39 92r28 93r40 98r28 99r41 8|3r19
+8F9*Tank_Height_Float{float} 14r48 15r48 16r48 17r48 8|24r48 25r48 26r48
+. 27r48
+9F9*Tank_Area_Float{float} 13r48 8|23r48
+10F9*Tank_Volume_Float{float} 47r38 56r40 8|46r37 61r39
+13U14*Initialize 13>26 14>26 15>26 16>26 17>26 8|23b14 37l8 37t18
+13f26 Crossection_Area{9F9} 21r21 26r16 8|23b26 30r40 32r40
+14f26 Height{8F9} 22r21 27r16 29r35 31r33 35r33 8|24b26 31r40 32r59
+15f26 High_Sensor_Loc{8F9} 23r21 28r16 29r16 32r33 8|25b26 34r40
+16f26 Mid_Sensor_Loc{8F9} 24r21 30r16 31r16 32r16 33r33 8|26b26 35r40
+17f26 Low_Sensor_Loc{8F9} 25r21 33r16 34r16 35r16 8|27b26 36r40
+40V13*Liquid_Height{float} 43r20 8|40b13 42r21
+47U14*Liquid_In 47>25 8|46b14 57l8 57t17
+47f25 Flow_In{10F9} 50r36 51r16 8|46b24 49r34 54r13
+56U14*Liquid_Out 56>26 8|61b14 70l8 70t18
+56f26 Flow_Out{10F9} 59r36 60r16 8|61b25 64r34 68r12
+64V13*High_Sensor_Status{boolean} 67r20 8|73b13
+71V13*Mid_Sensor_Status{boolean} 74r20 8|79b13
+78V13*Low_Sensor_Status{boolean} 81r20 8|85b13
+84V13*Valid_Tank{boolean} 36s17 51s35 52s17 60s36 61s16 68s15 75s15 87r18
+. 8|91b13
+90V13*No_Overflow{boolean} 93r18 8|101b13
+96V13*No_Underflow{boolean} 99r18 8|107b13
+X 8 tank2.adb
+7R9 Tank_Type 17e4 20r15
+9f10*Crossection_Area{float} 30m20 92r16
+10f10*Height{float} 31m20 93r20 95r43
+11f10*Max_Volume{float} 32m20 50r18 51r45 104r39
+12f10*Cur_Volume{float} 33m20 40r53 42r53 49r21 51m22 53m18 53r41 64r21 65m19
+. 67m19 67r42 76r43 82r43 88r42 94r20 95r20 104r17 110r17
+13f10*H_Sensor_Loc{float} 34m20 76r17 96r20
+14f10*M_Sensor_Loc{float} 35m20 82r17 96r44 97r20
+15f10*L_Sensor_Loc{float} 36m20 88r17 97r44 98r20
+20r4 The_Tank{7R9} 3r33 30m7 30r7 40r44 42r44 49r12 50r9 51m13 51r36 53m9
+. 53r32 64r12 65m10 67m10 67r33 76r8 76r34 82r8 82r34 88r8 88r33 92r7 93r11
+. 94r11 95r11 95r34 96r11 96r35 97r11 97r35 98r11 104r8 104r30 110r8
+

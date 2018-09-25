@@ -1,0 +1,61 @@
+Summary of SPARK analysis
+=========================
+
+------------------------------------------------------------------------------------------------------------------------
+SPARK Analysis results        Total        Flow    Interval   CodePeer                   Provers   Justified    Unproved
+------------------------------------------------------------------------------------------------------------------------
+Data Dependencies                 .           .           .          .                         .           .           .
+Flow Dependencies                 .           .           .          .                         .           .           .
+Initialization                   51          51           .          .                         .           .           .
+Non-Aliasing                      .           .           .          .                         .           .           .
+Run-time Checks                  27           .          15          .    7 (CVC4  86%, Z3  14%)           .           5
+Assertions                       10           .           .          .    4 (CVC4  50%, Z3  50%)           .           6
+Functional Contracts             30           .           .          .    21 (CVC4  91%, Z3  9%)           .           9
+LSP Verification                  .           .           .          .                         .           .           .
+------------------------------------------------------------------------------------------------------------------------
+Total                           118    51 (43%)    15 (13%)          .                  32 (27%)           .    20 (17%)
+
+
+Analyzed 6 units
+in unit control, 3 subprograms and packages out of 3 analyzed
+  Control at control.ads:5 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Control.Tank1_Control at control.ads:9 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+  Control.Tank2_Control at control.ads:27 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+in unit pump, 4 subprograms and packages out of 4 analyzed
+  Pump at pump.ads:5 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Pump.Pump_Operate at pump.ads:16 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+  Pump.Valid_Flow at pump.ads:32 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+  Pump.Valid_Pump at pump.ads:24 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+in unit tank1, 12 subprograms and packages out of 12 analyzed
+  Tank1 at tank1.ads:2 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Tank1.High_Sensor_Status at tank1.ads:59 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+  Tank1.Initialize at tank1.ads:13 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (3 checks)
+  Tank1.Liquid_Height at tank1.ads:34 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+  Tank1.Liquid_In at tank1.ads:42 flow analyzed (0 errors, 0 checks and 0 warnings) and not proved, 5 checks out of 6 proved
+  Tank1.Liquid_Out at tank1.ads:51 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (6 checks)
+  Tank1.Low_Sensor_Status at tank1.ads:66 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+  Tank1.No_Overflow at tank1.ads:86 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Tank1.No_Underflow at tank1.ads:92 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Tank1.Tank_TypePredicate at tank1.adb:8 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Tank1.Valid_Sensors at tank1.ads:73 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Tank1.Valid_Tank at tank1.ads:79 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+in unit tank2, 2 subprograms and packages out of 12 analyzed
+  Tank2 at tank2.ads:2 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Tank2.High_Sensor_Status at tank2.ads:64 skipped
+  Tank2.Initialize at tank2.ads:13 skipped
+  Tank2.Liquid_Height at tank2.ads:40 skipped
+  Tank2.Liquid_In at tank2.ads:47 skipped
+  Tank2.Liquid_Out at tank2.ads:56 skipped
+  Tank2.Low_Sensor_Status at tank2.ads:78 skipped
+  Tank2.Mid_Sensor_Status at tank2.ads:71 skipped
+  Tank2.No_Overflow at tank2.ads:90 skipped
+  Tank2.No_Underflow at tank2.ads:96 skipped
+  Tank2.Tank_TypePredicate at tank2.adb:7 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Tank2.Valid_Tank at tank2.ads:84 skipped
+in unit tts, 1 subprograms and packages out of 1 analyzed
+  Tts at tts.adb:10 flow analyzed (0 errors, 0 checks and 0 warnings) and not proved, 24 checks out of 43 proved
+in unit valve, 4 subprograms and packages out of 4 analyzed
+  Valve at valve.ads:5 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Valve.Valid_Flow at valve.ads:29 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Valve.Valid_Valve at valve.ads:23 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Valve.Valve_Operate at valve.ads:15 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)

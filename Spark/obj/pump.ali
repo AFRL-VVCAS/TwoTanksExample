@@ -1,0 +1,39 @@
+V "GNAT Lib v18"
+A -gnatA
+A -gnata
+A -mtune=generic
+A -march=x86-64
+P ZX
+
+RN
+RV NO_FLOATING_POINT
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U pump%b		pump.adb		4ea00f24 NE OO PK
+W system.assertions%s	s-assert.adb		s-assert.ali
+
+U pump%s		pump.ads		6a2fa182 EE NE OO PK
+W system.assertions%s	s-assert.adb		s-assert.ali
+
+D ada.ads		20170727072659 76789da1 ada%s
+D a-unccon.ads		20170725134137 0e9b276f ada.unchecked_conversion%s
+D pump.ads		20180919201227 6a2fa182 pump%s
+D pump.adb		20180919201227 248faea6 pump%b
+D system.ads		20170911102249 4635ec04 system%s
+D s-assert.ads		20170725134137 cd8d2c94 system.assertions%s
+D s-exctab.ads		20170725134137 54135002 system.exception_table%s
+D s-stalib.ads		20170725134137 09bd3940 system.standard_library%s
+X 3 pump.ads
+5K9*Pump 38l5 38e9 4|2b14 21l5 21t9
+7N4*Max_Flow 11r45
+11F9*Pump_Type<float> 16r37 24r35 4|8r37
+16V13*Pump_Operate{float} 16>27 17>27 19r20 21r27 4|8b13 18l8 18t20
+16f27 Pump{11F9} 19r44 20r26 4|8b27 14r23
+17b27 Enable{boolean} 19r50 4|9b24 13r10
+24V13*Valid_Pump{boolean} 20s15 24>25 27r20 28r17
+24f25 Pump{11F9} 25r10 27r41 28r38
+32V13*Valid_Flow{boolean} 21s16 32>25 35r20 36r17
+32f25 Flow{float} 33r10 35r41 36r38
+
