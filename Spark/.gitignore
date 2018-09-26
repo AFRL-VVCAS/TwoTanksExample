@@ -1,0 +1,10 @@
+# Git Ignore File
+
+# ignore the object folder
+obj/
+
+# ignore generated object files
+*.o
+
+# ignore generated .ali files
+*.ali
